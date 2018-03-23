@@ -52,6 +52,7 @@ mercatorTicks = np.log(1.0 / np.cos(latTicks) + np.tan(latTicks))
 
 plt.plot(thetaVals, mercatorVals)
 plt.yticks(mercatorTicks, latLabels)
+plt.xticks(longTicks, longLabels)
 ax = plt.gca()
 ax.set_ylabel('Latitude (Radians)')
 ax.set_xlabel('Longitude (Radians)')

@@ -8,12 +8,18 @@ The Mercator Map of the world spaces out the lines of latitude in a particular w
 The problem is that ships would navigate by sailing with a fixed angle to due north (e.g. as seen on a compass). 
 This creates an issue for making map. 
 Consider a map where the lines of latitude are spaced out evenly in the vertical direction (so NOT the Mercator map); for such a map, a course with fixed angle to magnetic north is NOT a straight line on the map.  
+The figure below shows the path of a course with constant angle to magnetic north on a map with uniformly spaced lines of latitude.
+
+\includegraphics[width = 5in]{oneVarIntCalc/nonMercator.pdf}
 
 The problem is that the lines of latitude get represent shorter and shorter distances as you move from the equator towards either of the poles. 
 This means that there is a complicated relationship between the angle measured on this map and the true angle to magnetic north it represents.
 
 In 1569, Mercator had the idea that he could create a map where the lines of latitude are NOT spaced evenly; if you choose the variation in spacing in the correct manner, then a course with fixed angle to magnetic north will be a straight line on this new map. 
 Furthermore, the angle measured on the map will match the true angle to magnetic north.
+Consider the following figure that shows a course with constant angle to magnetic north on a Mercator map, note that the lines of latitude are not evenly spaced (the values marked are multiples of \(\pi/9\) radians).
+
+\includegraphics[width = 5in]{oneVarIntCalc/mercator.pdf}
 
 Unfortunately, Mercator didn't give a clear formula to precisely describe how to space out the lines of latitude. 
 However, in 1599, Edward Wright found a precise mathematical description of how to space out the lines; he found that the spacing depended on the area under the secant function.
