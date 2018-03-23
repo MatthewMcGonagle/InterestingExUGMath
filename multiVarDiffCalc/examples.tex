@@ -10,6 +10,8 @@ This is best illustrated with examples.
 
 \subsubsection{The Hyperbola as an Envelope}
 
+\subsubsection*{The Set Up}
+
 Consider the family \(\mathfrak F\) of straight lines in \(\mathbb R^2\), where each line crosses the x-axis and y-axis at pairs of points of the form \((s,0)\) and \((0, 1/s)\) for some \(s > 0\). 
 So we see that each line is of the form \(\frac{1}{s} x + s y = 1\) for some \(s > 0\).
 Some of the lines from the family are pictured in the following figure.
@@ -20,7 +22,12 @@ We can see that extemal to the family of lines is a curve concave up in the firs
 
 \includegraphics[width = 4.0in]{multiVarDiffCalc/hyperbolaEnvelope.pdf}
 
-Let us consider computing the envelope of the family \(\mathfrak F\). For this, let us consider the auxilliary function
+\subsubsection*{The Problem}
+Let us consider computing the envelope curve \(\gamma(x)\) of the family \(\mathfrak F\). 
+
+\subsubsection*{The Solution}
+
+To compute the envelope curve \(\gamma(x)\), let us consider the auxilliary function
 \(g(x,y,s) = \frac{1}{s} x + s y - 1\). Let us see how the Implicit Function Theorem of vector calculus let's us
 use \(g(x,y, s)\) to find the exremal envelope curve \(\gamma(x)\). As we discuss this, please consider the similarities to the ordinary first derivative test.
 
@@ -55,6 +62,8 @@ Therefore, for \(x, y > 0\), we have \(s = \sqrt{\frac{x}{y}}\). Plugging this i
 Therefore, we find that the envelope curve must lie inside the set \(S = \{xy = \frac{1}{4}\}\). However, one will recognize that for each point \(x > 0\), there is only one \(y\) such that \(y \in S\). Therefore, the envelope must be this curve.
 
 So the envelope \(\gamma(x)\) is the curve \(y = \frac{1}{4x}\) for \(x > 0\).  
+
+\subsubsection*{Final Remark}
 
 Note that the set \(S\) is actually a hyperbola. Therefore, the hyperbola can be realized as the envelope of a simple family of straight lines. For this reason, hyperbolas are (approximately) reproducible in "string art": art formed from
 straight line segments where each segment is made by tightened string.
