@@ -1,0 +1,127 @@
+\section{One Variable Differential Calculus}
+
+\subsection{Gauss and the Gauss Distribution}
+
+\subsubsection*{History}
+
+A good reference on the history of the gaussian distribution is \cite{gaussian}.
+
+The history of how to deal with errors is intimately tied to astronomy; astronomical predictions involve quantities that need to be measured to high precision. 
+Practical limits force astronomers to deal with the errors of predictions or measurements never being in complete agreement.
+
+In the 18th century and early 19th century, there was some confusion as to how to deal with these errors in measurement. 
+As an example, there was some dispute as to whether to use the average or the median of measurements. 
+One of the problems was a theoretical foundation for understanding error was in its infancy. 
+For example, Laplace created a model of typical error that is far from the typical gaussian distribution considered today.
+
+So how did Gauss arrive at his distribution? First it should be noted that he worked on modeling error while solving a problem in astronomy. 
+On January 1, 1801, Giuseppe Piazzi observed the Ceres asteriod. 
+He was interested in whether Ceres was a new planet, but he could only take a small number of observations of its position before it disappered behind the sun. 
+Ceres was estimated to be visible again after about a year, which left many astronomers with the question of where to find it in the sky.
+
+Gauss greatly increased his reputation by correctly solving this problem; in fact, his correct answer was actually in disagreement with most reputable astronomers. 
+Aside from his masterful use of geometry, part of his solution is how to deal with the errors in measurements that were made. 
+It is this problem that lead him to the gaussian distribution as a model for the error.
+
+His approach to modeling the error is the following.
+
+He considers the errors to be random described by a differentiable probability density \(p(x)\). The distribution of the errors should satisfy the following:
+
+\begin{enumerate}
+\item Smaller errors are more probable, i.e. the density \(p(x)\) should have a maximum at \(x = 0\).
+\item The distribution of errors should symmetric, i.e. \(p(-x) = p(x)\).
+\item Consider any observed quanitity \(X\) with true value \(X_0\) and errors modeled by our distribution, i.e. \(X = X_0 + G\) where \(P(G = x) = p(x)\). 
+
+Given any set of observations \(\{x_1, x_2, ..., x_n\}\), then the likelihood \(P(x_1, x_2, ..., x_n | X_0)\) 
+(i.e. the probability of observing \(x_1\), \(x_2\), ... \(x_n\) given the true value is \(X_0\)) is maximized by \(X_0\) being the average of \(\{x_1, x_2, ..., x_n\}\)
+(i.e. \(X_0 = \frac{x_1 + x_2 +... + x_n}{n}\)). Let us explain this in a little more detail.
+
+We are assuming that the errors \(\{x_1, x_2, ..., x_n\}\) are independent. So
+\begin{equation}
+P(x_1, x_2, ..., x_n | X_0) = p(x_1 - X_0)p(x_2 - X_0)...p(x_n - X_0).
+\end{equation}
+When we speak of maximizing the likelihood, we think of all of the observations \(x_i\) being fixed. So the above is considered to a function of only the one variable \(X_0\). That is,
+we are considering the likelihood functions
+\begin{equation}
+L(X_0) = p(x_1 - X_0)p(x_2 - X_0)...p(x_n - X_0).
+\end{equation}
+Then our assumption is that the maximum of \(L(X_0)\) occurs at the average of our observations \(X_0 = \frac{x_1 + x_2 + ... + x_n}{n}\).
+
+This amounts to Gauss's justification of using averages over median. He is purposefully choosing a model of error where the average of the observations is the most likely explanation of
+the true value.
+
+\end{enumerate}
+
+\subsubsection*{The Problem}
+
+Show that Gauss' requirements on \(p(x)\) force \(p(x)\) to be a Gaussian distribution.
+
+\subsubsection*{The Solution}
+
+First, let us consider condition (3) and the consequences of maximizing the likelihood. First note that \(L(X_0) \geq 0\), so maximizing \(L(X_0)\) is equivalent to maximizing \(f(X_0) = \log(L(X_0))\). 
+Using the logarithm will be more convenient as it will turn the product of the \(p(x_i - X_0)\) into a sum of logarithms; so we have  
+\begin{equation}
+h(X_0) = \log(p(x_1 - X_0)) + \log(p(x_2 - X_0)) + ... + \log(p(x_n - X_0)).
+\end{equation}
+
+To find the maximum, let's set the derivative to be zero:
+\begin{equation}
+0 = h'(X_0) = -\left(\frac{p'(x_1 - X_0)}{p(x_1 - X_0)} + \frac{p'(x_2 - X_0)}{p(x_2 - X_0)} + ... + \frac{p'(x_n - X_0)}{p(x_n - X_0)} \right). 
+\end{equation}
+
+Now the key is that condition (3) applies to any possible set of observations, no matter how unprobable. Since \(p(x)\) is continuous with maximum at \(x = 0\), we know that
+there exists an interval \([-\delta, \delta]\) around \(x = 0\) such that \(p(x) > 0\) for all \(x \in [-\delta, \delta]\). 
+In particular, we know that observations in \([X_0 - \delta, X_0 + \delta]\) are all possible. 
+So now consider any real number \(r \in [-\delta, \delta]\) and the observations \(\{x_1 = X_0\}\) and \(\{x_2 = ... = x_n = X_0 + r\}\).
+
+Since we have already fixed \(X_0\) to represent our true value, let us now use \(y\) as the independent variable for our likelihood. So we seek to maximize
+\begin{equation}
+L(y) = p(x_1 - y) p(x_2 - y) ... p(x_n - y).
+\end{equation}
+Condition (3) says this maximum is at \(y = \frac{x_1 + x_2 + ... x_n}{n} = X_0 + \frac{n-1}{n} r\). To simplify notation, let \(f(x) = \frac{p'(x)}{p(x)}\). So we get 
+\begin{equation} \label{gauss:homog}
+0 = f\left(-\frac{n-1}{n} r\right) + (n - 1) f\left(\frac{1}{n} r\right). 
+\end{equation}
+Now, note that \(p(x)\) symmetric implies that \(p'(x)\) is anti-symmetric. Therefore \(f(x)\) is anti-symmetric. So we get that
+\begin{equation}
+f\left(\frac{n-1}{n} r\right) = (n-1) f\left(\frac{1}{n} r \right).
+\end{equation}
+
+What are the consequences of this equation? Fix any \(r_0\) small enough such that \(2r_0\) is in the interval \([-\delta, \delta]\). Now note that \(\frac{n}{n-1}r_0\) is also in the interval for
+any \(n > 1\), and consider \(r = \frac{n}{n-1} r_0\). Then we have that 
+\begin{equation}
+\frac{1}{n-1} f(r_0) = f\left(\frac{r_0}{n-1}\right).
+\end{equation}
+
+Now consider \(0 < k \leq n + 1\). Note that \(\frac{k}{n}r \) is in the interval too, and now apply \ref{gauss:homog} for \(n -> k\) and \(r -> \frac{k}{n} r\), we get
+\begin{equation}
+f\left(\frac{k-1}{n}r\right) = (k-1)f\left(\frac{1}{n}r\right).
+\end{equation} 
+So for any fraction of the form \(frac{m}{n}\) where \(0 < m \leq n\), we have that
+\begin{equation}
+f\left(\frac{m}{n} r_0\right) = \frac{m}{n} f(r_0). 
+\end{equation}
+
+Consider the function \(g(x) = f(r_0) x\). We have that \(g(x) - f(x) = 0\) for any \(x\) that is a rational multiple of \(r_0\) and \(0 < |x| \leq r_0\). Hence, by the continuity of \(f(x)\), 
+we have that \(f(x) = g(x) = f(r_0) x\) for all \(|x| \leq r_0\).
+
+Therefore, we may write that \(f(x) = k x\) for some constant \(k\) and \(x\) on some interval around zero. This gives us the differential equation 
+\begin{equation}
+\frac{p'(x)}{p(x)} = k, 
+\end{equation}
+locally around \(x = 0\). Integrating we get
+\begin{equation}
+\log(p(x)) = \frac{k}{2}x^2 + C. 
+\end{equation} 
+This can be written in the form \(p(x) = Ae^{-Bx^2}\). So we see the probability distribution extends to be non-zero on all \(x\). 
+Furthermore, the constants \(A\) and \(B\) can be related 
+by the fact that \(p(x)\) is a probability density so that \(\int_{-\infty}^{\infty} Ae^{-Bx^2} \dx = 1\). It is standard to solve for \(A\) in terms of \(B\).
+
+To solve \(\int_{-\infty}^{\infty} e^{-Bx^2} \dx\), we square the integral and switch to polar coordinates to get
+\begin{equation}
+\int\limits_{-\infty}^\infty e^{-Bx^2} \dx = \sqrt{\frac{\pi}{B}}.
+\end{equation}
+So we get that \(A = \sqrt{\frac{B}{\pi}}\), and then
+\begin{equation}
+p(x) = \sqrt{\frac{B}{\pi}} e^{-Bx^2}. 
+\end{equation}
