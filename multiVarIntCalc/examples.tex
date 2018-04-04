@@ -1,0 +1,104 @@
+\section{Multivariable Integral Calculus}
+
+\subsection{Function Not Satisfying Fubini's Theorem}
+
+\subsubsection*{Set Up}
+
+Here we consider Fubini's theorem in two-dimensions.
+
+Fubini's theorem tells us two things:
+\begin{itemize}
+\item When we know we can compute a two-dimensional integral as a repeated application of one-dimensional integration over the variables \(x\) and \(y\).
+
+\item When we know the order of the repeated one-dimensional integration over \(x\) and \(y\) doesn't depend on the order of integrating over \(x\) and \(y\). 
+
+\end{itemize}
+
+We will consider the problem of finding a simple function that doesn't satisfy Fubini's theorem. In particular, the result of applying the repeated 
+one-dimensional integration will depend on the order of \(x\) and \(y\). We will aim to find a simple elementary function, and we will keep the domain of integration
+simple, i.e. the square \(S = \{0 \leq x \leq 1 \text{ and } 0 \leq y \leq 1\}\).
+
+As a hint as to how this process will work, let us recall the fact that for a convergent series \(\sum_i a_i\), the limit of the partial sums is independent of the order of
+the sum when the series is absolutely convergent, i.e. \(\sum_i |a_i| < \infty\). For our problem of finding an appropriate function \(u(x,y)\), we are then lead to consider
+finding a function \(u(x,y)\) that satisfies the following:
+\begin{itemize}
+\item The function \(u(x,y)\) takes positive and negative values. 
+\item The integral of the aboslute value of \(u\) is not convergent, i.e. \(\iint_s |u| \dA = \infty\).
+\item The integrals of the positive and negative parts of the function must cancel out in some way such that the repeated integration gives nice finite values despite
+the fact that \(\iint_s |u| \dA = \infty\).
+\end{itemize}
+
+
+\subsubsection*{The Problem}
+
+Find a nice elementary function \(u(x, y)\) defined on the square \(s = \{0 \leq x \leq 1 \text{ and } 0 \leq y \leq 1\}\) such that \(u(x,y)\) doesn't satisfy Fubini's theorem in the following sense:
+\begin{itemize}
+\item Both of the repeated integrals
+\begin{equation}
+\int\limits_0^1 \int\limits_0^1 u(x,y) \dx \dy,
+\end{equation}
+and
+\begin{equation}
+\int\limits_0^1 \int\limits_0^1 u(x,y) \dy \dx,
+\end{equation}
+exist and are finite.
+\item However, the repeated integrals mentioned above are NOT equal.
+\end{itemize}
+
+\subsubsection*{Solution}
+
+To keep things simple, we find a function \(u(x,y)\) that blows up to both \(\pm \infty\) at the corner \((0,0)\). First let us observe that the function 
+\begin{equation}
+f(x,y) = \frac{-1}{(x+y)^2}
+\end{equation}
+has \(\iint_S |f| \dA = \infty\); you can quickly see that convergence of this integral is suspect because \(|f|\) of order \(r^{-2}\) as the radius \(r \to 0\). This is the edge case of convergence
+for two-dimensions (recall that the area element for polar coordinates in two-dimensions includes an extra \(r\), i.e. \(\dA = r d\theta dr\)). 
+
+However, \(f(x,y)\) is always negative inside the square \(S\); so we won't get the cancellation of positive and negative parts that we desire. To fix this we set up \(u(x,y)\) to be a difference
+of \(f(x,y)\) and a similar function. First, let \(A, B\) be constants that we will determine later. Then we use
+\begin{equation}
+u(x,y) = \frac{1}{(Ax + By)^2} - \frac{1}{(x+y)^2} .
+\end{equation}
+
+We need that \(u\) takes positive and negative values in \(S\). To make sure \(u\) is always defined in \(S\) we will restrict to considering \(A, B > 0\).
+
+Next, consider the values of \(u\) along the line \(\{x + y = 1\}\). This line joins two corners of \(S\), i.e. \((0,1)\) and \((1,0)\). We will design \(A\) and \(B\) to make
+sure \(u\) has opposite signs at these two corners. To do so, we need to compare the sizes of \(Ax + By\) and \(x + y\) at these two corners.
+
+To get opposite signs, we need that \(Ax + By\) is above \(1\) at one of these two corners and below \(1\) at the other corner. At \((0,1)\), \(Ax + By = B\) and at \((1,0)\), \(Ax + By = A\).
+So we can choose \(A\) is above \(1\) and \(B\) is below \(1\). A convenient choice is \(A = 2\) and \(B = 1/2\) (if you dive deeper into the construction, you will find that the reciprocal nature of \(A\) and \(B\) is also necessary, but we won't go into detail on this). 
+
+So we have that
+\begin{equation}
+u(x,y) = \frac{1}{(2x + y/2)^2} - \frac{1}{(x+y)^2}.
+\end{equation}
+Let us verify that this function \(u(x,y)\) satisfies the conditions on the repeated integrals that we are looking for.
+
+First, note that for any \(y > 0\), we have
+\begin{align}
+\int\limits_0^1 \frac{1}{(2x + y/2)^2} - \frac{1}{(x+y)^2} \dx & = \left.\frac{1}{x+y} - \frac{1}{2(2x + y/2)}\right|^1_{x = 0}, \\ 
+    & = \frac{1}{1 + y} - \frac{1}{y} - \frac{1}{4+y} + \frac{1}{y}, \\
+    & = \frac{1}{1+y} - \frac{1}{4+y}.
+\end{align}
+So we get that
+\begin{align}
+\int\limits_0^1 \left(\int\limits_0^1 \frac{1}{(2x + y/2)^2} - \frac{1}{(x+y)^2} \dx\right) \dy & = \int\limits_0^1 \frac{1}{1+y} - \frac{1}{4 + y} \dy, \\
+    & = \left. \log(1 +y) - \log(4 + y)\right|_{y = 0}^1, \\
+    & = \log(2) - \log(1) - \log(5) + \log(4), \\
+    & = 3\log(2) - \log(5). 
+\end{align}
+
+Now, let us consider the other iterated integral. First, for any \(x > 0\), we have that
+\begin{align}
+\int\limits_0^1 \frac{1}{(2x + y/2)^2} - \frac{1}{(x+y)^2} \dy & = \left.\frac{1}{x+y} - \frac{2}{2x + y/2}\right|_{y = 0}^1, \\
+    & = \frac{1}{x+1} - \frac{1}{x} -\frac{2}{2x+1/2} + \frac{2}{2x}, \\ 
+    & = \frac{1}{x+1} - \frac{2}{2x+1/2}.
+\end{align}
+So we have that
+\begin{align}
+\int\limits_0^1 \left(\int\limits_0^1 \frac{1}{(2x + y/2)^2} - \frac{1}{(x+y)^2} \dy\right) \dx & = \int\limits_0^1 \frac{1}{x+1} - \frac{2}{2x+1/2} \dx, \\
+    & = \left. \log(x+1) - \log(2x + 1/2)\right|_{x = 0}^1, \\
+    & = \log(2) - \log(1) - \log(5/2) + \log(1/2), \\
+    & = \log(2) - \log(5). 
+\end{align}
+And so we see the repeated integrals are finite, but do NOT match.
