@@ -67,3 +67,80 @@ So the envelope \(\gamma(x)\) is the curve \(y = \frac{1}{4x}\) for \(x > 0\).
 
 Note that the set \(S\) is actually a hyperbola. Therefore, the hyperbola can be realized as the envelope of a simple family of straight lines. For this reason, hyperbolas are (approximately) reproducible in "string art": art formed from
 straight line segments where each segment is made by tightened string.
+
+\subsection{Differentiable Function With Bounded Non-Continuous Derivatives}
+
+\subsubsection*{Setup}
+
+Functions that are differentiable everywhere do not necessarily have continuous derivatives, even if the derivatives of the function are bounded. For the case of one variable, a classic example is
+\begin{equation}
+f(x) = \begin{cases}
+    x^2 \sin(\frac{1}{x}) & x\neq 0,\\
+    0 & x = 0.
+    \end{cases}
+\end{equation}
+Here, the altering of the amplitude by the factor of \(x^2\) forces the function to be differentiable at \(x = 0\) and \(f'(0) = 0\). This can be checked by directly applying the definition of differentiability. However, the derivative \(f'(x)\) alternates infinitely between values close to \(f' = -1\) and \(f' = 1\) as \(x \to 0\). Therefore, the function does not have continuous derivatives.
+
+However, one may wonder if this "infinite frequency oscillation" is necessary. In this example, we show that this is unnecessary in two-dimensions. That is, we construct a function \(u(x,y)\) that is 
+differentiable everywhere, has bounded derivatives, and does not have continuous derivatives at \((0,0)\).
+
+\subsubsection*{The Problem}
+
+Find a simple function \(u(x,y)\) such that \(u\) is differentiable on \(\mathbb R^2\), the derivatives of \(u\) are bounded, and at least one of the derivatives of \(u\) is NOT continuous at \((0,0)\).
+
+\subsubsection*{The Solution}
+
+First let us consider a phenomenon in one-variable calculus. If \(g(x)\) is a differentiable function with bounded derivatives: \(|g'| \leq M\), then for any constant \(\lambda > 0\) the function
+\(h(x) = \lambda g\left(\frac{x}{\lambda}\right)\) has the same bound for its derivatives, i.e. \(|h'| \leq M\). This is easily proved using the chain rule:
+\begin{align}
+h'(x) & = \lambda \frac{d}{dx} \left( g\left(\frac{x}{\lambda}\right)\right), \\
+    & = \lambda g'\left(\frac{x}{\lambda}\right) \frac{1}{\lambda}, \\
+    & = g'\left(\frac{x}{\lambda}\right). 
+\end{align}
+Therefore, if \(|g'| \leq M\), then \(|h'| \leq M\) too. 
+
+So the idea is that we can construct a function \(u(x,y)\) by setting \(u(x,y) = (x^2 + y^2) h\left(\frac{x}{x^2 + y^2}\right)\) for an appropriate function \(h(x)\). What properties should we require
+of \(h(x)\)? First, let's check what is necessary for bounded derivates. Although we were guided by our idea in one-variable differentiation, we must now explicitly check that everything works out okay
+since our factor \(x^2 + y^2\) isn't actually constant. 
+
+First, let's calculate the \(x\)-derivative when \((x,y) \neq (0, 0)\):
+\begin{align}
+\frac{\partial u}{\partial x} & = 2x h + (x^2 + y^2) h' \left(\frac{1}{x^2 + y^2} - \frac{2x^2}{(x^2 + y^2)^2}\right), \\
+    & = 2xh + h' - h' \frac{x^2}{x^2 + y^2}. 
+\end{align}
+
+Now, let's calculate the \(y\)-derivative when \((x,y) \neq (0,0)\):
+\begin{align}
+\frac{\partial u}{\partial y} & = 2yh + (x^2 + y^2) h' \frac{2xy}{(x^2 + y^2)^2}, \\
+    & = 2yh + h'\frac{2xy}{x^2 + y^2}.
+\end{align}
+
+Therefore, we see that the derivatives \(u_x\) and \(u_y\) will be bounded for \((x,y) \neq (0,0)\) when the function \(h(x)\) and its derivative \(h'(x)\) are both bounded; note that expressions like
+\(\frac{x^2}{x^2 + y^2}\) and \(\frac{2xy}{x^2 + y^2}\) are bounded for points away from the origin because they are invariant under scaling (i.e. homogeneous of order 0).
+
+Finally, when \(h(x)\) is bounded, the fact that we mulitply \(h\) by \(x^2 + y^2\) to construct \(u\) implies that \(u\) will be differentiable at the origin and that \(u_x(0,0) = u_y(0,0) = 0\).
+Now, focus on the expression \(h' \frac{2x^2}{x^2 + y^2}\) in the expression for \(u_x\). If we approach the origin along \(y^4 = x\), then
+\begin{align}
+h'\left(\frac{x}{x^2 + y^2}\right) & = h'\left(\frac{\sqrt{x}}{x^{3/2} + 1}\right) ,\\
+    & \to h'(0).
+\end{align} 
+Furthermore as we approach the origin along \(y^4 = x\), 
+\begin{align}
+\frac{x^2}{x^2 + y^2} & = \frac{x^{3/2}}{x^{3/2} + 1}, \\
+    & \to 0. 
+\end{align}
+Therefore, as we approach the origin along \(y^4 = x\), we have that \(u_x \to h'(0)\). So we will want \(h'(0) \neq 0\), e.g. \(h'(0) = 1\).
+
+Let us recap our requirements for \(h(x)\).
+\begin{itemize}
+\item The function \(h(x)\) is differentiable with continuous derivatives on \(\mathbb R\)
+\item The values of the function \(h(x)\) and its derivative \(h'(x)\) are both bounded.
+\item At \(x = 0\), we have \(h'(0) = 1\).
+\end{itemize}
+
+A function that meets all of these requirements is \(h(x) = \frac{x}{1 + x^2}\). So our function \(u(x,y)\) is
+\begin{align}
+u(x,y) & = (x^2 + y^2) h\left(\frac{x}{x^2 + y^2}\right), \\
+    & = (x^2 + y^2) \frac{x}{(x^2+y^2)(1 + x^2 (x^2 + y^2)^{-2})}, \\
+    & = \frac{x(x^2 + y^2)^2}{(x^2 + y^2)^2 + x^2}.
+\end{align}
