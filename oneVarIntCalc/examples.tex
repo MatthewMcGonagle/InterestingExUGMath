@@ -82,3 +82,104 @@ To simplify things, we can now use some trigonometric identities.
     & = \log\left(\frac{1 + \sin(x)}{\cos(x)}\right), \\
     & = \log(\sec(x) + \tan(x)).
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% Fermat Method of Exhaustion
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Fermat's Method of Integrating Powers of \(x\)}
+
+\subsubsection*{Motivation}
+
+Consider the problem of finding the area underneath the curve for a particular power of \(x\); here we will concentrate on the 
+particular case of \(y = x^{3/2}\) and \(0 \leq x \leq 1\). Note that the restriction of \(x\) to \(x\geq 0\) keeps everything well-defined within
+the realm of real numbers. 
+
+Before Leibniz and Newton developed the use of integral calculus to find the area under curves, Fermat had already developed 
+a method to solve this particular problem. Let us put his idea into modern terms. His idea is to use a method of exhaustion to 
+give lower bounds and upper bounds for the area. In particular, the key to his idea is that we will use rectangles whose widths
+are not uniform. In fact, their widths decrease geometrically. 
+
+For example, on the interval \(0 \leq x \leq 1\), one can bound the area above and below by the area of an infinite number of rectangles whose widths
+are the powers of \(1/2\). To see this, consider the graph below for the lowerbound.
+
+\includegraphics[width = 5in]{oneVarIntCalc/fermatLower.pdf}
+
+The behavior of the rectangles is dictated by the following pattern:
+
+\begin{itemize}
+\item The rectangle of width \(1/2\) is from \(1/2 \leq x \leq 1\). 
+\item The rectangle of width \(1/4\) is from \(1/4 \leq x \leq 1/2\).
+\item The rectangle of width \(1/8\) is from \(1/8 \leq x \leq 1/4\). 
+\item Etc...
+\end{itemize}
+
+The amazing consequence of Fermat's idea is that we can actually compute the area of these infinite number of rectangles since their areas turn out to be a geometric series.
+Recall that a geometric sum is of the form \(b + b^2 + ... + b^n\) for some base \(b\) and power \(n\); this can be expressed more explicitly as
+\begin{equation}
+b + b^2 + ... + b^n = \frac{b - b^{n+1}}{1 - b}.
+\end{equation}
+So for bases \(b\) satisfying \(|b| < 1\), we get an expression for the infinite series:
+\begin{equation}
+b + b^2 + b^3 + ... = \frac{b}{1 - b}.
+\end{equation}
+Let us see how this is related to the area of the rectangles described above.
+
+The area of the rectangles are:
+\begin{itemize}
+\item The area of the rectangle on \(1/2 \leq x \leq 1\) is \( (1/2)^{3/2} (1/2) = (1/2)^{5/2}\).
+\item The area of the rectangle on \(1/4 \leq x \leq 1/2\) is \( (1/4)^{3/2} (1/4) = (1/4)^{5/2}\).
+\item The area of the rectangle on \(1/8 \leq x \leq 1/4\) is \( (1/8)^{3/2} (1/8) = (1/8)^{5/2}\).
+\item Etc.
+\end{itemize}
+
+So we have that the total area is 
+\begin{equation}
+(1/2)^{5/2} + (1/4)^{5/2} + (1/8)^{5/2} + ... 
+    = (1/2)^{\frac{5}{2}} + \left((1/2)^{\frac{5}{2}}\right)^2 + \left((1/2)^{\frac{5}{2}}\right)^3 + ... 
+\end{equation}
+So we have an infinite geometric series with base \(b = (1/2)^{\frac{5}{2}}\). Therefore, this set of an infinite rectangles gives us a lowerbound
+of \(\frac{(1/2)^{5/2}}{1 - (1/2)^{5/2}}\) for the area under \(y = x^{3/2}\) and \(0 \leq x \leq 1\).
+
+A similar argument can be applied to another set of rectangles whose widths are powers of \(1/2\), as pictured below:
+
+\includegraphics[width = 5in]{oneVarIntCalc/fermatUpper.pdf}
+
+The final part of Fermat's idea is to do the above for general base \(0 < b < 1\). Then we consider the limit as \(b \to 1\).
+
+\subsubsection*{The Problem}
+
+Use Fermat's method to find the area under the curve \(y = x^{\frac{3}{2}}\) and \(0 \leq x \leq 1\).
+
+\subsubsection*{The Solution}
+
+Let us first construct the lower bound using rectangles whose widths are powers of a fixed base \(b\) satisfying \(0 < b < 1\). 
+Similar to the case of base \(1/2\) we discussed before, we have that the rectangles satisfy
+\begin{itemize}
+\item There is a rectangle on \(b \leq x \leq 1\) of height \(b^{\frac{3}{2}}\).
+\item There is a rectangle on \(b^2 \leq x \leq b\) of height \(\left(b^2\right)^{\frac{3}{2}}\).
+\item There is a rectangle on \(b^3 \leq x \leq b^2\) of height \(\left(b^3\right)^{\frac{3}{2}}\).
+\item Etc...
+\end{itemize}
+These rectangles have areas (repectively) \((1 - b)b^{\frac{3}{2}}\), \((1 - b) b\left(b^{\frac{3}{2}}\right)^2\), \((1-b)b^2\left(b^{\frac{5}{2}}\right)^3\), ...
+So we see that the total area of these rectangles (and hence our lowerbound) is:
+\begin{align}
+(1 - b)b^{\frac{3}{2}} + (1 - b) b\left(b^{\frac{3}{2}}\right)^2 + (1-b)b^2\left(b^{\frac{5}{2}}\right)^3 + ... 
+    & = \frac{1 - b}{b} \left( b^{\frac{5}{2}} + \left(b^{\frac{5}{2}}\right)^2 + \left(b^{\frac{5}{2}}\right)^2 + ...\right), \\
+    & = \frac{1 - b}{b} \frac{b^{\frac{5}{2}}} {1 - b^{\frac{5}{2}}}, \\
+    & = b^{\frac{3}{2}} \frac{1 - b}{1 - b^{\frac{5}{2}}}.
+\end{align}
+Now we use the algebraic fact that we can factor \(1 - y^2 = (1  - y) (1 + y)\) and \(1 - y^5 = (1 - y)(1 + y + y^2 + y^3 + y^4)\) for \(y = b^{\frac{1}{2}}\) to get that the lower bound is given by
+\begin{equation}
+b^{\frac{3}{2}} \frac{1 + b^{\frac{1}{2}}}
+    {1 + b^{\frac{1}{2}} + b^{\frac{2}{2}} + b^{\frac{3}{2}} + b^{\frac{4}{2}}}.
+\end{equation}
+
+This lower bound is valid for all \(0 < b < 1\). So taking the limit as \(b \to 1\) we get a lower bound of
+\begin{equation}
+\frac{1 + 1}{1 + 1+ 1+ 1 + 1} = \frac{2}{5}.
+\end{equation} 
+
+We can use a similiar process to find an upper bound of \(\frac{2}{5}\). Since the upper bound and lower bound are the same, we must have that they are exaclty equal to the area.
+
+Therefore, the area under \(y = x^{3/2}\) from \(0 \leq x \leq 1\) is \(\frac{2}{5}\).

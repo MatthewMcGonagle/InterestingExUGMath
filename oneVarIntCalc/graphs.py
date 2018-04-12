@@ -59,3 +59,34 @@ ax.set_xlabel('Longitude (Radians)')
 ax.set_title('Mercator Map\nAngle to North is Pi/6 Radians')
 plt.savefig('mercator.pdf')
 plt.show()
+
+############################################
+##### Fermat method of exhaustion graphs
+############################################
+
+powers = np.arange(-6.0, 0)
+base = 2
+partitionX = base**powers
+widths = base**powers 
+curveX = np.linspace(0, 1.0, num = 30)
+curveY = curveX**(3/2)
+
+def plotFermat(partitionX, partitionY, widths, title):
+
+    plt.bar(partitionX, height = partitionY, width = widths, color = 'white')
+    ax = plt.gca()
+    ax.set_title(title)
+    ax.set_ylabel('y')
+    ax.set_xlabel('x (Partition Points at Powers of 1/2)')
+
+partitionY = base**((1 + powers) * 3/2)
+plotFermat(partitionX, partitionY, widths, 'Overestimate for y = x^(3/2)')
+plt.plot(curveX, curveY, color = 'red')
+plt.savefig('fermatUpper.pdf')
+plt.show()
+
+partitionY = base**(powers * 3/2)
+plotFermat(partitionX, partitionY, widths, 'Underestimate for y = x^(3/2)')
+plt.plot(curveX, curveY, color = 'red')
+plt.savefig('fermatLower.pdf')
+plt.show()
