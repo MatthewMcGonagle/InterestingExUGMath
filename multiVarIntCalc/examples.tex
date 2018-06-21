@@ -106,7 +106,7 @@ And so we see the repeated integrals are finite, but do NOT match.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Inverse Distribution of Significands Under Multiplication}
+\subsection{Interesting Property of Significands Under Multiplication}
 
 \subsubsection*{The Setup}
 
@@ -117,50 +117,51 @@ in scientific notation. Note that the significand isn't defined for the number z
 
 Let us denote the signficand of a number \(x\) by \(s(x)\).
 
-Now we consider the case that we have a distribution of random (non-zero) numbers \(X\) such that the probability distribution of the significands of \(X\) are given by
-an inverse distribution. That is, the probability that \(s(X) = x\) is given by the following density:
+Now we consider the case that we have a distribution of random significands \(X\) such that their probability distribution is given by 
+an inverse distribution. That is, the probability density is \(\frac{1}{x\log(10)}\), i.e. for any \(1 \leq x < 10\),
 \begin{equation}
-P\left(s(X) = x\right) = \frac{1}{x\log(10)}.
+P\left(X \leq x\right) = \int \limits_1^x \frac{1}{s\log(10)} ds.
 \end{equation}
 
-We also assume we have another distribution of random (non-zero) numbers \(Y\) such that the probability distribution of the significands of \(Y\) are given by an 
-arbitrary density \(f(y)\). That is, the probability of \(s(Y) = y\) is given by the following density:
+We also assume we have another distribution of random significands \(Y\) such that their probability distribution is given by an 
+arbitrary density \(f(y)\). That is, for any \(1 \leq y < 10\), we have 
 \begin{equation}
-P\left(s(Y) = y\right) = f(y).
+P\left(Y \leq y\right) = \int \limits_0^y f(s) ds.
 \end{equation}
 
-We will consider the distribution of the significands for the product of \(X\) and \(Y\); that is \(P(s(XY) = z)\). We will show that
+We will consider the distribution of the significands for the product of \(X\) and \(Y\); that is \(P(s(XY) \leq z)\). Let \(h(z)\) be the density of the probability
+distribution of \(s(XY)\). We will show that
 \begin{equation}
-P(s(XY) = z) = \frac{1}{z\log(10)}.
+h(z) = \frac{1}{z\log(10)}.
 \end{equation}
 That is, the significands of the products also have an inverse distribution, no matter what the density \(f(y)\) is. For a more detailed discussion, please see \cite{Hamming}.
 
-Since we seek the distribution of a random variable that is real valued, it is helpful to consider the appropriate cumulative distribution. First, let \(h(z)\) be the density
-for \(P(s(XY) = z)\), i.e. \(P(s(XY) = z) = h(z)\). We then let \(H(z)\) be the cumulative distribution, i.e.
+Since we seek the distribution of a random variable that is real valued, it is helpful to consider the appropriate cumulative distribution. Since we denote the density of 
+the signficands \(s(XY)\) by \(h(z)\), we will then let \(H(z)\) be the cumulative distribution, i.e. 
 \begin{align}
 H(z) & = P(1 \leq s(XY) \leq z) \\
-    & = \int_1^z h(z) dz.
+    & = \int_1^z h(z) dz,
 \end{align}
-Recall that the significand is always between 1 and 10.
+for any \(1 \leq z < 10\). Recall that the significand is always between 1 and 10.
 
 Similary, we let \(F(y)\) be the cumulative distribution for \(f(y)\).
 
-Next, let us describe which significands \(s(X)\) and \(s(Y)\) satisfy \(1 \leq s(XY) \leq z\). First, we have the case that the product of the signficands \(s(X)s(Y) < 10\). In this case, we have that
-the significand \(s(XY) = s(X)s(Y)\). However, in the case that \(s(X)s(Y) \geq 10\), we have that \(s(XY) = s(X)s(Y) / 10\); we need to divide by \(10\) to move the decimal point to the right. So we
+Next, let us describe which significands \(X\) and \(Y\) satisfy \(1 \leq s(XY) \leq z\). First, we have the case that the product satisfies \(XY < 10\). In this case, we have that
+the significand \(s(XY) = XY\). However, in the case that \(XY \geq 10\), we have that \(s(XY) = XY / 10\); we need to divide by \(10\) to move the decimal point to the right. So we
 see that
 \begin{equation}
-\{1 \leq s(XY) \leq z\} = \{1 \leq s(X)s(Y) \leq z\} \cup \{10 \leq s(X)s(Y) \leq 10z\}.
+\{1 \leq s(XY) \leq z\} = \{1 \leq XY \leq z\} \cup \{10 \leq XY \leq 10z\}.
 \end{equation}
 Let \(U = \{1 \leq xy \leq z | 1\leq x,y < 10\}\) and \(V = \{10 \leq xy \leq 10z | 1\leq x, y < 10\}\).
 
-Let's take a look at these regions
+Let's take a look at these regions.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width = 0.5\textwidth]{multiVarIntCalc/significandProduct.pdf}
 \end{figure}
 
-Let \(p(x,y) = P(s(X) = x \text{ and } s(Y) = y) = \frac{f(y)}{x\log(10)}\). Then we have that our cumulative distribution is given by
+Let \(p(x,y)\) be the density for \((X, Y)\); we have that \(p(x,y) = \frac{f(y)}{x\log(10)}\). Then we have that our cumulative distribution is given by
 \begin{align}
 H(z) & = \iint\limits_{U\cup V} p(x,y) \dA_{xy}, \\ 
 & = \frac{1}{\log(10)} \iint \limits_{U\cup V} \frac{f(y)}{x}  dA_{xy}.
@@ -204,3 +205,56 @@ H_U'(z) & = 0 + \frac{1}{\log(10)} \int\limits_1^z \frac{1}{x^2} f\left(\frac{z}
     & = \frac{1}{z\log(10)} \int\limits_1^{z} f(u) du, \\
 & = \frac{F(z)}{z\log(10)}.
 \end{align}
+
+Next, we compute \(H_V'(z)\) for \(H_V(z)\) defined by
+\begin{equation}
+H_V(z) \coloneqq \frac{1}{\log(10)} \iint\limits_V \frac{f(y)}{x}\dA_{xy}. 
+\end{equation}
+We can either compute this by breaking up the integral into regions where we can apply double iterated integrals or we can make a
+change of coordinates. We will change our coordinates.
+
+Define coordinates \(u = x\) and \(v = xy\); note that these are valid cooridinates for the square \(1 \leq x, y \leq 10\). In \(xy\)-coordinates,
+the region \(V\) is specified by its four boundary pieces: \(\{x = 10\}\), \(\{y = 10\}\), \(\{xy = 10\}\), and \(\{xy = 10z\}\). In \(uv\)-coordinates,
+these become \(\{u = 10\}\), \(\{v = 10u\}\), \(\{v = 10\}\), \(\{v = 10z\}\). Denote this tranformed region by \(\overline{V}\); below is a picture of \(\overline{V}\).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 0.5\textwidth]{multiVarIntCalc/uvRegion.pdf}
+\end{figure} 
+
+We see that we can integrate over the region \(\overline{V}\) in the \(uv\)-plane with one application of iterated integrals. However,
+first we need to compute the Jacobian factor for the transformation of coordinates. We have
+\begin{equation}
+\frac{\partial(u, v)}{\partial(x, y)} = x. 
+\end{equation} 
+So we get that
+\begin{align}
+\frac{\partial(x, y)}{\partial(u, v)} & = \frac{1}{x},\\
+    & = \frac{1}{u}.
+\end{align}
+So we see that
+\begin{align}
+H_V(z) & = \frac{1}{\log(10)} \iint \limits_{\overline{V}} \frac{1}{u^2} f\left(\frac{v}{u}\right) dA_{uv}, \\
+    & = \frac{1}{\log(10)} \int\limits_{10}^{10z} \left( \int\limits_{v/10}^{10} \frac{1}{u^2} f\left(\frac{v}{u}\right) du \right) dv.
+\end{align}
+For the inner integral we get
+\begin{align}
+\int\limits_{v/10}^{10} \frac{1}{u^2} f\left(\frac{v}{u}\right) du  & = \frac{1}{v} \int\limits_{v/10}^{10} f(w) dw, \\
+    & = \frac{1}{v}\left(F(10) - F\left(\frac{v}{10}\right) \right), \\
+    & =  \frac{1}{v}\left(1 - F\left(\frac{v}{10}\right) \right).
+\end{align}
+Here we have used that \(F(10) = 1\).
+
+So then 
+\begin{equation}
+H_V(z) = \frac{1}{\log(10)} \int\limits_{10}^{10z} \frac{1}{v}\left(1 - F\left(\frac{v}{10}\right) \right) dv,
+\end{equation}
+and therefore
+\begin{align}
+H_V'(z) & = \frac{10}{10z\log(10)} \left(1 - F(z)\right), \\
+    & = \frac{1}{z\log(10)} - \frac{1}{z\log(10)}F(z).
+\end{align}
+Since \(H(z) = H_U(z) + H_V(z)\), we have that \(h(z) = H_U'(z) + H_V'(z)\) and so we get 
+\begin{equation}
+h(z) = \frac{1}{z\log(10)}.
+\end{equation}
