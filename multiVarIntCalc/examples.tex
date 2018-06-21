@@ -152,7 +152,8 @@ see that
 \begin{equation}
 \{1 \leq s(XY) \leq z\} = \{1 \leq XY \leq z\} \cup \{10 \leq XY \leq 10z\}.
 \end{equation}
-Let \(U = \{1 \leq xy \leq z | 1\leq x,y < 10\}\) and \(V = \{10 \leq xy \leq 10z | 1\leq x, y < 10\}\).
+Let \(U = \{(x, y) | 1 \leq xy \leq z \text{ and } 1\leq x,y < 10\}\) 
+and \(V = \{(x, y) | 10 \leq xy \leq 10z \text{ and } 1\leq x, y < 10\}\). Note that \(U\) and \(V\) both depend on \(z\).
 
 Let's take a look at these regions.
 
@@ -170,7 +171,7 @@ We can use this expression for \(H(z)\) to compute the density \(h(z) = H'(z)\).
 
 \subsubsection*{The Problem}
 
-For \(1 \leq z < 10\), consider the regions \(U = \{1 \leq xy \leq z | 1 \leq x, y < 10 \}\) and \(V = \{10 \leq xy \leq 10z | 1 \leq x, y < 10\}\). Use that the
+For \(1 \leq z < 10\), consider the regions \(U = \{(x, y) | 1 \leq xy \leq z \text{ and } 1 \leq x, y < 10 \}\) and \(V = \{(x, y) | 10 \leq xy \leq 10z \text{ and } 1 \leq x, y < 10\}\). Use that the
 cumulative distribution \(H(z)\) satisfies 
 \begin{equation}
 H(z) = \frac{1}{\log(10)} \iint\limits_{U \cup V} \frac{f(y)}{x} \dA_{xy}, 
