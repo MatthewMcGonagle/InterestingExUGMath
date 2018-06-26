@@ -1,0 +1,122 @@
+\subsection{Maximizing Likelihood for a Three Step Markov Process}
+
+\subsubsection*{The Setup : The Constraints}
+
+\newcommand{\flip}[1]{\overline{#1}}
+
+We have three random variables \(X_1\), \(X_2\), and \(X_3\) where each \(X_i = 0\) or \(X_i = 1\). The order
+of the variables matter, and we think of them as randomly being chosen in sequence according to their indices
+one, two, or three. 
+
+So there are eight possible outcomes according to the two possible values for each \(X_i\); we label these
+outcomes as \(X_1X_2X_3\), e.g. \(000\) or \(110\). We label the probabilities of the outcomes according to these  
+possibilities, e.g. \(p_{000}\) or \(p_{110}\). We think of the probabilities forming a vector 
+\(\vec p \in \mathbb R^8\), i.e. the vector \(\vec p = (p_{000}, p_{001}, ..., p_{111})\). 
+
+Finally, one more notation we will use. We will use \(\flip i\) to denote the other value of \(0\) or \(1\) that 
+is not \(i\); i.e. if \(i = 1\) then \(\flip i = 0\).
+
+To be a three step Markov process, the transition from \(X_2\) to \(X_3\) needs to depend only on \(X_2\) and
+not on the entire history, i.e. not depend on \(X_1\) and \(X_2\). In terms of probabilities, this is
+expressed as 
+\begin{equation}
+P(X_3 = k | X_1 = i, X_2 = j) = P(X_3 = k | X_2 = j).
+\end{equation}
+Applying Bayes' formula to both sides of this equation, we get
+\begin{equation}
+\frac{p_{ijk}}{\sum_\gamma p_{ij\gamma}} 
+= \frac{\sum_\alpha p_{\alpha jk}} {\sum_{\alpha, \gamma} p_{\alpha j\gamma} }.
+\end{equation}
+We can rewrite this as 
+\begin{equation}
+p_{ijk} \sum_{\alpha, \gamma} p_{\alpha j\gamma} =
+     \left(\sum_\alpha p_{\alpha jk}\right) \left( \sum_\gamma p_{ij\gamma} \right).
+\end{equation}
+Next, let's expand the sums over \(\gamma\) as sums over the values \(k\) and \(\flip k\); we get
+\begin{equation}
+p_{ijk}\sum_\alpha p_{\alpha jk} + p_{ijk} \sum_\alpha p_{\alpha j\flip k} =
+p_{ijk} \sum_\alpha p_{\alpha jk} + p_{ij\flip k} \sum_\alpha p_{\alpha jk}.
+\end{equation}
+Cancelling terms we get
+\begin{equation}
+p_{ijk} \sum_\alpha p_{\alpha j\flip k} = p_{ij\flip k} \sum_\alpha p_{\alpha jk}.
+\end{equation}
+Now expand the sum over \(\alpha\) as a sum over the values \(i\) and \(\flip i\), we get
+\begin{equation}
+p_{ijk} p_{ij\flip k} + p_{ijk} p_{\flip ij\flip k} = p_{ij\flip k} p_{ijk} + p_{ij\flip k} p_{\flip ijk}.
+\end{equation}
+Again, cancelling terms we get
+\begin{equation}
+p_{ijk} p_{\flip ij\flip k} = p_{ij\flip k} p_{\flip ijk}.
+\end{equation}
+
+Now, at first this appears to be eight different equations, one for each possible choice of \((i, j, k)\). 
+However, we will now show that it is actually just two different equations without doing a brute force
+plug and check.
+
+First, notice that the equation is exactly the same if we make the substitution \(i \to \flip i\); the effect
+is to merely switch the left and right hand side of the equation. Therefore, the equation is the same no matter
+which value of \(i\) we choose. So let us choose \(i = 0\).
+
+Similarly, using the substitution \(k \to \flip k\), we can choose \(k = 0\). Both of these choices give
+\begin{equation}
+p_{0j0} p_{1j1} = p_{0j1} p_{1j0},
+\end{equation}
+for either \(j = 0\) or \(j = 1\). It is not very hard to see that we get different equations for each
+different value of \(j\). 
+
+Therefore, we find that the constraints for \(\vec p\) to be a three step Markov process are exactly the
+four following constraints: 
+\begin{equation}
+\begin{cases}
+p_{ijk} \geq 0, \\
+\sum_{\alpha, \beta, \gamma} p_{\alpha\beta\gamma} = 1, \\
+p_{000} p_{101} = p_{001} p_{100}, \\ 
+p_{010} p_{111} = p_{011} p_{110}.
+\end{cases}
+\end{equation}
+All probability vectors \(\vec p \in \mathbb R^8\) that belong to three step Markov processes are exactly 
+the probability vectors \(\vec p\in \mathbb R^8\) that satisfy all of the above constraints. 
+
+\subsection*{The Setup: Maximizing Likelihood}
+
+We are interested in creating statistical estimates for the different \(p_{ijk}\) based on data recording
+sample counts \(n_{ijk}\); that is, we run \(N\) independent trials, and \(n_{ijk}\) is the 
+number of times we see outcome \(X_1 = i\), \(X_2 = j\), and \(X_3 = k\). We denote the collection of
+all the \(n_{ijk}\) as a vector \(\vec n\) similarly to how we used \(\vec p\) above. 
+
+First, let us briefly discuss the notion of likelihood. For the notion of likelihood, you consider the
+data \(\vec n\) to be fixed, and we consider varying the probabilities of our model \(\vec p\). The 
+likelihood is defined as the probabilitiy \(l(\vec p) = P(\vec n | \vec p) \) for our three step Markov
+model. Assuming the trials are independent, we have
+\begin{equation}
+l(\vec p) = \prod_{\alpha, \beta, \gamma} (p_{\alpha\beta\gamma})^{n_{\alpha\beta\gamma}}.
+\end{equation} 
+The term "likelihood" is used instead of probability, because \(l(\vec p)\) does not in general represent
+a probability distribution on \(\vec p\).
+
+The idea is that a good estimate of the true probabilities should come from finding \(\vec p\) that
+maximizes the likelihood \(l(\vec p\). 
+
+Next note that maximizing likelihood is equivalent to maiximizing the logarithm of likelihood; however,
+the latter has a nicer form. So let \(L(\vec p) = \log(l(\vec p))\). We see that
+\begin{equation}
+L(\vec p) = \sum_{\alpha, \beta, \gamma} n_{\alpha\beta\gamma} \log(p_{\alpha\beta\gamma}).
+\end{equation}
+
+Now, recall that those \(\vec p\) that represent three step Markov processes are exactly those \(\vec p\) 
+satisfying four constraints. So we are lead to a constrained maximization problem. We will assume that
+the maximum occurs at the interior of the constraints, i.e. \(p_{ijk} > 0\) for all \((i, j, k)\). 
+
+\subsubsection*{The Problem}
+
+Let the data \(n_{ijk}\) be fixed. Assume that the maximum of the following constrained problem occurs at \(p_{ijk} > 0\) for all \((i, j, k)\):
+\begin{equation}
+\begin{cases}
+\text{maximize } L(\vec p) = \sum_{\alpha, \beta, \gamma} n_{\alpha\beta\gamma} \log p_{\alpha\beta\gamma}, \\
+\sum_{\alpha, \beta, \gamma} p_{\alpha\beta\gamma} = 1, \\
+p_{0j0} p_{1j1} = p_{0j1} p_{1j0}, & \text{ for } j \in \{0, 1\}.
+\end{cases}
+\end{equation}
+
+Find the \(p_{ijk}\) where the maximum occurs in terms of the data \(n_{ijk}\).
