@@ -115,8 +115,111 @@ Let the data \(n_{ijk}\) be fixed. Assume that the maximum of the following cons
 \begin{cases}
 \text{maximize } L(\vec p) = \sum_{\alpha, \beta, \gamma} n_{\alpha\beta\gamma} \log p_{\alpha\beta\gamma}, \\
 \sum_{\alpha, \beta, \gamma} p_{\alpha\beta\gamma} = 1, \\
-p_{0j0} p_{1j1} = p_{0j1} p_{1j0}, & \text{ for } j \in \{0, 1\}.
+p_{0j0} p_{1j1} - p_{0j1} p_{1j0} = 0, & \text{ for } j \in \{0, 1\}.
 \end{cases}
 \end{equation}
 
 Find the \(p_{ijk}\) where the maximum occurs in terms of the data \(n_{ijk}\).
+
+\subsubsection*{The Solution}
+
+For convenience of notation, let us make the following definitions
+\begin{align}
+f(\vec p) & \coloneqq \sum_{\alpha, \beta, \gamma} p_{\alpha\beta\gamma}, \\
+g_j(\vec p) & \coloneqq p_{0j0} p_{1j1} - p_{0j1} p_{1j0}.
+\end{align}
+
+Let us look the Lagrangian condition for finding the constrained critical points of \(L(\vec p)\).
+Now, note that 
+\begin{align}
+\frac{\partial L}{\partial p_{ijk}} & = \frac{n_{ijk}} {p_{ijk}}, \\
+\frac{\partial f}{\partial p_{ijk}} & = 1,
+\end{align}
+for all \((i, j, k)\). Next, let us consider the derivatives of \(g_j(\vec p)\). We see that
+\begin{align}
+\frac{\partial g_j}{\partial p_{ijk}} & = (-1)^{i + k} p_{\flip i j\flip k}, \\
+\frac{\partial g_j}{\partial p_{i\flip jk} } & = 0.
+\end{align}
+
+Now, let \(\lambda\) be the Lagrangian coefficient for \(f(\vec p)\) and let the two coefficients \(\tau_j\)
+be the Lagrangian coefficients for \(g_j(\vec p)\). The Lagrangian condition gives us that
+\begin{equation}
+\frac{n_{ijk}} {p_{ijk}} = \lambda + \tau_j (-1)^{i + k} p_{\flip i j\flip k},
+\end{equation}
+for each \((i, j, k)\). Note how coefficient \(\tau_0\) and variables \(p_{i0k}\) are 
+decoupled from \(\tau_1\) and \(p_{i1k}\); that is no equation has some variable or coefficient from both sets. 
+However, \(\lambda\) is coupled to all of them.
+
+Now, multiply through to get
+\begin{equation}
+n_{ijk} = \lambda p_{ijk} + \tau_j (-1)^{i + k} p_{ijk} p_{\flip ij\flip k}.
+\end{equation}
+Next consider this equation for \((i, j, \flip k)\) and note that \((-1)^{i+k} = -(-1)^{i + \flip k}\). So
+we have
+\begin{equation}
+n_{ij\flip k} = \lambda p_{ij\flip k} - \tau_j (-1)^{i + k} p_{ij\flip k} p_{\flip ijk}.
+\end{equation}
+Next, use the constraint \(p_{ijk}p_{\flip ij\flip k} = p_{ij\flip k}p_{\flip ijk}\) and add together the 
+two equations to get
+\begin{equation}
+n_{ijk} + n_{ij\flip k} = \lambda(p_{ijk} + p_{ij\flip k}).
+\end{equation}
+
+Similarly do the same for \((\flip i, j, k)\), and we obtain
+\begin{equation}
+\frac{n_{ijk} + n_{\flip ijk}} {p_{ijk} + p_{\flip ijk}} = 
+    \frac{n_{ijk} + n_{ij\flip k}} {p_{ijk} + p_{ij\flip k}} =
+    \lambda.
+\end{equation}
+
+Let us concentrate on the following constraints:
+\begin{equation}
+\begin{cases}
+\sum_{\alpha, \beta, \gamma} p_{\alpha\beta\gamma} = 1, \\
+\frac{n_{ijk} + n_{\flip ijk}} {p_{ijk} + p_{\flip ijk}} = 
+    \frac{n_{ijk} + n_{ij\flip k}} {p_{ijk} + p_{ij\flip k}} =
+    \lambda, \\
+p_{0j0}p_{1j1} = p_{0j1}p_{1j0}.
+\end{cases}
+\end{equation}
+Note that these constraints are invariant under the substitution \(i \to \flip i\) (appropriately interpreted
+for the quadratic constraint); that is the substitution \(i \to \flip i\) is a symmetry for these constraints. 
+Similarly \(j \to \flip j\) is a symmetry as well.
+
+We will want to use these symmetries to help us solve these system of constraints. Before we do so, let us
+show how to formalize these symmetries.
+
+Let \(S(\vec p)_{ijk} = p_{\flip ijk}\) be the linear transformation that involves switching components
+according to the substitution \(i \to \flip i\). Similarly let \(T(\vec p)_{ijk} = p_{ij\flip k}\) be that
+corresponding to the substitution \(j \to \flip j\). 
+
+A symmetry in the substitution \(i \to \flip i\) means that \(\vec p\) satisfies these constraints 
+if and only if \(S (\vec p)\) does too; similarly for a symmetry in the substitution \(j \to \flip j\) and the
+transformation \(T\).
+
+The key point is that these constraints are easier to understand if we change to coordinates that are special
+for the transformations \(S\) and \(T\). Note that \(ST = TS\) and they are both orthogonal transformations, 
+and so we can decompose \(\mathbb R^8\) into an eigenbasis for both \(S\) and \(T\); if you are uncomfortable with
+these theoretical details, then it is enough to know that we want to try and we will see that it will work. 
+
+First, let us decompose into an eigenbasis of \(S\). Note that \(S\) just switches the components of \(\vec p\)
+in pairs, and so \(S^2 = 1\). Therefore the eigenvalues of \(S\) are at most \(\pm 1\). In fact, it is 
+simple to correctly guess the eigenvectors of \(S\). This leads us to an intial change of variables
+\begin{align}
+q_{+jk} & \coloneqq p_{ijk} + p_{\flip ijk}, \\
+q_{-jk} & \coloneqq p_{ijk} - p_{\flip ijk}.
+\end{align}
+Note that we have used subscripts of \(\pm\) to indicate whether the variable corresponds to eigenvalue \(\pm 1\).
+Also take note of the symmetries and anti-symmetries for the substitution \(i \to \flip i\) in the 
+definitions of \(q_{+jk}\) and \(q_{-jk}\).
+
+Next, we wish to further decompose for \(T\). Again, it is simple enough to guess at the right answer. The 
+coordinates are
+\begin{align}
+r_{+j+} & \coloneqq p_{ijk} + p_{\flip ijk} + p_{ij\flip k} + p_{\flip i j\flip k}, \\
+r_{+j-} & \coloneqq p_{ijk} + p_{\flip ijk} - p_{ij\flip k} - p_{\flip i j\flip k}, \\
+r_{-j+} & \coloneqq p_{ijk} - p_{\flip ijk} + p_{ij\flip k} - p_{\flip ij\flip k}, \\
+r_{-j-} & \coloneqq p_{ijk} - p_{\flip ijk} - p_{ij\flip k} + p_{\flip ij\flip k}. 
+\end{align}
+Again, note the symmetries and anti-symmetries for the substitution \(i \to \flip i\) and for the
+substitution \(j \to \flip j\).
