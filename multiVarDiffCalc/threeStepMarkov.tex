@@ -176,8 +176,8 @@ Let us concentrate on the following constraints:
 \begin{equation}
 \begin{cases}
 \sum_{\alpha, \beta, \gamma} p_{\alpha\beta\gamma} = 1, \\
-\frac{n_{ijk} + n_{\flip ijk}} {p_{ijk} + p_{\flip ijk}} = 
-    \frac{n_{ijk} + n_{ij\flip k}} {p_{ijk} + p_{ij\flip k}} =
+\frac{n_{0jk} + n_{1jk}} {p_{0jk} + p_{1jk}} = 
+    \frac{n_{ij0} + n_{ij1}} {p_{ij0} + p_{ij1}} =
     \lambda, \\
 p_{0j0}p_{1j1} = p_{0j1}p_{1j0}.
 \end{cases}
@@ -206,20 +206,185 @@ First, let us decompose into an eigenbasis of \(S\). Note that \(S\) just switch
 in pairs, and so \(S^2 = 1\). Therefore the eigenvalues of \(S\) are at most \(\pm 1\). In fact, it is 
 simple to correctly guess the eigenvectors of \(S\). This leads us to an intial change of variables
 \begin{align}
-q_{+jk} & \coloneqq p_{ijk} + p_{\flip ijk}, \\
-q_{-jk} & \coloneqq p_{ijk} - p_{\flip ijk}.
+q_{+jk} & \coloneqq p_{0jk} + p_{1jk}, \\
+q_{-jk} & \coloneqq p_{0jk} - p_{1jk}.
 \end{align}
-Note that we have used subscripts of \(\pm\) to indicate whether the variable corresponds to eigenvalue \(\pm 1\).
-Also take note of the symmetries and anti-symmetries for the substitution \(i \to \flip i\) in the 
-definitions of \(q_{+jk}\) and \(q_{-jk}\).
+Note that we have used subscripts of \(\pm\) to indicate whether the variable corresponds to 
+eigenvalue \(\pm 1\).
+Also take note of the symmetry for the substitution \(p_{ijk} \to p_{\flip ijk}\) in the 
+definition of \(q_{+jk}\); furthermore, such a substitution in the definition of \(q_{-jk}\) is 
+an anti-symmetry, i.e. it changes the sign.
 
 Next, we wish to further decompose for \(T\). Again, it is simple enough to guess at the right answer. The 
 coordinates are
 \begin{align}
-r_{+j+} & \coloneqq p_{ijk} + p_{\flip ijk} + p_{ij\flip k} + p_{\flip i j\flip k}, \\
-r_{+j-} & \coloneqq p_{ijk} + p_{\flip ijk} - p_{ij\flip k} - p_{\flip i j\flip k}, \\
-r_{-j+} & \coloneqq p_{ijk} - p_{\flip ijk} + p_{ij\flip k} - p_{\flip ij\flip k}, \\
-r_{-j-} & \coloneqq p_{ijk} - p_{\flip ijk} - p_{ij\flip k} + p_{\flip ij\flip k}. 
+r_{+j+} & \coloneqq p_{0j0} + p_{1j0} + p_{0j1} + p_{1j1}, \\
+r_{+j-} & \coloneqq p_{0j0} + p_{1j0} - p_{0j1} - p_{1j1}, \\
+r_{-j+} & \coloneqq p_{0j0} - p_{1j0} + p_{0j1} - p_{1j1}, \\
+r_{-j-} & \coloneqq p_{0j0} - p_{1j0} - p_{0j1} + p_{1j1}, \\
 \end{align}
-Again, note the symmetries and anti-symmetries for the substitution \(i \to \flip i\) and for the
-substitution \(j \to \flip j\).
+Again, note the symmetries and anti-symmetries for the substitution \(p_{ijk} \to p_{\flip ijk}\) and for the
+substitution \(p_{ijk} \to p_{ij\flip k}\).
+
+It will be convenient if we do a similar change of coordinates to \(n_{ijk}\) to make coordinates 
+\(\{m_{+j+}, m_{+j-}, m_{-j+}, m_{-j-}\}\).
+
+Next, we rewrite our constraints in terms of these new coordinates.
+
+First, we note that \(\sum_{\alpha, \beta, \gamma} p_{\alpha\beta\gamma} = \sum_j r_{+j+}\), so we get 
+the constraint
+\begin{equation}
+r_{+0+} + r_{+1+} = 1.
+\end{equation}
+
+Next, let's look at the linear constraints \(n_{ij0} + n_{ij1} = \lambda (p_{ij0} + p_{ij1})\) for each 
+value of \(i\). We note
+that both sides are invariant under the substitution \(k \to \flip k\). So we seek expressing the right side
+in terms of \(r_{+j+}\) and \(r_{-j+}\), and similar expressions for the left hand side.
+
+We immediately see that \(r_{+j+} + r_{-j+} = 2(p_{0j0} + p_{0j1})\) and 
+that \(r_{+j+} - r_{-j+} = 2(p_{1j0} + p_{1j1})\). We get a similar result for
+\(m_{+j+} + m_{-j+}\) and \(m_{+j+} - m_{-j+}\). Therefore we have
+\begin{align}
+m_{+j+} + m_{-j+} & = \lambda(r_{+j+} + r_{-j+}), \\
+m_{+j+} - m_{-j+} & = \lambda(r_{+j+} - r_{-j+}), \\
+\end{align}
+
+So we get
+\begin{align}
+m_{+j+} & = \lambda r_{+j+}, \\
+m_{-j+} & = \lambda r_{-j+}.
+\end{align}
+
+Similarly, using the linear constraints \(n_{0jk} + n_{1jk} = \lambda (p_{0jk} + p_{1jk})\) for each value of 
+\(k\), we get another equation (but only one new equation):
+\begin{equation}
+m_{+j-} = \lambda r_{+j-}.
+\end{equation}
+
+Now, it is easy to see that \(N = m_{+0+} + m_{+1+}\). So using our new equations we get
+\begin{align}
+N & = \lambda(r_{+0+} + r_{+1+}), \\
+& = \lambda. 
+\end{align}
+
+So we get
+\begin{align}
+r_{+j+} & = \frac{m_{+j+}} {N}, \\
+r_{-j+} & = \frac{m_{-j+}} {N}, \\
+r_{+j-} & = \frac{m_{+j-}} {N}.
+\end{align}
+Note that the right hand sides only depend on the data \(n_{ijk}\), which is fixed. In order to
+obtain our original \(p_{ijk}\), we still need to find \(r_{-j-}\) in terms of the data. 
+
+To do so, we will have to use the quadratic equations \(p_{0j0}p_{1j1} - p_{0j1}p_{1j0} = 0\). 
+We need to rewrite this quadratic polynomial in \(p_{ijk}\) as a quadratic polynomial in \(r\)-coordinates.
+For now, forget the other constraints and just consider these quadratic equations for 
+any \(\vec p \in \mathbb R^8\).
+
+Recall that these equations are described using the quadratic forms \(g_j(\vec p)\). 
+Next, note that the quadratic forms \(g_j\) are anti-symmetric for the substitution 
+\(p_{ijk} \to p_{\flip ijk}\)
+and for the substitution \(p_{ijk} \to p_{ij\flip k}\).
+
+These substitutions correspond to our transformations \(S\) and \(T\). So when we find how \(g_j\) depends
+on the coordinates \(r_{+j+}\), \(r_{+j-}\), \(r_{-j+}\), and \(r_{-j-}\), we can make our work much 
+shorter by paying attention to the anti-symmetries of the substitutions.
+
+For example, we know that \(g_j\) will be a quadratic polynomial in the \(r\)-coordinates. Let us consider
+what the coefficient of \(r_{+j+}r_{+j+}\) can be. So consider
+\begin{equation}
+g_j(\vec p) = A r_{+j+}r_{+j+} + ...
+\end{equation} 
+From the above discussion we know that \(g_j(S\vec p) = g_j(s\vec p)\). However, the \(r_{+j+}\) coordinates
+of \(S\vec p\) is the same as \(\vec p\). Therefore we get
+\begin{align}
+-(A r_{+j+}r_{+j+} + ...) & = -g_j(\vec p), \\
+& = g_j(S\vec p), \\
+& = A r_{+j+}r_{+j+} \pm ....
+\end{align}
+Now, we haven't discussed what happens to the other \(r\)-coordinates, but it doesn't matter as none of them
+transform into having any \(r_{+j+}\) coordinate. Therefore, we have \(-A = A\), and so we get \(A = 0\).
+Hence the coefficient of \(r_{+j+}r_{+j+}\) is zero. The key for why this worked out so nicely is that the
+\(r\)-coordinates are constructed to from the eigenvectors of both \(S\) and \(T\). 
+
+In fact, we can use the anti-symmetries to narrow down our list of which terms can be non-zero. They need
+to match the anti-symmetry of the substitutions. Consider first the substitution \(p_{ijk} \to p_{\flip ijk}\).
+This results in an anti-symmetry means that we can only have non-zero coefficients for those terms that
+have exactly one minus in their \(i\) spot, i.e. \(r_{+jx}r_{-jy}\) where \(x,y \in \{-, +\}\).
+
+Similarly, considering the anti-symmetry of the substitution \(p_{ijk} \to p_{ij\flip k}\), we narrow
+down the terms to
+\begin{equation}
+g_j(\vec p) = B r_{+j+}r_{-j-} + C r_{+j-}r_{-j+},
+\end{equation}
+for some unknown constants \(B, C\).
+
+To find \(B\) and \(C\), we simply substitute in some choice of \(\vec p^0\) (recall that we our now considering
+all \(\vec p\in\mathbb R^8\)). Let us use \(p^0_{0j0} = s\), \(p^0_{1j1} = t\), and all other 
+values of \(p^0_{ijk} = 0\). We have
+\begin{align}
+st & = p^0_{0j0}p^0_{1j1} - p^0_{0j1} p^0_{1j0}, \\
+r^0_{+j+} & = s + t, \\
+r^0_{+j-} & = s - t, \\
+r^0_{-j+} & = s - t, \\
+r^0_{-j-} & = s + t.
+\end{align}
+So we get
+\begin{align}
+Ar^0_{+j+}r^0_{-j-} + Br^0_{+j-}r^0_{-j+} & = A(s + t)^2 + B(s - t)^2, \\
+& = (A + B)s^2 + 2(A - B)st + (A + B)t^2. 
+\end{align}
+So we get
+\begin{align}
+A + B & = 0, \\
+2(A - B) & = 1
+\end{align}
+Therefore, we get \(A = 1/4\) and \(B = -1/4\). So
+\begin{equation}
+g_j = \frac{r_{+j+}r_{-j-} - r_{+j-}r_{-j+} } {4}.
+\end{equation}
+
+So the condition that \(p_{0j0}p_{1j1} = p_{0j1} p_{1j0}\) becomes 
+\(r_{+j+} r_{-j-} = r_{+j-} r_{-j+} \). Therefore, we can solve for \(r_{-j-}\) to
+get
+\begin{equation}
+r_{-j-} = \frac{m_{+j-} m_{-j+} }{N m_{+j+} }.
+\end{equation}
+
+Now that we have solved the \(r\)-coordinates in terms of the data, we can solve
+for the \(p_{ijk}\). Again, we can pay attention to the symmetries to minimize the
+amount of work this entails.
+
+First, let us solve for \(p_{0j0}\). We note that
+\begin{align}
+p_{0j0} & = \frac{r_{+j+} + r_{+j-} + r_{-j+} + r_{-j-} } {4}, \\
+& = \frac{m_{+j+}( m_{+j+} + m_{+j-} + m_{-j+}) + m_{+j-}m_{-j+}} {4Nm_{+j+}}, \\
+& = \frac{m_{+j+}( m_{+j+} + m_{+j-}) + m_{-j+}(m_{+j+} + m_{+j-}) } {4Nm_{+j+}}, \\
+& = \frac{(m_{+j+} + m_{-j+}) (m_{+j+} + m_{+j-}) } {4Nm_{+j+}}, \\
+& = \frac{4(n_{0j0} + n_{0j1})(n_{0j0} + n_{1j0}) } {4Nm_{+j+}}, \\
+& = \frac{\left(\sum_\gamma n_{0j\gamma}\right) \left(\sum_\alpha n_{\alpha j0}\right) } 
+    {N\sum_{\alpha, \gamma} n_{\alpha j\gamma}}.
+\end{align}
+
+Now that we have solved for \(p_{0j0}\), we can use symmetries to solve for the rest of the \(p_{ijk}\). Let
+\(\tilde n_{ijk} = n_{\flip ijk} \). Note that this amounts to relabeling the outcomes of \(X_1\). 
+Next, let \(\tilde p_{ijk}\) be the optimal probabilities for \(\tilde n_{ijk}\). Since we are really
+only relabeling \(X_1\), we have that \(\tilde p_{ijk} = p_{\flip ijk}\). 
+
+Now we use the formula for \(\tilde p_{0j0}\). We get
+\begin{align}
+p_{1j0} & = \tilde p_{0j0}, \\
+& = \frac{\left(\sum_\gamma \tilde n_{0j\gamma}\right) 
+        \left(\sum_\alpha \tilde n_{\alpha j0}\right) }
+        {N \sum_{\alpha, \gamma} \tilde n_{\alpha j\gamma}}, \\
+& = \frac{\left(\sum_\gamma n_{1j\gamma}\right) 
+        \left(\sum_\alpha n_{\alpha j0}\right) }
+        {N \sum_{\alpha, \gamma} n_{\alpha j\gamma}}.
+\end{align} 
+Similarly we can compute every \(p_{ijk}\) as
+\begin{equation}
+p_{ijk} = \frac{\left(\sum_\gamma n_{ij\gamma}\right)
+                \left(\sum_\alpha n_{\alpha jk}\right) }
+               {N \sum_{\alpha, \gamma} n_{\alpha j\gamma}}.
+\end{equation}
