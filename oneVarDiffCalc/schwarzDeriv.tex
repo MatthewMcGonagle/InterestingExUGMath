@@ -1,0 +1,101 @@
+\subsection{The Schwarzian Derivative}
+
+In this example we will derive the form of the Schwarzian derivative \(Su\) for a smooth function \(u:\mathbb R \to \mathbb R\)
+given by
+\begin{equation}
+Su = \frac{u'''}{u'} - \frac{3}{2}\left(\frac{u''}{u'}\right)^2.
+\end{equation}
+What is special about the Schwarzian derivative is that you get the same result if you apply it to
+a function \(w\) that is a linear fractional transformation of \(f\), i.e. for
+\begin{equation}
+w(x) = \frac{A + Bu(x)}{C + Du(x)},
+\end{equation}
+for constants \(A, B, C,\) and \(D\), we have that \(Su = Sw\). We will first briefly discuss 
+linear fractional transformations and then how we aim to derive the Schwarzian derivative from the
+above invariance property.
+
+\subsubsection*{The Setup: Linear Fractional Transformations}
+
+A linear fractional transformation for one real variable is a function of the form
+\begin{equation}
+T(y) = \frac{A + By}{C + Dy},
+\end{equation}
+for constants \(A, B, C\) and \(D\). Note that the function is not defined for the single point \(C + Dy = 0\) when
+\(D\neq 0\).
+
+An important motivation for linear fractional transformations is perspective transformations. First imagine an
+eye sitting at the origin in \(\mathbb R^2\), and the eye is looking down the x-axis towards \(+\infty\). 
+Everything the eye
+observes is equivalent to seeing something sitting in its viewing line (or plane for 3-dimensions). We will
+take the viewing line of the eye to be \(\{x = 1\}\). See the figure below.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 2in]{oneVarDiffCalc/perspective1.pdf}
+\end{figure}
+
+Now imagine that the eye rotates \(\pi/4\) radians counter-clockwise; it is now looking down a line that makes
+an angle of \(\pi/4\) radians with the x-axis. Furthermore, its viewing line has rotated to be the 
+line \(\left\{y + x = 2\sqrt{\frac{1}{2}} \right\}\). Let \(\tilde y\) denote the position along this 
+new viewing line. See the figure below
+
+\begin{figure}[h]
+\centering
+\includegraphics[width = 2in]{oneVarDiffCalc/perspective2.pdf}
+\end{figure}
+
+Let \(\tilde y\) measure position on the viewing line relative the line \(\{y = x\}\), i.e. the line that eye is
+looking down. If an object appears to be at a point \(y\) on the original viewing line, what is its new position \(\tilde y\) on 
+the new viewing line?
+The answer turns out to be a linear fractional transformation, i.e.
+\begin{equation}
+\tilde y = \frac{A + By}{C + Dy},
+\end{equation} 
+for some constants \(A, B, C,\) and \(D\) depending on the angle of rotation.
+
+Linear fractional transformations are also a classical topic in complex analysis, projective geometry, and
+conformal geometry.
+
+\subsubsection*{Finding the Schwarzian Derivative}
+
+Now we will discuss our method of finding the Schwarzian derivative \(Su\) of a function \(u: \mathbb R \to 
+\mathbb R\). We will demand that \(Su\) has the following properties:
+
+\begin{enumerate}
+\item The Schwarzian derivative is defined by
+\begin{equation}
+Su = F(u, u', u'', u'''),
+\end{equation}
+for some function \(F(a, b, c, d)\).
+
+\item Given any function \(u(x)\) and linear fractional transformation \(T(y) = \frac{A + By}{C + Dy}\), we have
+that the function defined by
+\begin{equation}
+w(x) = T(u(x)) = \frac{A + Bu(x)} {C + Du(x)},
+\end{equation}
+satisfies \(Sw = Su\).
+\end{enumerate}
+
+You can interpret the Schwarz derivative via perpective transformations. Suppose there is a particle moving in a
+2-dimensional plane and the eye from our first set-up in the previous section observes it at position \(u(t)\)
+in its viewing line. Next, suppose another observer is at 45 degrees relative to the first observer (so the 
+second set-up) and observes the particle at position \(w(t)\) on their viewing line. Furthermore, suppose
+neither observer knows the distance of their viewing plane and doesn't know the angle difference of
+their perspectives. Is there some measure of the rate of change in the particle's position that they can agree on?
+
+Yes, the Schwarzian derivative. Their observations differ by some linear fractional transformation; 
+since they are missing data on their perspectives, they can't reconstruct the actual position of the particle
+and they also can not reconstruct the details of the linear fractional transformation that relates their observations.
+However, the Schwarzian derivative will always be the same despite no knowing the exact transformation. It is
+enough to just know that it is a linear fractional transformation. 
+
+\subsubsection*{The Problem}
+
+Given the two properties of the Schwarzian derivative listed above, show that
+\begin{equation}
+F(u, u', u'', u''') = J\left( \frac{u'''}{u'} - \frac{3}{2} \left(\frac{u''}{u'}\right)^2 \right),
+\end{equation}
+for some function \(J\). Thus, deduce that a reasonable definition of the Schwarzian derivative is
+\begin{equation}
+Su = \frac{u'''}{u'} - \frac{3}{2}\left( \frac{u''}{u'} \right)^2.
+\end{equation} 
