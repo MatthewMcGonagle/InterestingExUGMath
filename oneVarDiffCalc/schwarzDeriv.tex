@@ -99,3 +99,113 @@ for some function \(J\). Thus, deduce that a reasonable definition of the Schwar
 \begin{equation}
 Su = \frac{u'''}{u'} - \frac{3}{2}\left( \frac{u''}{u'} \right)^2.
 \end{equation} 
+
+\subsubsection*{The Solution}
+
+First, we start by looking at the consequences of having an invariant for translations \(T(y) = A + y\) which
+are fractional transformations for \(B = 1, C = 1,\) and \(D = 0\). Note that the derivatives of \(u\) and \(w\)
+are equal. So we get that for any function \(u\) that
+\begin{equation}
+F(u + A, u', u'', u''') = F(u, u', u'', u''').
+\end{equation}
+Now, note that for any point \((a, b, c, d)\), we can find a function \(u\) such that 
+\((u, u', u'', u''') = (a,b,c,d)\) for some point \(x\). So we get that
+\begin{equation}
+F(a + A, b, c, d) = F(a, b, c, d),
+\end{equation} 
+for any \(A, a, b, c,\) and \(d\). In particular, since we can vary \(A\) without changing the right
+hand side, we see that the value \(F(a, b, c, d)\) is actually independent of \(a\). Therefore, we
+may find a function \(G(b, c, d)\) such that
+\begin{equation}
+F(a, b, c, d) = G(b, c, d).
+\end{equation}
+Note that \(G(u', u'', u''')\) will be invariant for linear fractional transformations of \(u\) and 
+that \(G(u', u'', u''')\) depends only on the derivatives of \(u\).
+
+Next, we consider the effect of scalings \(T(y) = By\), these are also a specific class of linear fractional
+transformations. We have that
+\begin{equation}
+G(Bu', Bu'', Bu''') = G(u', u'', u'''),
+\end{equation}
+for any \(B\). Similar to before, we get that
+\begin{equation}
+G(Bb, Bc, Bd) = G(b, c, d),
+\end{equation}
+for any \(B, b, c,\) and \(d\). Therefore, we see that \(G\) must be homogeneous of degree 0, i.e.
+\begin{equation}
+G(\lambda b, \lambda c, \lambda d) = G(b, c, d),
+\end{equation}
+for any constant scaling \(\lambda\).
+
+Next, we consider the specific linear fractional transformation \(T(y) = \frac{1}{y}\). We then have that
+\begin{align}
+w & = \frac{1}{u}, \\
+w' & = -\frac{u'}{u^2}, \\
+w'' & = \frac{2u'^2}{u^3} - \frac{u''}{u^2}, \\
+w''' & = \frac{6u'u''}{u^3} - \frac{6u'^3}{u^4} - \frac{u'''}{u^2}. 
+\end{align}
+So from the invariance of \(G\), we get that
+\begin{equation}
+G(u', u'', u''') = G\left( -\frac{u'}{u^2},
+    \frac{2u'^2}{u^3} - \frac{u''}{u^2},
+    \frac{6u'u''}{u^3} - \frac{6u'^3}{u^4} - \frac{u'''}{u^2} \right). 
+\end{equation}
+Now use the 0-homoegeneity of \(G\) to get
+\begin{equation}
+G(u', u'', u''') = G\left(-1, 
+    \frac{2u'}{u} - \frac{u''}{u'}, 
+    \frac{6u''}{u} - \frac{6u'^2}{u^2} - \frac{u'''}{u'}\right)
+\end{equation}
+Note that the expression on the right hand side contains terms involving \(u\) without any derivatives,
+which isn't directly supplied as an argument to \(G\) on the left hand side. So when like before we
+pass to general coordinates, the \(u\) terms turn into general constants \(A\). So we get
+\begin{equation}
+G(b, c, d) = G\left(-1, 
+    \frac{2b}{A} - \frac{c}{b}, 
+    \frac{6c}{A} - \frac{6b^2}{A^2} - \frac{d}{b}\right),
+\end{equation} 
+for any constant \(A\). So there exists a function \(H\) such that
+\begin{equation}
+G(b, c, d) = H\left(
+    \frac{2b}{A} - \frac{c}{b}, 
+    \frac{6c}{A} - \frac{6b^2}{A^2} - \frac{d}{b}\right),
+\end{equation}
+for any constant \(A\).
+
+The fact that \(A\) is any general constant that appears on the right hand side but is not on the left means that 
+there is more information to draw from \(H\). Let \(\theta = \frac{2b}{A} - \frac{c}{b}\). So
+\begin{align}
+\frac{6c}{A} - \frac{6b^2}{A^2} - \frac{d}{b} & = 
+    \frac{3c}{b}\left(\theta + \frac{c}{b}\right)
+    - \frac{3}{2}\left(\theta + \frac{c}{b}\right)^2 - \frac{d}{b}, \\
+& = 3\left(\theta + \frac{c}{b}\right)\left(\frac{c}{2b} - \frac{\theta}{2}\right) - \frac{d}{b}, \\
+& = \frac{3}{2}\left(\frac{c^2}{b^2} - \theta^2\right) - \frac{d}{b}.
+\end{align}
+
+So, we get that
+\begin{equation}
+G(b,c, d) = H\left(\theta, \frac{3}{2}\left(\frac{c^2}{b^2} - \theta^2\right) - \frac{d}{b} \right).
+\end{equation}
+Now, freeze \(b, c\) and \(d\) while varying \(A\). The left hand side is constant, but the value of \(\theta\)
+on the right hand side is varying. So we see that the right hand side is constant on \(\{\theta < -\frac{c}{b}\}\) 
+and it is also constant on \(\{\theta > -\frac{c}{b}\}\). Note as long as \(c \neq 0\) and \(b \neq 0\), we can
+find a value of \(A\) such that \(\theta = 0\). So we have
+\begin{equation}
+G(b, c, d) = H\left(0, \frac{3}{2}\left(\frac{c}{b}\right)^2 - \frac{d}{b}\right),
+\end{equation}
+as long as \(c \neq 0\) and \(b \neq 0\).
+
+So for \(b, c\neq 0\), we can write
+\begin{equation}
+G(b,c, d) = J\left(\frac{d}{b} - \frac{3}{2}\left(\frac{c}{b}\right)^2 \right).
+\end{equation} 
+As long as \(J\) is continuous, it extends to \(b \neq0\). So putting it all together, we get
+\begin{equation}
+F(u, u', u'', u''') = J\left( \frac{u'''}{u'} - \frac{3}{2}\left(\frac{u''}{u'}\right)^2 \right).
+\end{equation}
+We may take the expression inside parenthesese on the right hand side to be the Schwarzian derivative, i.e.
+\begin{equation}
+Su = \frac{u'''}{u'} - \frac{3}{2} \left(\frac{u''}{u'}\right)^2.
+\end{equation}
+You can now directly verify that if \(w(x) = T(u(x))\) for a linear fractional transformation \(T\), then
+\(Sw = Su\).
