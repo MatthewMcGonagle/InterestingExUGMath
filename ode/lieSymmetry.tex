@@ -120,15 +120,105 @@ component \(\VX\) satisfies
 That is, \(\VX(x,y)\) doesn't depend on \(z\). Similarly \(\VY(x,y)\) doesn't depend on \(z\).
 
 Next, let us derive a restriction on \(\VZ\). We take a time derivative \(\frac{\partial}{\partial t}\)
-of the equation \ref{lie:eq:phiz} and use that \(phi^0(x,y,z) = (x,y,z)\) to get
+of the equation \ref{lie:eq:phiz} and use that \(\phi^0(x,y,z) = (x,y,z)\) to get
 \begin{align}
 \VZ (x, y,z) & = \frac{1}{1 + 0z} \left( \frac{\partial \VY}{\partial x} + z \frac{\partial \VY}{\partial y}\right)
-        - \frac{0 + 1z} {(1 + 0z)^2} \left( \frac{\partial \VX}{\partial y} 
+        - \frac{0 + 1z} {(1 + 0z)^2} \left( \frac{\partial \VX}{\partial x} 
                 + z \frac{\partial \VX}{\partial y}\right), \\
 & =  \frac{\partial \VY}{\partial x} + z \frac{\partial \VY}{\partial y} 
-        - z\left( \frac{\partial \VX}{\partial y} + z \frac{\partial \VX}{\partial y}\right).
+        - z\left( \frac{\partial \VX}{\partial x} + z \frac{\partial \VX}{\partial y}\right).
 \end{align}
 If you wish, this may be expressed more succinctly as 
 \begin{equation}
 \VZ = \left(\frac{\partial}{\partial x} + z\frac{\partial}{\partial y} \right) (\VY - z\VX).
 \end{equation}
+
+So far we haven't actually used the differential equation; we have only found conditions on our vector field
+\(\vec V\) such that its flow \(\frac{\partial \phi^t}{\partial t} = \vec V(\phi^t)\) will properly
+preserve using the \(z\)-coordinate to represent a derivative of a function \(y = f(x)\). Now we find
+conditions on our vector field \(\vec V\) such that \(\phi^t\) takes a solution of the differential equation
+to a solution of the differential equation.
+
+That is, suppose \(y = f(x)\) is a solution to our differential equation, 
+i.e. \(F\left(x, f, \frac{df}{dx}\right) = 0\). We require that the transformed function \(\tilde y = g(\tilde x)\)
+is also a solution, i.e. \(F\left(\tilde x, g, \frac{dg}{d\tilde x}\right) = 0\). However, from our
+previous restrictions, we can directly express this using the coordinates of the transformation \(\phi^t\). We have
+that \(F(\phiX^t, \phiY^t, \phiZ^t) = 0\) for all time \(t\).
+
+Taking a time derivative at \(t = 0\) and using the multi-variable chain rule, we then get that
+\begin{equation}
+\frac{\partial F}{\partial x}\VX + \frac{\partial F}{\partial y}\VY +  \frac{\partial F}{\partial z} \VZ = 0,
+\end{equation}
+at all point \((x, y, z)\). This is our final condition on the vector field \(\vec V\).
+
+\subsubsection*{The Problem : Part 1}
+For the differential equation
+\begin{equation}
+-1 + y^2 + xy\frac{dy}{dx} = 0,
+\end{equation}
+use the function \(F(x,y,z) = -1 + y^2 + xyz\) and the following restrictions on the vector 
+field \(\vec V(x,y,z)\) to find all possible \(\vec V(x,y,z)\) generating the symmetries of the differential
+equation. The restrictions on \(\vec V\) are:
+\begin{enumerate}
+\item The components \(\VX(x,y)\) and \(\VY(x,y)\) do not depend on \(z\). 
+\item The component \(\VZ(x,y,z)\) satisfies
+\begin{equation}
+\VZ =  \frac{\partial \VY}{\partial x} + z \frac{\partial \VY}{\partial y} 
+        - z\left( \frac{\partial \VX}{\partial x} + z \frac{\partial \VX}{\partial y}\right).
+\end{equation}
+\item The components of \(\vec V\) are related to the differential equation by the following constraint: 
+\begin{equation}
+\frac{\partial F}{\partial x}\VX + \frac{\partial F}{\partial y}\VY +  \frac{\partial F}{\partial z} \VZ = 0.
+\end{equation} 
+\end{enumerate}
+
+\subsubsection*{The Problem : Part 2}
+
+After finding all possible \(\vec V\) generating symmetries, use one particular \(\vec V\) to find a particular
+family of symmetries \(\phi^t (x,y,z)\) to turn the constant trivial solution \(y_0(x) = 1\) into
+the general solution of the differential equation.
+
+\subsubsection*{The Solution to Part 1}
+
+We first compute that
+\begin{align}
+\frac{\partial F}{\partial x} & = yz, \\
+\frac{\partial F}{\partial y} & = 2y + xz, \\
+\frac{\partial F}{\partial z} & = xy.
+\end{align}
+So we get the following constraint on the components of \(\vec V\):
+\begin{equation}
+yz\VX + (2y + xz)\VY + xy \VZ = 0.
+\end{equation}
+Now we use the constraint giving \(\VZ\) in terms of \(\VX\) and \(\VY\); we also group like powers of \(z\).
+\begin{align}
+0 & = 2y\VY + xy \frac{\partial \VY}{\partial x} \\
+& + z \left( y\VX + x \VY + xy \left( \frac{\partial \VY}{\partial y} 
+            - \frac{\partial \VX}{\partial x} \right)\right) \\
+& - z^2 \left(xy \frac{\partial \VX}{\partial y}\right).
+\end{align}
+Since \(\VX(x,y)\) and \(\VY(x,y)\) don't depend on \(z\), we see that the only parts of the above equation
+that depend on \(z\) are \(z\) and \(z^2\). Therefore, we see that their coefficients must vanish (and so must
+the term not depending on \(z\)). So we get three equations
+\begin{align}
+0 & = 2y\VY + xy \frac{\partial \VY}{\partial x}, \\ 
+0 & = y\VX + x \VY + xy \left( \frac{\partial \VY}{\partial y} 
+            - \frac{\partial \VX}{\partial x} \right), \\
+0 & = xy \frac{\partial \VX}{\partial y}
+\end{align}
+The last equation tells us that \(\frac{\partial \VX}{\partial y} = 0\) and so \(\VX(x)\) is independent of both
+\(y\) and \(z\).
+
+Next, we rewrite the first equation as 
+\begin{equation}
+0 = 2x\VY + x^2 \frac{\partial \VY}{\partial x}.
+\end{equation}
+This is a linear ODE, and we may readily solve it to get
+\begin{equation}
+0 = \frac{\partial (x^2\VY)} {\partial x},
+\end{equation}
+which gives
+\begin{equation}
+\VY = \frac{g(y)}{x^2}, 
+\end{equation}
+for some function \(g(y)\).
