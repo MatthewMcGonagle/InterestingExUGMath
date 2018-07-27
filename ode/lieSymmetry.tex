@@ -1,0 +1,134 @@
+\subsection{Lie Symmetries}
+
+\newcommand{\phiX}{\phi_{\tilde x}}
+\newcommand{\phiY}{\phi_{\tilde y}}
+\newcommand{\phiZ}{\phi_{\tilde z}}
+\newcommand{\VX}{V_x}
+\newcommand{\VY}{V_y}
+\newcommand{\VZ}{V_z}
+
+In this section we will briefly investigate the idea of studying the Lie symmetries of a differential equation
+and how they can sometimes be used to transform a trivial solution into the general solution.
+
+A nice reference for this is \cite{lieGroups}.
+
+\subsubsection*{The Setup: The Differential Equation}
+
+Consider the differential equation
+\begin{equation}
+-1 + y^2 + xy \frac{dy}{dx} = 0.
+\end{equation}
+We will be making use of partial derivatives and derivatives of quantities that really depend on only
+one variable. So we will be explicit as to which derivative we are using and whether it should
+be thought of as a partial derivative or a complete derivative; this will be made more clear later.
+
+Furthermore note that the above differential equation isn't exact since
+\begin{align}
+\frac{\partial}{\partial y} \left(-1 + y^2\right) & = 2y , \\
+    & \neq y = \frac{\partial}{\partial x} \left(xy\right). 
+\end{align}
+
+It should also be clear that the extra constant term \(-1\) keeps this differential equation from being
+separable; i.e. we can't separate the variables through division or multiplication.
+
+So how are we to solve this equation? One way (which is usually taught in a differential equations class) is
+to search for an appropriate integration factor. However, here we will take a different approach. First note
+that this equation has a trivial constant solution \(y(x) = 1\). We will then investigate symmetries of the
+differential equation that will then allow us to transform this particular solution into the general solution. 
+
+\subsubsection*{The Setup: Lie Symmetries}
+
+We will be studying the so called Lie Group symmetries of the differential equation. First define
+\begin{equation}
+F(x, y, z) = -1 + y^2 + xyz.
+\end{equation} 
+Note that any solution \(y(x)\) to our differential equation satisfies \(F\left(x, y, \frac{dy}{dx}\right) = 0\).
+Our ultimate goal is to find change of variables \((\tilde x, \tilde y, \tilde z) = \phi(x, y, z)\) that takes
+solutions of our differential equation to other solutions of our differential equation. Ensuring this happens
+is a sort of complicated process, so let us tackle it in stages. First, for clarity, we will denote the components
+of \(\phi\) by \(\phiX, \phiY\) and \(\phiZ\).
+
+First, we want to ensure that for a function \(y = f(x)\), if \(\phi\) transforms \(\left(x, f(x), \frac{df}{dx}\right)\)
+into a curve such that \(\tilde y = g(\tilde x)\), i.e. \(\tilde y\) is a function of \(\tilde x\), then the 
+point \(\left(x, f(x), \frac{df}{dx}\right)\) 
+transforms into \(\left(\tilde x, g(\tilde x), \frac{dg}{d\tilde x}\right)\). That is, we have that
+\(\tilde z = \frac{dg}{d\tilde x}\). 
+
+The key to making sure this will work is to use a chain rule for derivatives, and to consider \(\tilde y\) and \(\tilde x\) to both be functions of only \(x\) (which is possible because we are assuming \(y\) and \(z\) are functions
+of only \(x\), i.e. \(y = f(x)\) and \(z = f'(x)\)). From the single variable chain rule we have that 
+\begin{equation}
+\frac{dg}{d\tilde x} = \frac{ \frac{d\tilde y}{dx} } { \frac{d\tilde x}{dx} }.
+\end{equation}
+Let us investigate the numerator and denominator. From the fact that we are looking at the transformation of 
+the curve
+\(\left(x, f(x), \frac{df}{dx} \right)\), we have that 
+\begin{equation}
+\tilde y(x) = \phiY \left(x, f(x), \frac{df}{dx} \right). 
+\end{equation}
+Therefore, using the multi-variable chain rule we have that
+\begin{equation}
+\frac{d\tilde y}{dx} = \frac{\partial \phiY}{\partial x} \left(x, f(x), \frac{df}{dx} \right) 
+    + \frac{df}{dx} \frac{\partial \phiY}{\partial y} \left(x, f(x), \frac{df}{dx} \right)
+    + \frac{d^2f}{dx^2} \frac{\partial \phiY}{\partial z} \left(x, f(x), \frac{df}{dx} \right)
+\end{equation}
+We would like to relate the terms on the right hand side to the original coordinates \((x, y, z)\), but the term
+\(\frac{d^2 f}{dx^2}\) has no relation to these coordinates. It depends on the original curve in a way that
+can't be expressed in terms of the coordinates \((x,y,z)\) themselves. 
+
+To eliminate this problem, we make the choice that
+\(\frac{\partial \phiY}{\partial z} = 0\); that is we require \(\phiY (x, y)\) to be only a function of \(x\) and
+\(y\). Then using that we get
+\begin{equation}
+\frac{d\tilde y}{dx} = \frac{\partial \phiY}{\partial x} (x, y)
+    + z \frac{\partial \phiY}{\partial y} (x, y),
+\end{equation}
+where \((x, y, z) = \left(x, f(x), \frac{df}{dx}\right)\).
+
+Similarly, we require that \(\phiX(x,y)\) be only a function of \(x\) and \(y\), and we find
+\begin{equation}
+\frac{d\tilde x}{dx} = \frac{\partial \phiX}{\partial x} (x, y)
+     + z \frac{\partial \phiX}{\partial y} (x, y),
+\end{equation}
+where \((x,y,z) = \left(x, f(x), \frac{df}{dx} \right)\). 
+
+Now using that we require that \(\phiZ = \tilde z = \frac{d g}{d \tilde x}\), we get
+\begin{equation} \label{lie:eq:phiz}
+\phiZ (x, y, z) = \frac{\frac{\partial \phiY}{\partial x} (x, y)
+            + z \frac{\partial \phiY}{\partial y} (x, y)} 
+    {\frac{\partial \phiX}{\partial x} (x, y)
+            + z \frac{\partial \phiX}{\partial y} (x, y)}.
+\end{equation}
+When \(\phiZ\) satisfies the above relation, we have that when the \(z\)-variable acts as a derivative
+for a function, then the transformed \(\tilde z\)-variable will act as a derivative for the transformed
+curve. 
+
+Next, we change our viewpoint slightly. Instead of considering a single transformation \(\phi(x,y,z)\), we 
+consider a family of transformations \(\phi^t (x,y, z)\) paramaterized by time \(t\) and such that
+\(\phi^0\) is the identitiy transformation, i.e. \(\phi^0 (x,y,z) = (x, y, z)\). Furthermore, we require
+that \(\frac {\partial \phi^t}{\partial t} (x, y,z) = \vec V(x,y, z)\), a vector field independent 
+of time. This restriction
+will allow us to solve for possible \(\vec V\) and then integrate the symmetry forward in time.
+
+Note that to calculate \(\vec V\) it suffices to calculate \(\frac{\partial \phi^0}{\partial t}\), the time derivative
+at time \(t = 0\). This is more tractable as we know that \(\phi^0\) is the identity transformation. 
+
+From our restrictions above we have that \(\phiX^t (x,y)\) doesn't depend on \(z\). So we have that the
+component \(\VX\) satisfies
+\begin{equation}
+\VX = \frac{\partial \phiX^0}{\partial t} (x, y).
+\end{equation}
+That is, \(\VX(x,y)\) doesn't depend on \(z\). Similarly \(\VY(x,y)\) doesn't depend on \(z\).
+
+Next, let us derive a restriction on \(\VZ\). We take a time derivative \(\frac{\partial}{\partial t}\)
+of the equation \ref{lie:eq:phiz} and use that \(phi^0(x,y,z) = (x,y,z)\) to get
+\begin{align}
+\VZ (x, y,z) & = \frac{1}{1 + 0z} \left( \frac{\partial \VY}{\partial x} + z \frac{\partial \VY}{\partial y}\right)
+        - \frac{0 + 1z} {(1 + 0z)^2} \left( \frac{\partial \VX}{\partial y} 
+                + z \frac{\partial \VX}{\partial y}\right), \\
+& =  \frac{\partial \VY}{\partial x} + z \frac{\partial \VY}{\partial y} 
+        - z\left( \frac{\partial \VX}{\partial y} + z \frac{\partial \VX}{\partial y}\right).
+\end{align}
+If you wish, this may be expressed more succinctly as 
+\begin{equation}
+\VZ = \left(\frac{\partial}{\partial x} + z\frac{\partial}{\partial y} \right) (\VY - z\VX).
+\end{equation}
