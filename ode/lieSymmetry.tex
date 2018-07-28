@@ -270,3 +270,54 @@ Therefore, all components \(\VX\) and \(\VY\) are given by
 \end{align}
 
 \subsubsection*{Solution to Part 2}
+
+Now we choose a simple version of \(\VX\) and \(\VY\) that will actually change the \(y\)-values of our
+initial solution. So we need a simple version of both such that \(\VY \neq 0\). A nice choice is given
+by \(C = E = 0\) and \(D = 1\). We then have
+\begin{align}
+\VX & = 0, \\
+\VY & = \frac{1}{x^2y}.
+\end{align}
+
+So now let us integrate this vector field for initial points starting on the graph of the trivial solution
+\(y(x) = 1\). Let's start with an intial point of \((x_0, 1)\) on the graph of the trivial solution. So
+we seek a solution to the following differential system in time:
+\begin{align}
+\frac{dx}{dt} & = 0, \\
+\frac{dy}{dt} & = \frac{1}{x^2y}, 
+x(0) = x_0, \\
+y(0) = 1.
+\end{align}
+
+Since \(\frac{dx}{dt} = 0\) for all time \(t\), we have that \(x\) is the constant function
+\(x(t) = x_0\) for all time. Then we may integrate
+\begin{equation}
+\frac{dy}{dt} = \frac{1}{x_0^2 y},
+\end{equation}
+to get
+\begin{equation}
+\frac{d(y^2)}{dt} = \frac{2}{x_0^2}.
+\end{equation}
+Then we get
+\begin{equation}
+y(t)^2 - 1 = \frac{2t}{x_0^2}.
+\end{equation}
+
+Fixing a value of \(t = t_0\) and varying \(x_0 = x\) gives us a new solution:
+\begin{equation}
+y^2 - 1 = \frac{2t_0}{x^2}.
+\end{equation}
+We can rewrite this as
+\begin{equation}
+x^2y^2 - x^2 = 2t_0.
+\end{equation} 
+As we change \(t_0\) the right hand side just varies over different constants. So we see that the solutions
+are given implicilty by the family of curves
+\begin{equation}
+x^2 y^2 - x^2 = C,
+\end{equation}
+for different constants \(C\).
+
+Okay, there is one catch. We have shown that these are solutions, but we haven't shown they are all solutions.
+This can be seen by studying the curves \(x^2 y^2 - x^2 = C\) and seeing which points in the \(xy\)-plane are
+part of this family.
