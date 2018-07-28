@@ -157,7 +157,7 @@ For the differential equation
 -1 + y^2 + xy\frac{dy}{dx} = 0,
 \end{equation}
 use the function \(F(x,y,z) = -1 + y^2 + xyz\) and the following restrictions on the vector 
-field \(\vec V(x,y,z)\) to find all possible \(\vec V(x,y,z)\) generating the symmetries of the differential
+field \(\vec V(x,y,z)\) to find all possible components \(\VX(x,y)\) and \(\VY(x,y)\) generating the symmetries of the differential
 equation. The restrictions on \(\vec V\) are:
 \begin{enumerate}
 \item The components \(\VX(x,y)\) and \(\VY(x,y)\) do not depend on \(z\). 
@@ -222,3 +222,51 @@ which gives
 \VY = \frac{g(y)}{x^2}, 
 \end{equation}
 for some function \(g(y)\).
+
+Then we plug into the second equation to get
+\begin{equation}
+0 = y\VX + \frac{g(y)}{x} + \frac{y}{x}\frac{dg}{dy} - xy \frac{\partial\VX}{\partial x}.
+\end{equation}
+We can then separate the variables of this equation: 
+\begin{equation}
+x^2 \frac{\partial \VX}{\partial x} - x\VX = \frac{g(y)}{y} + \frac{dg}{dy}.
+\end{equation}
+Since the left hand side depends only on \(x\) and the right hand side depends only on \(y\), we have
+that each side is equal to the same constant \(C\). So
+\begin{align}
+C & = \frac{g(y)}{y} + \frac{dg}{dy}, \\
+C & = x^2 \frac{\partial \VX}{\partial x} - x\VX. 
+\end{align}
+
+The first equation for \(g\) may be rewritten as 
+\begin{equation}
+Cy = \frac{d (yg)} {dy}.
+\end{equation}
+So we get that
+\begin{equation}
+g(y) = \frac{C}{2}y + \frac{D}{y},
+\end{equation}
+for some constand \(D\).
+
+Now, let us use our equation for \(\VY\) in terms of \(g(y)\) to get
+\begin{equation}
+\VY = \frac{Cy}{2x^2}  + \frac{D}{x^2 y}.
+\end{equation}
+
+Then we rewrite the equation for \(\VX\) as
+\begin{equation}
+\frac{C}{x^3} = \frac{d (x^{-1} \VX)}{dx}.
+\end{equation}
+Then we may integrate to get
+\begin{equation}
+\VX = \frac{C}{2x^2} + Ex,
+\end{equation}
+for another constant \(E\). 
+
+Therefore, all components \(\VX\) and \(\VY\) are given by
+\begin{align}
+\VX & = \frac{C}{2x^2} + Ex, \\
+\VY & = \frac{Cy}{2x^2}  + \frac{D}{x^2 y}.
+\end{align}
+
+\subsubsection*{Solution to Part 2}
