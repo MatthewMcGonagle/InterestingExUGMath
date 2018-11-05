@@ -102,5 +102,48 @@ This is most simple when \(n = 1\). So we will take \(y = C^{-2} x^2 z\) for our
 \begin{equation}
 x^3 = 3C^5 z^{-2} - C^6 z^{-3}.
 \end{equation}
-Now we need to be more rigorous with our boundary terms.
+Now we need to be more rigorous with our boundary terms. 
+
+First note that the loop of the folium of descartes is in the first quadrant, i.e. \(\{x,y \geq 0\}\). 
+Furthermore, the only non-negative solutions to \(3C^5 z^{-2} - C^6 z^{-3} = 0 \) are \(z = \frac{C}{3}\) and \(z = \infty\). 
+
+Next, note that for \(x^3 + y^3 = 3Cxy\) and \(x, y\) close to the origin, the \(3Cxy\) term dominates. So we expect the loop to
+be asymptotically like \(3xy = 0\). That is, one direction of approach to the origin is horizontal while the other is vertical. We need
+to investigate this asymptoticness more closely.
+
+For any point \((x,y)\) on the folium and close to the origin, let \(\lambda = \|(x,y)\|\) and let \((\tilde x, \tilde y) = \frac{1}{\lambda}(x, y)\). 
+Using the equation for the folium, we have that 
+\begin{equation}
+0 \leq \tilde x \tilde y \leq \frac{\lambda}{3C}.  
+\end{equation}
+Note that \((\tilde x, \tilde y)\) occur on the unit circle. Consider the function \(f(x,y) = xy\) and its parameterization on the unit circle
+given by \(g(\theta) = f(\cos\theta, \sin\theta) = \cos\theta \sin\theta\). Now note that where \(g\) vanishes for the first quadrant is \(\theta = 0\) or
+\(\theta = \pi/2\). Furthermore, \(g'(0)\neq 0\) and \(g'(\pi/2) \neq 0\). 
+
+We can use this and some basic trignometry to show that \(\tilde x \tilde y \leq \frac{\lambda}{3C}\) gives us that \(\|(\tilde x, \tilde y) - (1,0)\| \leq K \lambda\) or
+\(\|(\tilde x, \tilde y) - (0, 1)\| \leq K \lambda\) for some constant \(K\) depending on \(C\).
+
+The first case is the horizontal part of the loop approaching the origin. In this case, we have that \(z = C^2 y / x^2 = C^2 \frac{\tilde y} {\lambda \tilde x^2}\). Now, as we approach
+the origin, \(\lambda \to 0\), \(\tilde x \to 1\) and \(\tilde y \leq K \lambda\). So we get that \(z\) is bounded as we approach the origin along the horizontal portion of the loop.
+So it must approach \(z = \frac{C}{3}\).
+
+The second case is the vertical portion of the loop approacing the origin. In this case, we write \(z = C^2 \frac{\tilde y}{x\tilde x}\). We have that \(\tilde x \to 0\), \(x \to 0\), and
+\(\tilde y \to 1\). Therefore \(z \to \infty\) along the vertical portion of the loop as we approach the origin.
+
+From the \(xz\)-equation of the folium, we see that in either case that \(zx^3 \to 0\) as \(x \to 0\). Now let us rigorously apply integration by parts.
+We have that
+\begin{align}
+\int\limits_0^{\bar x} (z_2 - z_1) x^2 dx & = \lim\limits_{a \to 0+} \int\limits_a^{\bar x} (z_2 - z_1) d \left(\frac{x^3}{3}\right), \\
+    & = \lim\limits_{a \to 0+} \frac{1}{3}(z_2 - z_1)x^3\big |_a^{\bar x} + \int\limits_{C / 3} ^ {\bar z}\frac{1}{3} x_1^3 dz + \lim\limits_{b \to\infty} \int\limits_{\bar z}^b x_2^3 dx, \\
+    & = 0 + \lim\limits_{b\to\infty} \int\limits_{C/3}^b x^3 dz,\\
+    & = \lim\limits_{b\to \infty} \int\limits_{C/3}^b 3C^5z^{-2} - C^6 z^{-3} dz, \\
+    & = \lim\limits_{b\to \infty} \frac{C^6}{2}z^{-2} - 3C^5 z^{-1} \big|_{C/3}^b, \\ 
+    & = 9C^4 - \frac{9}{2}C^4, \\
+    & = \frac{9}{2}C^4.
+\end{align} 
+
+Combining with the area integral, we get
+\begin{equation}
+\int\limits_0^{\bar x} (y_2 - y_1) dx = \frac{9}{2}C^2.
+\end{equation}
 \end{enumerate}
