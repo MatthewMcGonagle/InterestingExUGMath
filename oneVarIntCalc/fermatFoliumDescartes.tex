@@ -1,0 +1,106 @@
+\subsection{Fermat's Quadrature of the Folium of Descartes}
+
+\subsubsection*{The Setup}
+
+In this section we investigate how Fermat was able to use integration by parts to find the area of the
+loop in the Folium of Descartes. A reference for Fermat's treatment of this problem is given by \cite{fermatTreatise}. 
+
+The Folium of Descartes is the curve given by
+\begin{equation}
+x^3 + y^3 = 3C xy,
+\end{equation}
+where \(C\) is a constant. A graph of the curve for \(C = 1\) is given below. The curve crosses itself
+at the origin.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=3in]{oneVarIntCalc/graphFoliumDescartes.pdf}
+\end{figure}
+
+Fermat's idea comes in two parts:
+\begin{enumerate}
+\item If we can make a substitution for a new variable \(z\) to replace \(y\) given by \(y = C^{1 - m - n} x^m z^n\) such that the equation
+now becomes
+\begin{equation}
+x^p = \sum\limits_{i} D_i^{p - p_i} z^{p_i},
+\end{equation}
+then we know how to compute the integral
+\begin{equation}
+\int\limits x^p dz.
+\end{equation}
+A note here about the choice of \(C^{1 - m - n}\), Fermat likes to follow the rules of homogeneity, which is probably best explained
+in terms of units. If \(x\) and \(y\) were distances in say meters, then the left hand side of \(x^3 + y^3 = 3Cxy\) has units 
+\(\text{meters}^3\). Fermat chooses a constant \(C\) that is also in meters, and so the right hand side also has units
+\(\text{meters}^3\). Similarly, the left and right hand sides of \(y = C^{1 - m -n} x^m z^n\) have units of just meters. 
+
+\item Use integration by parts to write the original area integral in terms of the integral we now know how to compute. That is, 
+we try to find \(p\) and \(p_i\) to ensure that
+\begin{equation}
+\int\limits_0^{\bar x} (y_2 - y_1) dx = \int\limits_0^{\bar z} x^p dz.
+\end{equation}  
+It may be that \(\bar z = \pm \infty\), and so to be rigorous we will need to take an improper integral.
+\end{enumerate}
+
+\subsubsection*{The Problem}
+
+Do the two steps of Fermat's plan to evaluate the area of the loop in the Folium of Descartes.
+
+\subsubsection*{The Solution}
+
+\begin{enumerate}
+\item Let's do step one; let's make the substitution \(y = C^{1 - m - n} x^m z^n\) into \(x^3 + y^3 = 3Cxy\). We get
+\begin{equation}
+x^3 + C^{3 - 3m - 3n} x^{3m} z^{3n} = 3C^{2 - m - n} x^{1 + m} z^n.
+\end{equation}
+Let's us now try to consolidate the \(x\)-terms into one term \(x^p\); to do so, two of the terms need to have the same power of \(x\). 
+Let's look at the three cases:
+    \begin{enumerate}
+    \item If we try equating \(x^3 = x^{3m}\), then we must have \(m = 1\). So we get
+    \begin{equation}
+    1 + C^{-3n} z^{3n} = 3C^{1 - n} x^{-1} z^n.
+    \end{equation} 
+    Consolidating the z-terms, this becomes
+    \begin{equation}
+    3C^{1 - n} x^{-1} = z^{-n} + C^{-3n} z^{2n}.
+    \end{equation}
+    The problem here is that there is no way to produce the power \(x^{-1}\) using integration by parts without using a logarithm. So
+    this case isn't really any help.
+
+    \item Now let's try equating \(x^3m = x^{1 + m}\). We then have that \(m = \frac{1}{2}\). So we get
+    \begin{equation}
+    x^{3/2} = -C^{3/2 - 3n} z^{3n} + 3 C^{3/2 - n} z^n.
+    \end{equation}   
+    Again, we can't directly get \(x^{3/2}\) without introducing some radical power of \(x\) that isn't already present. We could just
+    square the equation, but we will see that it is better to work with the last case.
+
+    \item Now we equate \(x^3 = x^{1 + m}\) and we get \(m = 2\). So then we have that
+    \begin{equation}
+    1 + C^{-3 - 3n} x^3 z^{3n} = 3C^{-n} z^n,
+    \end{equation}
+    which gives us
+    \begin{equation}
+    x^3 = 3C^{3 + 2n} z^{-2n} -C^{3 + 3n} z^{-3n}. 
+    \end{equation}
+    The power \(x^3\) is a nice integer power for us to work with.
+    \end{enumerate}
+
+So we take \(y = C^{-1 - n} x^2 z^n\) where \(n\) is still left to be determined. Our equation defining the folium is now
+\begin{equation}
+x^3 = 3C^{3 + 2n} z^{-2n} - C^{3 + 3n} z^{-3n}.
+\end{equation}
+
+\item
+Let us now consider the area integral
+\begin{equation}
+\int\limits_0^a (y_2 - y_1) dx = C^{-1 - n} \int\limits_0^a (z_2^n - z_1^n) x^2 dx
+\end{equation}
+When we perform integration by parts, we will get an integral of the form (ignoring the boundary terms for now)
+\begin{equation}
+\frac{n}{3}\int z^{n - 1} x^3 dz. 
+\end{equation}
+This is most simple when \(n = 1\). So we will take \(y = C^{-2} x^2 z\) for our variable transformation. The equation of the folium is now
+\begin{equation}
+x^3 = 3C^5 z^{-2} - C^6 z^{-3}.
+\end{equation}
+Now we need to be more rigorous with our boundary terms.
+\end{enumerate}
