@@ -12,7 +12,7 @@ This creates an issue for making map.
 Consider a map where the lines of latitude are spaced out evenly in the vertical direction (so NOT the Mercator map); for such a map, a course with fixed angle to magnetic north is NOT a straight line on the map.  
 The figure below shows the path of a course with constant angle to magnetic north on a map with uniformly spaced lines of latitude.
 
-\includegraphics[width = 5in]{oneVarIntCalc/nonMercator.pdf}
+\includegraphics[width = 5in]{_generated/nonMercator.pdf}
 
 The problem is that the lines of latitude get represent shorter and shorter distances as you move from the equator towards either of the poles. 
 This means that there is a complicated relationship between the angle measured on this map and the true angle to magnetic north it represents.
@@ -21,7 +21,7 @@ In 1569, Mercator had the idea that he could create a map where the lines of lat
 Furthermore, the angle measured on the map will match the true angle to magnetic north.
 Consider the following figure that shows a course with constant angle to magnetic north on a Mercator map, note that the lines of latitude are not evenly spaced (the values marked are multiples of \(\pi/9\) radians).
 
-\includegraphics[width = 5in]{oneVarIntCalc/mercator.pdf}
+\includegraphics[width = 5in]{_generated/mercator.pdf}
 
 Unfortunately, Mercator didn't give a clear formula to precisely describe how to space out the lines of latitude. 
 However, in 1599, Edward Wright found a precise mathematical description of how to space out the lines; he found that the spacing depended on the area under the secant function.
@@ -103,7 +103,7 @@ are not uniform. In fact, their widths decrease geometrically.
 For example, on the interval \(0 \leq x \leq 1\), one can bound the area above and below by the area of an infinite number of rectangles whose widths
 are the powers of \(1/2\). To see this, consider the graph below for the lowerbound.
 
-\includegraphics[width = 5in]{oneVarIntCalc/fermatLower.pdf}
+\includegraphics[width = 5in]{_generated/fermatLower.pdf}
 
 The behavior of the rectangles is dictated by the following pattern:
 
@@ -143,7 +143,7 @@ of \(\frac{(1/2)^{5/2}}{1 - (1/2)^{5/2}}\) for the area under \(y = x^{3/2}\) an
 
 A similar argument can be applied to another set of rectangles whose widths are powers of \(1/2\), as pictured below:
 
-\includegraphics[width = 5in]{oneVarIntCalc/fermatUpper.pdf}
+\includegraphics[width = 5in]{_generated/fermatUpper.pdf}
 
 The final part of Fermat's idea is to do the above for general base \(0 < b < 1\). Then we consider the limit as \(b \to 1\).
 

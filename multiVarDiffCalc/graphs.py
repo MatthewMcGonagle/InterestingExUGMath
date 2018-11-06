@@ -20,7 +20,7 @@ ax = plt.gca()
 ax.set_title('Some Lines From The Family')
 ax.set_xlabel('x')
 ax.set_ylabel('y')
-plt.savefig('hyperbolaFamily' + fileExt)
+plt.savefig('_generated/hyperbolaFamily' + fileExt)
 
 # Graph Family of Lines With Envelope Curve
 # First regraph family of lines.
@@ -40,4 +40,4 @@ ax = plt.gca()
 ax.set_title('Envelope Curve of Family in Red')
 ax.set_xlabel('x')
 ax.set_ylabel('y')
-plt.savefig('hyperbolaEnvelope' + fileExt)
+plt.savefig('_generated/hyperbolaEnvelope' + fileExt)

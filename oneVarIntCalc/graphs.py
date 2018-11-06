@@ -40,9 +40,8 @@ ax.set_title('Uniformly Spaced Lines of Latitude (Not Mercator)\nAngle to North 
 plt.legend(['Constant Angle to North', 'Map Straight Line'], loc = (0.4, 0.1))
 plt.yticks(latTicks, latLabels)
 plt.xticks(longTicks, longLabels)
-plt.savefig('nonMercator.pdf')
-plt.show()
-
+plt.savefig('_generated/nonMercator.pdf')
+plt.cla()
 mercatorVals = np.log(1.0 / np.cos(phiVals) + np.tan(phiVals))
 thetaVals = mercatorVals * magCoeff 
 
@@ -57,8 +56,8 @@ ax = plt.gca()
 ax.set_ylabel('Latitude (Radians)')
 ax.set_xlabel('Longitude (Radians)')
 ax.set_title('Mercator Map\nAngle to North is Pi/6 Radians')
-plt.savefig('mercator.pdf')
-plt.show()
+plt.savefig('_generated/mercator.pdf')
+plt.cla()
 
 ############################################
 ##### Fermat method of exhaustion graphs
@@ -73,7 +72,7 @@ curveY = curveX**(3/2)
 
 def plotFermat(partitionX, partitionY, widths, title):
 
-    plt.bar(partitionX, height = partitionY, width = widths, color = 'white')
+    plt.bar(partitionX, height = partitionY, width = widths, align = 'edge', edgecolor = 'black')
     ax = plt.gca()
     ax.set_title(title)
     ax.set_ylabel('y')
@@ -82,11 +81,12 @@ def plotFermat(partitionX, partitionY, widths, title):
 partitionY = base**((1 + powers) * 3/2)
 plotFermat(partitionX, partitionY, widths, 'Overestimate for y = x^(3/2)')
 plt.plot(curveX, curveY, color = 'red')
-plt.savefig('fermatUpper.pdf')
-plt.show()
+plt.tight_layout()
+plt.savefig('_generated/fermatUpper.pdf')
+plt.cla()
 
 partitionY = base**(powers * 3/2)
 plotFermat(partitionX, partitionY, widths, 'Underestimate for y = x^(3/2)')
 plt.plot(curveX, curveY, color = 'red')
-plt.savefig('fermatLower.pdf')
-plt.show()
+plt.tight_layout()
+plt.savefig('_generated/fermatLower.pdf')

@@ -4,4 +4,7 @@
 *.bbl
 *.blg
 *.toc
+*.out
+*.bat
 x.pdf
+_generated/*.pdf
