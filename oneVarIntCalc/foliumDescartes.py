@@ -40,5 +40,22 @@ points = np.concatenate([points1, origin, points2], axis = 0)
 
 plt.plot(points[:, 0], points[:, 1])
 plt.title("Folium of Descartes for C = 1")
+plt.xlabel('x')
+plt.ylabel('y')
 plt.tight_layout()
 plt.savefig("graphFoliumDescartes.pdf")
+plt.cla()
+
+# Get the transformation xz-graph
+nPoints = 100
+t1 = np.linspace(0, 3, nPoints+1)[1:] 
+points1 = folium(t1)
+zs = points1[:, 1] / points1[:, 0]**2 
+points1 = np.stack( [points1[:,0], zs], axis = -1)
+points1 = np.concatenate([ [[0, 1/3]], points1], axis = 0)
+plt.plot(points1[:, 0], points1[:, 1])
+plt.title('xz-Coordinates of Loop For C = 1')
+plt.xlabel('x')
+plt.ylabel('z')
+plt.tight_layout()
+plt.savefig('xzGraphFolium.pdf')
