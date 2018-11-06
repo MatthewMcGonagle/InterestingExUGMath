@@ -17,6 +17,9 @@ at the origin.
 \includegraphics[width=3in]{_generated/graphFoliumDescartes.pdf}
 \end{figure}
 
+Let \(\bar x\) be the x-coordinate of the right-most part of the loop; so the loop can be written as the graph
+of two functions \(y_1 \leq y_2\) on \([0, \bar x]\).
+
 Fermat's idea comes in two parts:
 \begin{enumerate}
 \item If we can make a substitution for a new variable \(z\) to replace \(y\) given by \(y = C^{1 - m - n} x^m z^n\) such that the equation
@@ -33,8 +36,9 @@ in terms of units. If \(x\) and \(y\) were distances in say meters, then the lef
 \(\text{meters}^3\). Fermat chooses a constant \(C\) that is also in meters, and so the right hand side also has units
 \(\text{meters}^3\). Similarly, the left and right hand sides of \(y = C^{1 - m -n} x^m z^n\) have units of just meters. 
 
-\item Use integration by parts to write the original area integral in terms of the integral we now know how to compute. That is, 
-we try to find \(p\) and \(p_i\) to ensure that
+\item Use integration by parts to write the original area integral in terms of the integral we now know how to compute. Let \(\bar z\) be
+the largest value of the \(z\)-coordinate obtained by the loop (we will in fact see that \(\bar z = \infty\)). So we wish to try to find 
+\(p\) and \(p_i\) to ensure that
 \begin{equation}
 \int\limits_0^{\bar x} (y_2 - y_1) dx = \int\limits_0^{\bar z} x^p dz.
 \end{equation}  
@@ -66,7 +70,7 @@ Let's look at the three cases:
     The problem here is that there is no way to produce the power \(x^{-1}\) using integration by parts without using a logarithm. So
     this case isn't really any help.
 
-    \item Now let's try equating \(x^3m = x^{1 + m}\). We then have that \(m = \frac{1}{2}\). So we get
+    \item Now let's try equating \(x^{3m} = x^{1 + m}\). We then have that \(m = \frac{1}{2}\). So we get
     \begin{equation}
     x^{3/2} = -C^{3/2 - 3n} z^{3n} + 3 C^{3/2 - n} z^n.
     \end{equation}   
@@ -88,11 +92,6 @@ So we take \(y = C^{-1 - n} x^2 z^n\) where \(n\) is still left to be determined
 \begin{equation}
 x^3 = 3C^{3 + 2n} z^{-2n} - C^{3 + 3n} z^{-3n}.
 \end{equation}
-Below is a picture of the Folium of Descartes in \(xz\)-coordinates.
-\begin{figure}[h]
-\centering
-\includegraphics[width = 3in]{_generated/xzGraphFolium.pdf}
-\end{figure}
 
 \item
 Let us now consider the area integral
@@ -107,6 +106,12 @@ This is most simple when \(n = 1\). So we will take \(y = C^{-2} x^2 z\) for our
 \begin{equation}
 x^3 = 3C^5 z^{-2} - C^6 z^{-3}.
 \end{equation}
+Below is a picture of the Folium of Descartes in \(xz\)-coordinates.
+\begin{figure}[h]
+\centering
+\includegraphics[width = 3in]{_generated/xzGraphFolium.pdf}
+\end{figure}
+
 Now we need to be more rigorous with our boundary terms. 
 
 First note that the loop of the folium of descartes is in the first quadrant, i.e. \(\{x,y \geq 0\}\). 
@@ -136,19 +141,36 @@ The second case is the vertical portion of the loop approacing the origin. In th
 \(\tilde y \to 1\). Therefore \(z \to \infty\) along the vertical portion of the loop as we approach the origin.
 
 From the \(xz\)-equation of the folium, we see that in either case that \(zx^3 \to 0\) as \(x \to 0\). Now let us rigorously apply integration by parts.
+Let \(z_a\) be the z-coordinate of the right-most part of the loop.
 We have that
+\begin{equation}
+\int\limits_0^{\bar x} (z_2 - z_1) x^2 dx = \lim\limits_{b \to 0+} \int\limits_b^{\bar x} (z_2 - z_1) d \left(\frac{x^3}{3}\right).
+\end{equation}
+Let us study each integral involving \(z_i\) individually. Let \(z_a\) be the z-coordinate of the rightmost part of the loop. For the bottom part of the loop, we see that
 \begin{align}
-\int\limits_0^{\bar x} (z_2 - z_1) x^2 dx & = \lim\limits_{a \to 0+} \int\limits_a^{\bar x} (z_2 - z_1) d \left(\frac{x^3}{3}\right), \\
-    & = \lim\limits_{a \to 0+} \frac{1}{3}(z_2 - z_1)x^3\big |_a^{\bar x} + \int\limits_{C / 3} ^ {\bar z}\frac{1}{3} x_1^3 dz + \lim\limits_{b \to\infty} \int\limits_{\bar z}^b x_2^3 dx, \\
-    & = 0 + \lim\limits_{b\to\infty} \int\limits_{C/3}^b x^3 dz,\\
-    & = \lim\limits_{b\to \infty} \int\limits_{C/3}^b 3C^5z^{-2} - C^6 z^{-3} dz, \\
-    & = \lim\limits_{b\to \infty} \frac{C^6}{2}z^{-2} - 3C^5 z^{-1} \big|_{C/3}^b, \\ 
-    & = 9C^4 - \frac{9}{2}C^4, \\
-    & = \frac{9}{2}C^4.
-\end{align} 
+\lim\limits_{b \to 0+} \int\limits_b^{\bar x} z_1 d\left(\frac{x^3}{3}\right) & =  \lim\limits_{b \to 0+} z_1\frac{x^3}{3} \big|_b^a -\frac{1}{3} \int\limits_{C/3}^{z_a} x^3 dz, \\
+    & = \frac{z_b a^3}{3} - 0 - \frac{1}{3} \int\limits_{C/3}^{z_a} x^3 dz. 
+\end{align}
+For the top part of the loop, we see that
+\begin{align}
+\lim\limits_{b \to 0+} \int\limits_b^{\bar x} z_2 d\left(\frac{x^3}{3}\right) & = \lim\limits_{b \to 0+} z_2\frac{x^3}{3} \big|_b^a - \frac{1}{3} \int\limits_{\infty}^{z_a} x^3 dz, \\
+    & = \frac{z_a a^3}{3} + \frac{1}{3} \int\limits_{z_a}^\infty x^3 dz. 
+\end{align}
+Putting them together, we get
+\begin{align}
+\lim\limits_{b \to 0+} \int\limits_b^{\bar x} (z_2 - z_1) d \left(\frac{x^3}{3}\right) & =  \frac{1}{3} \int\limits_{z_a}^\infty x^3 dz + \frac{1}{3} \int\limits_{C/3}^{z_a} x^3 dz, \\ 
+    & = \frac{1}{3} \int\limits_{C/3}^\infty x^3 dz. 
+\end{align}
+Now, we can use the \(xz\)-coordinate equation for the folium to get that
+\begin{align}
+\frac{1}{3} \int\limits_{C/3}^\infty x^3 dz & = \int\limits_{C/3}^\infty \left( C^5 z^{-2} - \frac{C^6 z^{-3}}{3} \right) dz, \\
+    & = C^5 \frac{3}{C} - C^6\frac{9}{6C^2}, \\
+    & = 3C^4 - \frac{3C^4}{2}, \\
+    & = \frac{3C^4}{2}. 
+\end{align}
 
 Combining with the area integral, we get
 \begin{equation}
-\int\limits_0^{\bar x} (y_2 - y_1) dx = \frac{9}{2}C^2.
+\int\limits_0^{\bar x} (y_2 - y_1) dx = \frac{3}{2}C^2.
 \end{equation}
 \end{enumerate}
