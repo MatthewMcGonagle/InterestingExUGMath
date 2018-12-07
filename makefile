@@ -5,24 +5,37 @@ MULTIVARDIFFCALCGRAPHS = $(patsubst %, _generated/%.pdf, $(_MULTIVARDIFFCALCGRAP
 _ONEVARDIFFCALCGRAPHS = graphFoliumDescartes xzGraphFolium nonMercator mercator fermatUpper fermatLower
 ONEVARDIFFCALCGRAPHS = $(patsubst %, _generated/%.pdf, $(_ONEVARDIFFCALCGRAPHS))
 
-_MULTIVARINTCALCPICS = significandProduct uvRegion
-MULTIVARINTCALCPICS = $(patsubst %, _generated/%.pdf, $(_MULTIVARINTCALCPICS))
-
-_ONEVARDIFFPICS = perspective1 perspective2
-ONEVARDIFFPICS = $(patsubst %, _generated/%.pdf, $(_ONEVARDIFFPICS))
-
-_PRECALCPICS = signPoly signTangentLines
-PRECALCPICS = $(patsubst %, _generated/%.pdf, $(_PRECALCPICS))
-
-PICS = $(MULTIVARINTCALCPICS) $(ONEVARDIFFPICS) $(PRECALCPICS)
 GRAPHS = $(MULTIVARDIFFCALCGRAPHS) $(ONEVARDIFFCALCGRAPHS) 
+
+DIRS = multiVarDiffCalc multiVarIntCalc oneVarDiffCalc oneVarIntCalc preCalculus 
+
+define _FROMSVG = 
+$(eval _NAMES := $(wildcard $(1)/*.svg))\
+$(patsubst $(1)/%.svg, _generated/%.pdf, $(_NAMES)) 
+endef
+
+define FROMSVG = 
+$(foreach dir, $(DIRS), $(call _FROMSVG,$(dir)))
+endef 
+$(info FROMSVG = $(FROMSVG))
 
 define svgToPdf =
 _generated/$(2).pdf : $(1)/$(2).svg
-	inkscape --file=$(1)/$(2).svg --export-pdf=_generated/$(2).pdf 
+	inkscape --file=$(1)/$(2).svg --export-pdf=_generated/$(2).pdf
 endef
 
-main: $(TEX) $(GRAPHS) $(PICS) 
+# Need to use double $$ for variables that will be evaluated after expansion.
+# Note the need to eval each result in the for loop, as a for loop when simply
+# expanded doesn't generate new rules.
+
+define dirSvgToPdf =
+_SVGFILES := $(wildcard $(1)/*.svg)
+SVGFILES := $$(patsubst $(1)/%.svg, %, $$(_SVGFILES))
+$$(foreach name, $$(SVGFILES), $$(eval $$(call svgToPdf,$(1),$$(name)))\
+)
+endef
+
+main: $(TEX) $(GRAPHS) $(FROMSVG) 
 	pdflatex main
 	bibtex main
 	pdflatex main
@@ -37,14 +50,6 @@ _generated/graphFoliumDescartes.pdf _generated/xzGraphFolium.pdf: oneVarIntCalc/
 _generated/nonMercator.pdf _generated/mercator.pdf _generated/fermatLower.pdf _generated/fermatUpper.pdf : oneVarIntCalc/graphs.py
 	python oneVarIntCalc/graphs.py
 
-$(foreach pic, $(_MULTIVARINTCALCPICS),\
-	$(eval $(call svgToPdf,multiVarIntCalc,$(pic)))\
-)
-
-$(foreach pic, $(_ONEVARDIFFPICS),\
-	$(eval $(call svgToPdf,oneVarDiffCalc,$(pic)))\
-)
-
-$(foreach pic, $(_PRECALCPICS),\
-	$(eval $(call svgToPdf,preCalculus,$(pic)))\
-)
+$(eval $(call dirSvgToPdf,multiVarIntCalc))
+$(eval $(call dirSvgToPdf,oneVarDiffCalc))
+$(eval $(call dirSvgToPdf,preCalculus))
