@@ -20,6 +20,7 @@ endef
 $(info FROMSVG = $(FROMSVG))
 
 define svgToPdf =
+
 _generated/$(2).pdf : $(1)/$(2).svg
 	inkscape --file=$(1)/$(2).svg --export-pdf=_generated/$(2).pdf
 endef
@@ -31,8 +32,8 @@ endef
 define dirSvgToPdf =
 _SVGFILES := $(wildcard $(1)/*.svg)
 SVGFILES := $$(patsubst $(1)/%.svg, %, $$(_SVGFILES))
-$$(foreach name, $$(SVGFILES), $$(eval $$(call svgToPdf,$(1),$$(name)))\
-)
+NEWRULES = $$(foreach name, $$(SVGFILES), $$(call svgToPdf,$(1),$$(name)))
+$$(eval $$(NEWRULES))
 endef
 
 main: $(TEX) $(GRAPHS) $(FROMSVG) 
