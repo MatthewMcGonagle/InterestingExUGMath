@@ -1,0 +1,41 @@
+\subsection{No Metric For Pointwise Convergence}
+
+In this section we look at a motivating example for why metric spaces aren't enough to capture all notions
+of convergence; a more abstract concept such as point-set topology is necessary to cover a simple example of convergence.
+
+We will in particular consider pointwise convergence of a sequence of functions \(f_n(x) : [0, 1] \to \mathbb R\).
+We will show that there is no metric \(d\) on these functions such that pointwise convergence of \(f_n(x)\) is
+equivalent to \(d(f_n, f) \to 0\). In particular, we will show that given a metric \(d\) on these functions, there
+exists a sequence of functions \(f_n\) pointwise converges to the zero function, but \(d(f_n, 0) \not \to 0\).
+
+\subsubsection*{The Setup}
+
+Historically, topology arose from a desire to have a universal framework to discuss different notions of convergence.
+Since Weierstrass, analysts recognized that there are different notions of convergence for functions, e.g. uniform
+convergence vs point-wise convergence. It was desirable to put all of these ideas on even footing.
+
+In a sense, Frechet began the introduction of more abstract spaces with the creation of his so-called L-spaces in 1904. 
+Later, in his doctoral dissertation in 1906, Frechet introduced the concept of a metric space. Convergence of
+sequences was defined by abstract definitions of distance.
+
+In 1914, Hausdorff took a more set-theoretic approach; he introduced the precursor to the modern topology. The abstract
+concept of distance to a point is replaced with an abstract idea of neighborhoods of a point. For a nice historical
+discussion of the creation of point-set topology, see \cite{mooreTopology}.
+
+Now, let \(X\) be the set of \(\mathbb R\)-valued functions defined on \([0,1] \subset \mathbb R\). We will show that
+there is no metrix \(d\) on \(X\) such that point-wise convergence is equivalent to convergence in the metric. Now,
+at first you may think the issue is that the functions in \(X\) are unbounded, but this is not the issue. 
+
+For example, the metric \(d_0(f, g) = \sup\limits_{x\in [0,1]} \min \{|f(x) - g(x)|, 1\}\) is a bounded metric on \(X\).
+Furthermore, if \(d_0(f_n, g) \to 0\) then it isn't too hard to see that \(f_n\) must converg pointwise to \(g\) 
+(in fact the convergence must be uniform). 
+
+We will show that pointwise convergence for functions in \(X\) is not equivalent to convergence in any metric, but is
+pointwise convergence equivalent to convergence in a topology? Yes, if we think of the space of functions \(X\) as a 
+product of copies of \(\mathbb R\),  \(X = \prod\limits_{x\in [0,1]} \mathbb R_x\) where the \(x^\text{th}\) 
+component of \(f\) is \(f(x)\), then the product topology will work. 
+
+\subsubsection*{The Problem}
+
+Let \(X\) be the \(\mathbb R\)-valued functions defined on \([0,1]\subset\mathbb R\). Show that there is no metric
+such that a sequence of functions \(f_n \in X\) converges point-wise to \(g\) if and only if \(d(f_n, g) \to 0\). 
