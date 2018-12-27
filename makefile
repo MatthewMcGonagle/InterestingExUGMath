@@ -1,4 +1,5 @@
 TEX = main.tex 
+
 _MULTIVARDIFFCALCGRAPHS = hyperbolaFamily hyperbolaEnvelope 
 MULTIVARDIFFCALCGRAPHS = $(patsubst %, _generated/%.pdf, $(_MULTIVARDIFFCALCGRAPHS))
 
@@ -7,7 +8,10 @@ ONEVARDIFFCALCGRAPHS = $(patsubst %, _generated/%.pdf, $(_ONEVARDIFFCALCGRAPHS))
 
 GRAPHS = $(MULTIVARDIFFCALCGRAPHS) $(ONEVARDIFFCALCGRAPHS) 
 
-DIRS = multiVarDiffCalc multiVarIntCalc oneVarDiffCalc oneVarIntCalc preCalculus 
+DIRS = multiVarDiffCalc multiVarIntCalc oneVarDiffCalc oneVarIntCalc preCalculus topology
+EXAMPLE_TEX = $(foreach dir, $(DIRS), $(wildcard $(dir)/*.tex))
+$(info $(EXAMPLE_TEX))
+BIB = references.bib
 
 define _FROMSVG = 
 $(eval _NAMES := $(wildcard $(1)/*.svg))\
@@ -36,7 +40,7 @@ NEWRULES = $$(foreach name, $$(SVGFILES), $$(call svgToPdf,$(1),$$(name)))
 $$(eval $$(NEWRULES))
 endef
 
-main: $(TEX) $(GRAPHS) $(FROMSVG) 
+main.pdf: $(TEX) $(EXAMPLE_TEX) $(BIB) $(GRAPHS) $(FROMSVG) 
 	pdflatex main
 	bibtex main
 	pdflatex main
