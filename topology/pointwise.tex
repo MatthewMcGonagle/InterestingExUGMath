@@ -39,3 +39,43 @@ component of \(f\) is \(f(x)\), then the product topology will work.
 
 Let \(X\) be the \(\mathbb R\)-valued functions defined on \([0,1]\subset\mathbb R\). Show that there is no metric
 such that a sequence of functions \(f_n \in X\) converges point-wise to \(g\) if and only if \(d(f_n, g) \to 0\). 
+
+\subsubsection*{The Solution}
+
+We have already seen that there exists metrics \(d\) on \(X\) such that \(d(f_n, g) \to 0\) implies that 
+\(f_n\) converges point-wise to \(g\). So we must show that the other direction of implication does not hold.
+
+We will prove by contradiction; so for the purpose of creating a contradiction, assume that \(d\) is a metric
+on \(X\) such that \(f_n\) converges point-wise to \(g\) if and only if \(d(f_n, g) \to 0\). We will show that there is a sequence of functions \(f_n\) converging point-wise
+to the zero function \(g(x) = 0\), but \(d(f_n, 0) \not \to 0\).
+
+So, let \(d\) be a metric on \(X\). We prove the following claim: for every \(x \in [0, 1]\), there is a 
+\(\delta_x > 0\) such that if \(|f(x)| \geq 1\), then \(d(f(x), 0) > \delta_x\).
+
+Fix \(x \in [0,1]\). Let \(\delta_x = \inf \{d(f, 0) | |f(x)| \geq 1\}\). If \(\delta_x = 0\), then there is a 
+sequence of \(f_n\) such that \(d(f_n, 0)\to 0\) and \(|f_n(x)|\geq 1\). However, our assumptions on \(d\) then imply
+that \(f_n\) point-wise converges to \(0\), in particular \(f_n(x) \to 0\). So we have a contradiction. Therefore,
+\(\delta_x > 0\).
+
+Now we partition the \(x \in [0, 1]\) according to which of the following intervals \(\delta_x\) lies in: 
+we use a countable collection of intervals given by \([1, \infty)\), \([1/2, 1)\), \([1/3, 1/2)\), and so on. Note
+that we have used the positivity of \(\delta_x\). 
+
+Since this is a countable partition of the uncountable set \([0, 1]\), there must be a partition that contains
+an infinite number of \(x\). Therefore, there is a fixed \(N\) such that there are an infinite number of 
+\(x \in [0, 1]\) such that \(\delta_x > 1/N\); Now let \(x_n\) be a sequence of distinct such \(x\).
+
+Next, define the sequence of functions 
+\begin{equation}
+f_n(x) \coloneqq 
+    \begin{cases}
+    \frac{1}{n - k}, & x = x_k \text{ for some } k < n, \\
+    1, & x = x_k \text{ for some } k\geq n, \\
+    0, & \text{otherwise}. 
+    \end{cases}
+\end{equation} 
+We then have that \(f_n\) converges pointwise to the zero function. However, since \(f_n(x_n) = 1\), we have
+that \(d(f_n, 0) \geq \delta_{x_n} > 1/N\). 
+
+So \(f_n\) gives us a sequence of functions that converge point-wise to zero, but doesn't converge in the metric.
+Hence we have our contradiction.
