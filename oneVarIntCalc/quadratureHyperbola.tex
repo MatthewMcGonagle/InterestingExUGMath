@@ -1,0 +1,107 @@
+\subsection{Quadrature of the Hyperbola and Logarithms}
+
+Now we investigate the relationship between the area under the graph of the hyperbola \(y = 1 / x\) and 
+logarithms.
+
+\subsubsection*{The Setup}
+
+John Napier created the logarithm with the purpose of aiding in computations of multiplication and division. \cite{cajori} 
+He noted that comparing an arithmetic progression to a geometric progression would allow one to, e.g., switch from
+division to subtraction. By having a logarithm table, one can make division easier by converting to the
+logarithm using the table, performing subtraction, and then using the logarithm table to convert back. 
+
+So the original intention of logarithms is to take advantage of the algebraic fact that 
+\begin{equation}
+\log(ab) = \log(a) + \log(b).
+\end{equation}
+
+The relationship between logarithms and the area under the hyperbola \(y = 1/x\) was established by the work
+of Gregory St. Vincent in 1647 and Alfons Anton de Sarasa in 1649 (note that their work is before the 
+invention of calculus of Newton and Leibniz). Using modern terminology, we seek to show that 
+\begin{equation}
+f(x) \equiv \int\limits_1^x \frac{1}{t} dt,
+\end{equation}
+satisfies the algebraic rule of algorithms \(f(ab) = f(a) + f(b)\). Since this work predates the invention
+of calculus, we will prove this result directly using methods of exhaustion, a technique that also predates
+the invention of calculus.
+
+\subsubsection*{The Problem}
+
+\begin{enumerate}
+\item Use a method of exhaustion to show that for any \(a, b, c > 0\), one has that
+\begin{equation}
+\int\limits_{ac}^{bc} \frac{1}{t} dt = \int\limits_a^b \frac{1}{t} dt.
+\end{equation} 
+
+\item Prove that
+\begin{equation}
+\int\limits_1^{ab} \frac{1}{t} dt = \int\limits_1^a \frac{1}{t} dt + \int\limits_1^b \frac{1}{t} dt.
+\end{equation}
+\end{enumerate}
+
+\subsubsection*{The Solution}
+
+\begin{enumerate}
+\item First we partition \([ac, bc]\) using the points \(t_i = ac + \frac{bc - ac}{N} i \), for \(0 \leq i \leq N\).
+Next, note that the points \(s_i = a + \frac{b - a}{N} i\) for \(0 \leq i \leq N\) give a partition of
+the interval \([a, b]\).
+
+Let \(U_N\) be the upper sum for the partition of \([ac, bc]\). We have that
+\begin{align}
+U_N & = \sum\limits_{i = 0}^{N-1} \frac{1}{t_i} \frac{bc - ac}{N}, \\
+    & = \sum\limits_{i = 0}^{N - 1} \frac{1}{a + \frac{b - a}{N}i} \frac{b - a}{N}, \\
+    & = \sum\limits_{i = 0}^{N - 1} \frac{1}{s_i} \frac{b - a}{N}, \\
+\end{align}
+Let us relate this to \(\int_a^b 1/t dt\). Now, we see that \(U_N\) isn't quite a lower bound for this integral.
+However, we do have that it gives a lower bound for a slightly different interval. Let 
+\(\delta_N = \frac{b - a}{N}\), we have that
+\begin{equation}
+U_N < \int\limits_{a - \delta_N}^{b - \delta_N} \frac{1}{t} dt.
+\end{equation}
+
+Similarly let the lower sum be \(L_N\); we have that 
+\begin{align}
+L_N & = \sum\limits_{i = 0}^{N-1} \frac{1}{t_{i+1}} \frac{bc - ac}{N}, \\ 
+    & = \sum\limits_{i = 0}^{N - 1} \frac{1}{a + \frac{b - a}{N}(i+1)} \frac{b - a}{N}, \\
+    & = \sum\limits_{i = 0}^{N - 1} \frac{1}{s_{i + 1}} \frac{b - a}{N}, 
+\end{align}
+We also see that
+\begin{equation}
+L_N > \int\limits_{a + \delta_N}^{b + \delta_N} \frac{1}{t} dt.
+\end{equation}
+
+So we have that
+\begin{equation}
+\int\limits_{a + \delta_N}^{b + \delta_N} \frac{1}{t} dt < \int\limits_{ac}^{bc} \frac{1}{t} dt
+<  \int\limits_{a - \delta_N}^{b - \delta_N} \frac{1}{t} dt.
+\end{equation}
+
+As we let \(N \to \infty\), we have that \(\delta_N \to 0\). Therefore, we get that
+\begin{equation}
+\int\limits_a^b \frac{1}{t} dt \leq \int\limits_{ac}^{bc} \frac{1}{t} dt
+    \leq \int\limits_a^b \frac{1}{t} dt.
+\end{equation}
+Therefore,
+\begin{equation}
+\int\limits_{ac}^{bc} \frac{1}{t} dt = \int\limits_a^b \frac{1}{t} dt.
+\end{equation}
+
+\item Next, consider the area
+\begin{equation}
+\int\limits_1^{ab} \frac{1}{t} dt.
+\end{equation} 
+From our previous result, we have that
+\begin{equation}
+\int\limits_{a}^{ab} \frac{1}{t} dt = \int\limits_{1}{b} \frac{1}{t} dt.
+\end{equation}
+
+Next, note that 
+\begin{equation}
+\int\limits_a^{ab} \frac{1}{t} dt = \int\limits_1^{ab} \frac{1}{t} dt - \int\limits_1^a \frac{1}{t} dt.
+\end{equation}
+Therefore, we get that
+\begin{equation}
+\int\limits_1^{ab} \frac{1}{t} dt = \int\limits_1^a \frac{1}{t} dt + \int\limits_1^b \frac{1}{t} dt.
+\end{equation}
+
+\end{enumerate}
