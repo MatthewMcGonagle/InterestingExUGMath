@@ -1,0 +1,42 @@
+\subsection{Global Analysis}
+\subsubsection*{The Setup}
+
+It is sometimes possible for us to use topology to extend an argument that holds in a limit to a more global case.
+
+Here we look at an example from Osserman \cite{Osserman} where we can use winding number arguments to show that
+a map is in fact a diffeomorphism. In particular, consider the domain \(D = \{0 < |z| < 1\} \subset \mathbb C\}\), 
+and consider the map 
+\begin{equation}
+f(z) = \frac{1}{\bar z} + \frac{z^3}{3},
+\end{equation} 
+defined on \(D\). We will show that \(f\) is a diffeomorphism of \(D\) onto its image. To do so, we will employ
+a winding number argument.
+
+\subsubsection*{The Problem}
+\begin{enumerate}
+\item Show that \(f\) is a one-to-one map of the boundary component \(C = \{|z| = 1\}\).
+\item For any \(w_0 \not \in f(C)\), use a winding number argument to show that there is exactly one point
+\(z_0 \in D\) such that \(f(z_0) = w\).
+\item Show that the above also holds for any \(w_0 \in f(C)\).
+\end{enumerate}
+Therefore we have that \(f\) is a global diffeomorphism of \(D\) onto its image \(f(D)\).
+
+\subsubsection*{The Solution}
+\begin{enumerate}
+\item First let us show that \(f\) is a one-to-one map when restricted to \(C = \{|z| = 1\}\). On \(C\),
+we have that \(\bar z = 1 / z\), so we have that \(f(z) = z + z^3 / 3\). 
+
+So if \(|z| = |\zeta| = 1\) and \(f(z) = f(\zeta)\), then 
+\begin{equation}
+z - \zeta + \frac{z^3 - \zeta^3}{3} = 0. 
+\end{equation}
+We factor this equation by \(z - \zeta\) to get either \(z =\zeta\) or
+\begin{equation}
+3 + z^2 + z\zeta + \zeta^2 = 0.
+\end{equation}
+Now, \(|z^2| = |z\zeta| = |\zeta^2| = 1\); so \(|z^2 + z\zeta + \zeta^2| \leq 3\) with equality only when
+all three terms are the same. So from the above we must have that all three terms are the same, and hence
+\(z = \zeta\).
+
+In either case \(z = \zeta\), and so we have that \(f\) is one-to-one when restricted to \(C\).
+\end{enumerate}
