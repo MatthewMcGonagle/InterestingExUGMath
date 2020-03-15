@@ -9,7 +9,27 @@ and consider the map
 \begin{equation}
 f(z) = \frac{1}{\bar z} + \frac{z^3}{3},
 \end{equation} 
-defined on \(D\). We will show that \(f\) is a diffeomorphism of \(D\) onto its image. To do so, we will employ
+defined on \(D\). 
+
+Let us next show that \(f\) is a local diffeomorphism. Recall that we by the inverse function theorem, we need to 
+only show that on all points of \(D\) we have that \(Df\) is of rank two. This is equivalent to only having
+trivial solutions \(r_i \in \mathbb R\) to \(r_1\partial_x f + r_2\partial_y f\); this is equivalent to only
+a trivial solution \(c\in \mathbb C\) of \(c\partial_z f + \bar c \partial_{\bar z} f = 0\). 
+
+We have that
+\begin{align}
+\partial_z f & = z^2, \\
+\partial_{\bar z} f & = -\frac{1}{\bar z^2}.
+\end{align}
+
+Hence, we have that \(\frac{c^2}{|c|^2} |z|^4 = 1\). Note that we only need to show that such an equation has 
+no solutions with \(|c| = 1\) and \(z \in D\). So we consider \(c^2 |z|^4 = 1\). Note that every term other than
+\(c\) is in \(\mathbb R\), and \(|z|^4 \geq 0\). Therefore we must have that \(c = \pm 1\), 
+and therefore \(|z|^4 = 1\). Therefore there are no solutions in \(D\), and \(Df\) must be rank two 
+throughout \(D\). Hence, \(f\) is a local diffeomorphism.
+
+We will use a topological argument to show that \(f\)
+is in fact a global diffeomorphism of \(D\) onto its image. To do so, we will employ
 a winding number argument.
 
 \subsubsection*{The Problem}
@@ -39,4 +59,6 @@ all three terms are the same. So from the above we must have that all three term
 \(z = \zeta\).
 
 In either case \(z = \zeta\), and so we have that \(f\) is one-to-one when restricted to \(C\).
+
+\item If \(w_0 \not \in f(C)\), then 
 \end{enumerate}
