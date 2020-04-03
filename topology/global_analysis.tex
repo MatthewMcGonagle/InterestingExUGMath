@@ -9,7 +9,7 @@ and consider the map
 \begin{equation}
 f(z) = \frac{1}{\bar z} + \frac{z^3}{3},
 \end{equation} 
-defined on \(D\). 
+defined on \(D\). Let \(C = \{|z| = 1\}\) be the outermost component of the boundary of \(D\). 
 
 Let us next show that \(f\) is a local diffeomorphism. Recall that we by the inverse function theorem, we need to 
 only show that on all points of \(D\) we have that \(Df\) is of rank two. This is equivalent to only having
@@ -28,20 +28,19 @@ no solutions with \(|c| = 1\) and \(z \in D\). So we consider \(c^2 |z|^4 = 1\).
 and therefore \(|z|^4 = 1\). Therefore there are no solutions in \(D\), and \(Df\) must be rank two 
 throughout \(D\). Hence, \(f\) is a local diffeomorphism.
 
-We will use a topological argument to show that \(f\)
-is in fact a global diffeomorphism of \(D\) onto its image. To do so, we will employ
+We will show that \(f(C)\) is a Jordan curve, and we will use a topological argument to show that \(f\)
+is in fact a global diffeomorphism of \(D\) onto the exterior of \(f(C)\). To do so, we will employ
 a winding number argument.
 
 \subsubsection*{The Problem}
 \begin{enumerate}
 \item Show that \(f\) is a one-to-one map of the boundary component \(C = \{|z| = 1\}\).
-\item Show that image of \(f(\left\{|z| < 1\right\})\) is contained in the exterior of the Jordan curve
-\(f(\{|z| = 1\})\).
-\item For any \(w_0 \not \in f(C)\), use a winding number argument to show that there is exactly one point
-\(z_0 \in D\) such that \(f(z_0) = w\).
-\item Show that the above also holds for any \(w_0 \in f(C)\).
+\item For any \(w_0\) in the exterior of the Jordan curve \(f(C)\), use a winding number argument to 
+show that \(w_0\) is the image of exactly one point in \(D\). 
+\item Similarly show that no points \(w_0\) in the interior of \(f(C)\) are in the image of \(D\).  
+\item Finally, argue that every point \(w_0 \in f(C)\) is not in the image \(f(D)\).
 \end{enumerate}
-Therefore we have that \(f\) is a global diffeomorphism of \(D\) onto its image \(f(D)\).
+Therefore we have that \(f\) is a global diffeomorphism of \(D\) onto the exterior of \(f(C)\). 
 
 \subsubsection*{The Solution}
 \begin{enumerate}
@@ -62,27 +61,34 @@ all three terms are the same. So from the above we must have that all three term
 
 In either case \(z = \zeta\), and so we have that \(f\) is one-to-one when restricted to \(C\).
 
-\item We first show that \(0 \not \in f(D)\). Note that when
-\begin{equation}
-0 = \frac{1}{\bar z} + \frac{z^3}{3},
-\end{equation}
-we have that \(-3 = z^2 |z|^2\). Therefore, at such a point, \(|z| > 1\), and so \(z \not \in D|\).
-
-Now we claim that \(0\) is in the interior of \(f(\{|z| = 1\})\). If not, since \(|f(z)| \to \infty\)
-as \(z \to 0\), we have that if \(0\) is in the exterior, then \(|f(z)|\) must obtain a minimum on \(D\)
-(and not on \(\partial D\)). However, this is impossible since \(f\) is a local diffeomorphism on \(D\). 
-Therefore \(0\) is in the interior of \(f(C)\).
-
-Now, we show that \(f(D)\) is contained in the exterior to the Jordan curve \(f(C)\). We note that if this
-wasn't the case, then connect such an interior point \(f(z_0)\) to \(0\) by a curve on the interior. Then
-along this curve, there must be a point where the derivative \(Df\) has rank less than 2. Again, this
-contradicts that \(f\) is a local diffeomorphism. Therefore, \(f(D)\) is contained in the exterior of \(f(C)\).
-
-\item If \(w_0 \not \in f(C)\), then notice that \(f(C)\) is a simply connected
+\item If \(w_0\) is in the exterior of the Jordan curve \(f(C)\), then notice that \(f(C)\) is a simply connected
 curve in \(\mathbb C\setminus{w_0}\). 
 
 However, for \(r\) small, the curve \(\theta \to f(re^{i\theta})\) is a curve with winding number \(1\) about
 \(w_0\). 
 
-Next, note that since \(f\) is a local diffeomorphism, the points in \(f^{-1}(w_0)\) must be separated. 
+Next, note that since \(f\) is a local diffeomorphism, the points in \(f^{-1}(w_0)\) must be separated. Since
+\(|f| \to \infty\) as \(z \to 0\), we must then have that the image \(f^{-1}(w_0)\) consists of at
+most finitely many \(k\) points, where \(k \geq 0\). 
+
+We may homotope a counter-clockwise route \(\gamma\) on the circe \(C\) to a counter-clockwise circle around \(z = 0\),
+counter-clockwise circles around each point of \(f^{-1}(w_0)\), and overlapping pairs of curves (running in 
+opposite directions) that connect each of the former circles.
+
+Since \(w_0\) is in the exterior of \(f(C)\), we have that the winding number of \(f(\gamma)\) is \(0\).
+Furthermore, we know that \(f\) is orientation reversing near \(z = 0\) and so it must be orientation reversing on
+\(D\) since it is a local diffeomorphism on \(D\). Therefore, we have that winding numbers of 
+each of the above curves are \(-1\).
+
+From the above homotopy, we then have that \(0 = k - 1\), and therefore we must have that \(k = 1\). So 
+\(f^{-1}(w_0)\) consists of a single point, and so f is one to one onto the part of the image in the exterior
+of \(f(C)\).
+
+\item Similarly, when \(w_0\) in the interior of \(f(C)\), we may apply the above the argument. However, now the
+winding number of \(f(\gamma)\) is \(1\). Therefore, we get \(1 = k - 1\), and so \(k = 0\). Hence, the image of
+\(f\) does not intersect the interior of \(f(C)\). 
+
+\item Finally note that there can't be any points \(z \in D\) such that \(f(z) \in f(C)\), because this would
+imply that there are points in a neighborhood of \(f(C)\) that has more than one point in their pre-image. However,
+this impossible by our work above. 
 \end{enumerate}
