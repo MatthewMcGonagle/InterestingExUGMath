@@ -1,0 +1,56 @@
+\subsection{No Metric For Convergence From Above}
+\subsubsection*{The Setup}
+
+Here we look at another notion of convergence for which there is no metric \(d(x, y)\) that describes it.
+In particular we will look at a notion of convergence for sequences in \(\mathbb R\) such that there is
+no metric \(d(x, y)\) on \(\mathbb R\) 
+where the convergence can be described using the metric space convergence of \(d\).
+
+First let us define that a sequence \(a_n \in \mathbb R\) \textit{converges from above} to \(L\)\} when 
+for every \(\epsilon > 0\), there exists an \(N\) such that if \(n\geq N\) then \(L \leq a_n < L + \epsilon\).
+
+Roughly, the above definition means that in addition to converging to \(L\) (in the normal sense), 
+eventually the sequence must also be above \(L\). Note that we do not assume that \(a_n\) satisfies any sort
+of monotonicity (or eventual monotonicity). 
+
+The fact that this is notion of convergence depends on a direction depends on a direction (i.e. from above)
+gives one the intuition that this convergence must depend on more than distance. That is, it is no surprise
+that a metric \(d(x, y)\) will not be enough to describe it.
+
+However, there must be some care here. Note that there are subsets \(U \subset \mathbb R\) 
+such that \textit{converges from above} for \(a_n \in U\)
+can be described using the standard metric on \(\mathbb R\). For example, when 
+\(U = \{0\} \cup \{1 / m | m \in \mathbb Z^+\}\), a sequence \(a_n \in U\) converges with respect to the
+standard sub-space metric if and only if it converges from above. This can easily be seen, because any
+sequence \(a_n \in U\) converging to some \(1 / m \in U\) must eventually be constant. Finally, if \(a_n\)
+converges to \(0\), then by the defintion of \(U\) every point \(a_n\) already satisfies \(a_n \geq 0\).
+
+From our above example of a sub-set \(U\), we see that non-existence of such a metric for \(\mathbb R\)
+will be a little more deep than just the directionality. We will need to use the uncountable nature of
+\(\mathbb R\).
+
+\subsubsection*{The Problem}
+
+Prove that there does not exists a metric \(d(x, y)\) on \(\mathbb R\) such that a sequence \(a_n \in \mathbb R\)
+\textit{converges from above} to \(L\) if and only if the sequence converges to \(L\) in the sense of metric-space
+convergence for \(d\).
+
+\subsubsection*{The Solution}
+
+We prove by contradiction. Assume first that such a metric \(d\) exists.
+
+We claim that every point \(x \in \mathbb R\) has a \(\delta_x > 0\) such that all points \(y\) in the metric ball
+\(B_{\delta_x}(x)\) satisfy \(x \leq y\). If this was not the case, then we would have a sequence of points \(a_n\)
+converging to \(x\) with respect to the metric convergence of \(d\) but satisfying \(a_n < x\). This is a sequence
+that can not converge to \(x\) from above; by our assumption on \(d\) this is impossible. 
+
+We will now find a sequence that converges from above but does not converge with respect to the metric. Since
+the open interval \((0, 1)\) is uncountably infinite, we
+may find a strictly decreasing sub-sequence of points \(0 < a_n < 1\) such that \(a_n\)
+converges to \(0 \leq x_0 \leq 1\)
+and \(\delta_{a_n} > 1 / K\) for some \(K \in \mathbb Z^+\). Note that \(a_n\) converges from above to \(x_0\). 
+So \(d(x_n, x_0) \to 0\). However \(a_n < a_m\) for \(m < n\), so \(a_n \not\in B_{1/K}(a_m)\).  
+
+Since \(d(x_n, x_0) \to 0\), there exists \(a_m, a_n \in B_{1/3K}(x_0)\) and \(m < n\). However, we then have that
+\(d(x_m, x_n) < 2 / 3K < 1/K\) which contradicts that \(a_n \not\in B_{1/K}(a_m)\).
+
