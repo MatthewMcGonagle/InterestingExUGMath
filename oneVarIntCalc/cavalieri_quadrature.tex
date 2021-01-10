@@ -1,0 +1,231 @@
+\subsection{Cavalieri's Quadrature of \(x^n\)}
+
+In this example we consider Cavalieri's method of finding the area under \(x^n\) for positive integers \(n\). In
+particular, we will use a couple simple integral properties, which may be simply proven using a 
+method of exhaustion, to create a system of linear equations that will allow us to compute 
+\begin{equation}
+\int\limits_0^a x^n dx,
+\end{equation}
+for \(a > 0\) and any positive integer \(n\). Actually we will create an algorithm for finding the value of such an
+integral for a given value of \(n\) (\(a\) will still be general). The author is unaware of how 
+mathematical induction may be applied to find the general formula for general \(n\) and general \(a\); the
+equations seem to be too complicated to be immediately tractable.
+
+\subsubsection*{The Setup}
+
+First, an introduction to Cavalieri's idea. Struik \cite{struik} gives a nice discussion of Cavalieri's
+methods with more modern notation for \(n = 2, 3\).
+Cavalieri uses a notion of "summing over all lines", "summing over all squares,", "summing over all cubes", etc;
+for example, he is comfortable with writing in words the equivalent of \(\sum x^2\), where the sum is considered to
+be over all x-values for \(0 \leq x \leq a\). He does not consider details of convergence or whether such a sum
+is well-defined. This method is very non-rigorous by modern standards, and we will
+update his arguments; when necessary, we will prove the integral properties we need using an exhaustion by Riemann
+sums. 
+
+Furthermore, the argument in Struik \cite{struik} doesn't precisely match ours, but the author feels our argument
+amounts to an induction step that is easier to analyze. The difference being that we will induct over set of
+integrals depending on \(a\) and \(n\), instead of just the values of \(\int_0^a x^n dx\). Next we introduce
+the set of integrals we need for our induction.
+
+We introduce another variable \(y\) such that \(x + y = a\); here Cavalieri is imagining
+breaking the line segment of length \(a\) into two parts. Then the variables \(x\) and \(y\) represent their
+lengths, which must add up to \(a\). We will be interested in the following integrals
+\begin{equation}
+I^n_{p, q} \coloneqq \int\limits_0^a x^p y^q dx,
+\end{equation}
+where \(p, q\) are non-negative integers such that \(p + q = n\). Note that our integrals may
+be rewritten entirely in terms of \(x\) as \(I^n_{p, q} = \int_0^a x^p (a - x)^q dx\), but we will find
+it more convenient to express them in terms of \(x\) and \(y\). 
+
+Next, we describe our induction step. We will assume that we know that values of \(I^m_{p, q}\) for all
+\(m < n\) and \(p, q\) non-negative integers with \(p + q = m\). Then we will show that we can compute
+\(I^n_{p, q}\) for all \(p, q\) non-negative integers with \(p + q = n\).
+
+Cavalieri's idea can be broken into several parts:
+\begin{enumerate}
+\item There is a symmetry coming from interchanging the roles of \(x\) and \(y\), i.e. \(I^n_{p, q} = I^n_{q, p}\). 
+This implies that there are actually less than \(n+1\) unknowns. They can be expressed in the form
+\(I^n_{p, q}\) for \(p, q\) non-negative integers with \(p + q = n\).
+
+In the case of even \(n = 2k\), we only have the
+\(k+1\) unknowns \(I^{2k}_{0, 2k}, ..., I^{2k}_{k, k}\). In the case of odd \(n = 2k + 1\), we have only have the
+\(k+1\) unknowns \(I^{2k+1}_{0, 2k+1}, ..., I^{2k+1}_{k, k+1}\).
+
+The symmetry may be proven using a method of exhaustion. Take a uniform partition of \([0, a]\) with an even
+number of intervals \(2P\) of length \(h = a/2P\). Let \(x_i\) be the center of each partition interval.
+We approximate the integral using the sum
+\begin{equation}
+J^n_{p, q, P} \coloneqq \sum\limits_1^{2P} x_i^p y_i^q h,
+\end{equation}
+and we have that \(I^n_{p, q}  = \lim\limits_{P \to \infty} J^n_{p, q, 2P}\). By the symmetry of our partition
+and choice of \(x_i\), we have the symmetry \(J^n_{p, q, P} = J^n_{q, p, P}\). Taking the limit we get that
+\(I^n_{p, q} = I^n_{q, p}\). 
+
+\item The next part is to create recurrence relations for the \(I^n_{p, q}\) for the induction step using
+\begin{align}
+a I^{n-1}_{p, q} & = \int\limits_0^a (y + x)x^p y^q dx \\ 
+    & = I^{n}_{p, q+1} + I^n_{p+1, q},
+\end{align} 
+where \(p + q = n-1\).
+
+We see that for the case of even \(n = 2k\), we have the \(k\) equations in the \(k+1\) unknowns:
+\begin{align}
+aI^{2k-1}_{0, 2k-1} & = I^{2k}_{0, 2k} + I^{2k}_{1, 2k-1}, \\
+... & \\
+aI^{2k-1}_{k-2, k+1} & = I^{2k}_{k-2, k+2} + I^{2k}_{k-1, k+1}, \\
+aI^{2k-1}_{k-1, k} & = I^{2k}_{k-1, k+1} + I^{2k}_{k, k}. 
+\end{align}
+Note that this is an underdetermined system, and we will need another equation. In the next part we will
+obtain another equation for this case.
+
+For the case of odd \(n = 2k + 1\), we have the \(k+1\) equations in the \(k+1\) unknowns:
+\begin{align}
+a I^{2k}_{0, 2k} & = I^{2k+1}_{0, 2k+1} + I^{2k+1}_{1, 2k}, \\
+... \\
+a I^{2k}_{k-1, k+1} & = I^{2k+1}_{k-1, k+2} + I^{2k+1}_{k, k+1}, \\
+a I^{2k}_{k, k} & = 2 I^{2k+1}_{k, k+1}.
+\end{align}
+We can see that this system is actually solvable; the last equation allows us to solve for \(I^{2k+1}_{k, k+1}\),
+and then we work backward substitute in equations to solve for the rest of the quantities one by one. 
+
+\item For the final part we need to find another equation for the case of even \(n = 2k\). Cavalieri's idea
+involves a scaling argument to find a relation between \(I^{2k}_{0, 2k}\) and \(I^{2k}_{k, k}\). 
+
+First, introduce a variable \(z\) such that \(x = a/2 + z\) and \(y = a/2 - z\); that is, \(z\) represents the
+offset of \(x\) from \(a/2\).
+
+Then we have that
+\begin{equation}
+I^{2k}_{k, k} = \int\limits_0^a x^k y^k dx = \int\limits_0^a (a^2/4 - z^2)^k dx.
+\end{equation}
+An exhaustion argument can be used to easily show \(\int_0^a (f \pm g) dx = \int_0^a f dx \pm \int_0^a g dx\),
+especially in the case that \(f\) is non-negative and \(g\) is non-positive.
+
+Then, we have that
+\begin{equation}
+I^{2k}_{k, k} = 
+    \sum\limits_{l = 0}^{k} {k \choose l} (-1)^l (a/2)^{2l} \int\limits_0^a z^{2(k-l)} dx. 
+\end{equation}
+
+Now we claim that \(J^{2p} \coloneqq \int_0^a z^{2p} dx = (1/2)^{2p} \int_0^a x^{2p} dx\); this can be proven
+by breaking the integral into pieces and applying a scaling argument. 
+
+First note that
+\begin{align}
+J^{2p} & = \int_0^{a/2} z^{2p} dx + \int_{a/2}^a z^{2p} dx, \\ 
+    & \coloneqq J^{2p}_1 + J^{2p}_2
+\end{align}
+One can use an exhaustion argument to easily show that an integral is translation invariant. Next,
+not that \(z = x - a/2\), so that \(z\) is the translation of \(x\) by \(a/2\). Therefore, we have
+that \(J^{2p}_2 = \int_0^{a/2} x^{2p} dx\).
+
+Similarly we have that \(J^{2p}_1 = \int_{-a/2}^0 x^{2p} dx\); since \(x^{2p}\) is an even power, then it 
+is also an even function. Therefore \(J^{2p}_1 = \int_0^{a/2} x^{2p} dx\).
+
+Therefore we have that \(J^{2p} = 2 \int_0^{a/2} x^{2p} dx\).
+
+Next we claim that \(\int_0^{a/2} x^{2p} dx = (1/2)^{2p+1}\int_0^a x^p dx\). To prove the we apply a scaling
+argument to an exhaustion of \(\int_0^{a/2}x^{2p} dx\). We partition the interval \([0, a/2]\) into \(Q\)
+uniform intervals of length \(h_Q = a / 2Q\) and \(x_i\) be the left endpoints of each interval. 
+
+Then we have that \(J^{2p}_Q \coloneqq \sum\limits_i x_i^{2p} h_Q\). Next note that \(x_i = (1/2) \tilde x_i\)
+for points \(\tilde x_i\) of a partition of \([0, a]\). Similarly \(h_{2Q} = (1/2) \tilde h_Q\), where
+\(\tilde h_Q\) is the length of
+the corresponding uniform partition of \([0, a]\). Therefore, we have that 
+\(J^{2p}_Q = (1/2)^{2p + 1} \sum\limits_i \tilde x_i^{2p} \tilde h_Q\), a scalar multiple of an exhaustion for
+\(\int_0^a x^{2p} dx\). Therefore we get that
+\begin{align}
+\int\limits_0^a z^{2p} dx & = (1/2)^{2p} \int\limits_0^a x^{2p} dx, \\
+    & = (1/2)^{2p} I^{2p}_{2p, 0}.
+\end{align}
+So we have that
+\begin{equation}
+I^{2k}_{k, k} = \sum\limits_{l=0}^k {k \choose l} (-1)^l (a/2)^{2l} (1/2)^{2(k-l)} I^{2(k-l)}_{2(k-l), 0},
+\end{equation}
+and we get the equation
+\begin{equation}
+(1/2)^{2k} \sum\limits_{l=1}^k {k \choose l} (-1)^{l+1} a^{2l} I^{2(k-l)}_{2(k-l), 0} = 
+    (1/2)^{2k} I^{2k}_{2k, 0} - I^{2k}_{k, k},
+\end{equation}
+where the left hand side is known. It is possible to see that after including this system, we get \(k+1\) equations
+in the \(k+1\) unknowns system for \(I^{2k}_{0, 2k}, ..., I^{2k}_{k,k}\), and this system is in fact 
+solvable (it is easier this last fact using the matrix structure). 
+\end{enumerate}
+
+Note, you may be tempted to introduce an equation for \(I^{2k}_{k, k}\) by using that
+\(a^{2k+1} = \int_0^a (x + y)^{2k} dx\) and binomial expanding. However, this equation is a consequence
+of the \(k\) equations we already found. Namely we have that
+ \(a^{2k+1} = a \int_0^a(x+y)^{2k-1}dx = a\sum_{p=0}^{2k-1} {2k-1 \choose p} I^{2k-1}_{p, 2k-1-p}\), and
+then we can use that
+\({2k \choose p} = {2k-1 \choose p} + {2k-1 \choose p-1}\) to relate the two binomial expansions in each equation. 
+So trying to use the binomial expansion will not give us anything new. 
+
+It is noteworthy that amazingly we may solve for the case of odd \(n\) by just solving a linear system that
+it created from very simple knowledge of integrals (i.e. no need to do anything complicated like the \(z\) trick
+used in the even case).
+
+Let us demonstrate how to use Cavalieri's ideas to compute the cases of \(n = 2, 3\). 
+
+\subsubsection*{Example for the Case of \(n = 2\)}
+
+First note that \(\int_0^a x dx  = \int_0^a y dx = a^2 / 2\) follows from basic geometry. So we already know the
+base case of \(n = 1\). Our unknowns are \(I^2_{0, 2}\) and \(I^2_{1, 1}\). 
+
+We start by writing down the recurrence relation
+\begin{equation}
+a^3/2 = I^2_{0, 2} + I^2_{1, 1}. 
+\end{equation}
+Next we expand
+\begin{align}
+I^2_{1, 1} & = \int_0^a (a^2 /4 - z^2) dx, \\
+    & = a^3/4 - (1/4) I^2_{0, 2}. 
+\end{align}
+We can solve these equations to get
+\begin{align}
+I^2_{0, 2} & = a^3 / 3, \\
+I^2_{1, 1} & = a^3 / 6. 
+\end{align}
+
+\subsubsection*{Example for the Case of \(n = 3\)}
+
+We start by writing the recurrence relations
+\begin{align}
+a I^2_{0, 2} = a^4/3 & = I^3_{0, 3} + I^3_{1, 2}, \\
+a I^2_{1, 1} = a^4 / 6 & = 2 I^3_{1, 2}. 
+\end{align}
+
+We see that we can directly solve the last equation for \(I^3_{1, 2} = a^4 / 12\), and then we can
+solve the first equation for \(I^3_{0, 3} = a^4 / 4\).
+
+\subsubsection*{The Problem}
+Use Cavalieri's ideas to compute the next two cases of \(n = 4, 5\).
+
+\subsubsection*{The Solution}
+
+Let us first compute the case of \(n = 4\). We need to compute the integrals \(I^4_{0, 4}, I^4_{1, 3}, I^4_{2, 2}\).
+We start by writing down the recurrence relations
+\begin{align}
+a I^3_{0, 3} = a^5 / 4 & = I^4_{0, 4} + I^4_{1, 3}, \\
+a I^3_{1, 2} = a^5 / 12 & = I^4_{1, 3} + I^4_{2, 2}.
+\end{align}
+
+Next we expand
+\begin{align}
+I^4_{2, 2} & = \int\limits_0^a (a^2 / 4 - z^2)^2 dx, \\
+    & = a^5 / 16 - (a^2 / 2) \int\limits_0^a z^2 dx + \int\limits_0^a z^4 dx, \\
+    & = a^5 / 16 - a^5 / 24 + (1/16)I^4_{0, 4}, \\
+    & = a^5 / 48 + (1/16)I^4_{0, 4}.
+\end{align}
+So we have three equations in three unknowns, and this system is in fact solvable. We have \(I^4_{0, 4} = a^5/5\),
+\(I^4_{1, 3} = a^5 / 20\), and \(I^4_{2, 2} = a^5 / 30\).
+
+Next we consider the case of \(n = 5\). We still have only three unknowns: \(I^5_{0, 5}, I^5_{1, 4},\) and
+\(I^5_{2, 3}\). Let us write down the recurrence relations:
+\begin{align}
+a I^4_{0, 4} = a^6 / 5 = I^5_{0, 5} + I^5_{1, 4}, \\
+a I^4_{1, 3} = a^6 / 20 = I^5_{1, 4} + I^5_{2, 3}, \\
+a I^4_{2, 2} = a^6 / 30 = 2 I^5{2, 3}. 
+\end{align} 
+We can solve this system for our unknown integrals (no use of \(z\) necesssary). We obtain
+\(I^5_{0, 5} = a^6 / 6\), \(I^5_{1, 4} = a^6 / 30\), and \(I^5_{2, 3} = a^6 / 60\).
+
