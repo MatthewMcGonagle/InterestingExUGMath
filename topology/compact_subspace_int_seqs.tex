@@ -1,0 +1,27 @@
+\subsection{A Compact Subspace of Sequences of Non-negative Integers}
+
+Here we consider a compact sub-space of a metric-space topology defined on the space of sequences of
+non-negative integers. Both this metric space and sub-space are considered in \cite{federer} in relation to
+Suslin sets. 
+
+\subsection*{The Setup}
+
+Let \(d_0(i, j)\) be the following bounded metric on the set of non-negative integers \(\mathbb Z_{\geq 0} = \{ 
+0, 1, 2, ...\}\): 
+\begin{equation}
+d_0(i, j) \coloneqq \frac{|i -j|}{1 + |i - j|}.
+\end{equation}
+Note that \(d_0\) satisfies all of the conditions of being a metric, and that \(d(i, j) < 1\).
+
+We let \(\mathcal N\) be the metric space of sequences of non-negative integers with following metric:
+\begin{equation}
+d(m, n) = \sum\limits_{i = 0}^\infty \frac{ d_0(m_i, n_i) } {2^i},
+\end{equation}
+for \(m, n \in \mathcal N\).
+
+The importance of the space \(\mathcal N\) is that it is used to create the notion of Suslin sets which are
+useful for studying the behavior of Borel sets under continuous maps \cite{federer}; these are topics
+that are well beyond these notes and are not necessary for this example. We only mention them to provide
+some context for \(\mathcal N\).
+
+
