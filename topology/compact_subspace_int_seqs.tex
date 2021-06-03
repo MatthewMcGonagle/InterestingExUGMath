@@ -24,4 +24,55 @@ useful for studying the behavior of Borel sets under continuous maps \cite{feder
 that are well beyond these notes and are not necessary for this example. We only mention them to provide
 some context for \(\mathcal N\).
 
+Next, given a fixed sequence \(M \in \mathcal N\), we will define the sub-space
+\begin{equation}
+K \coloneqq \{n \in \mathcal N \mid n_i \leq M_i \text{ for all } i\}.
+\end{equation}
+We will show that \(K\) is a compact sub-space of \(\mathcal N\).
+
+Before we do so, let us discuss the topology of \(\mathcal N\). Note that \(d_0(i, j) \geq d_0(0, 1) = 1/2\)
+when \(i \neq j\). Therefore, if \(d(m, n) < 2^{-j}\) for some \(j > 1\), then we know that \(m_i = n_i\)
+for all \(i < j\). Therefore for every point \(m\) in the ball \(B_{2^{-j}}(n)\), we have that \(m_i = n_i\)
+for all \(i  < j\).
+
+You may be attempted to interpret members \(n \in \mathcal N\) as numeral expansions of numbers in \(\mathbb R\)
+with an "infinite base". However, such an interpretation is not completely correct; let us look at such a
+relationship and show that it isn't a homeomorphism.
+
+Consider the interval \([0, 1) \subset \mathbb R\). We construct a function
+\(g: \mathcal N \to [0, 1)\) that is onto and continuous. First partition the interval \([0, 1)\) into an
+infinite set of intervals of length \(1/2, 1/4, 1/8, 1/16, ...\); explicitly the intervals are
+\([0, 1/2), [1/2, 3/4), [3/4, 7/8), ...\). Then for \(n \in \mathcal N\), we let \(n_0\) choose one of the
+preceding intervals. Next, we take our previously chosen interval, break it up into intervals of geometrically
+decreasing sizes like we have done before, and let \(n_1\) choose the next interval. And we inductively
+continue with all \(n_i\). This gives a continuous function \(g: \mathcal N \to [0, 1)\) that is onto.
+Explicitly we have
+\begin{equation}
+g(n) = (1 - 2^{-n_0}) + 2^{-1 - n_0}(1 - 2^{-n_1}) + 2^{-2 - n_0 - n_1}(1 - 2^{-n_2}) + ... 
+\end{equation} 
+Note that \(g(n) < (1 - 2^{-n_0}) + 2^{-1-n_0} + 2^{-2-n_0} + ...\) and so we have that
+\(g(n) < 1 - 2^{-n_0} + 2^{-n_0} = 1\). Similarly, by taking \(n_i \to \infty\), we see that
+\(\sum_{n\in\mathcal N} g(n) = 1\). Finally, \(g(0) = 0\) and \(g(n) > 0\) for \(n \neq 0\).
+Therefore, we have that
+\(g: \mathcal N  \to [0, 1)\) is well defined.
+
+Furthermore, \(g\) is continuous. If \(d(m, n) < 2^{-j}\), then \(m_i = n_i\) for \(i < j\). So we have that 
+\begin{equation}
+|g(m) - g(n)| < 2^{-j} + 2^{-j-1} + ... = 2^{1-j}.
+\end{equation}
+Therefore, we have that \(g\) is continuous.
+
+From the desciption of the choice of intervals that are used to define \(g\), we see that if \(m < n\) for
+\(m, n \in \mathcal N\), then \(g(m) < g(n)\); continuing the analogy to, e.g., a decimal expansion, this where
+there is a difference. Two decimal expansions may represent the same number, e.g. \( 0.9999... = 1.0\).
+However, since there is no upper limit on the "numerals" used to construct \(g : \mathcal N \to [0, 1)\), such
+a situation is impossible for \(g\). Furthermore, the construction of \(g\) may be used to see that \(g\)
+is onto \([0, 1)\).
+
+We have shown that \(g: \mathcal N \to [0, 1)\) is a one-to-one, onto, and continuous. However, \(g^{-1}\) is
+not continuous and so \(g\) fails to be a homeomorphism. This may be seen in the following way. Let
+\(n^j = (0, j, 0, 0, ....) \in \mathcal N\) and \(m = (1, 0, 0, ...) \in \mathcal N\). Then we have that
+\(g(n^j) \to g(m)\), but \(d(n^j, m) > 1/2\). Therefore \(g^{-1}\) is not continuous. Despite \(g\)
+failing to completely characterize the topology of \(\mathcal N\), it can stil be useful to add to your 
+understanding of the nature of \(\mathcal N\). 
 
