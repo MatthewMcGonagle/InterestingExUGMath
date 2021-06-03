@@ -76,3 +76,16 @@ not continuous and so \(g\) fails to be a homeomorphism. This may be seen in the
 failing to completely characterize the topology of \(\mathcal N\), it can stil be useful to add to your 
 understanding of the nature of \(\mathcal N\). 
 
+\subsection*{The Problem}
+Given a fixed sequence \(m \in \mathcal N\), we define the sub-space
+\(K \coloneqq \{n\in\mathcal N \mid n_i \leq m_i \text{ for all } i\}\). Show that \(K\) is compact.
+
+\subsection*{The Solution}
+
+The key is to again interpret \(K\) as a numeral expansions as we did for \(g\) and \(\mathcal N\); however
+this time, instead of having an "infinite base", we have a varying finite base given by the \(m_i\). We will
+use this to construct a function \(f: K \to [0, 1]\) that is continuous and onto. Note that the function
+\(f\) will not be one to one, but the inverse image of any point will be finite; also note that it is
+onto a closed interval. With \(f\) constucted, we can then imitate the proof
+that a closed and bounded interval in \(\mathbb R\) is compact by looking at the set 
+\(S \coloneqq \{x\in [0,1] \mid f^{-1}([0, x]) \text{ is compact }\}\). 
