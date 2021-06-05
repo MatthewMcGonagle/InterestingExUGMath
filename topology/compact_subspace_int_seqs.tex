@@ -82,10 +82,45 @@ Given a fixed sequence \(m \in \mathcal N\), we define the sub-space
 
 \subsection*{The Solution}
 
+It is very clear if \(\tilde K\) is the space corresponding to another fixed sequence \(\tilde m_i\) such that
+\(m_i \leq \tilde m_i\) for all \(i\), then \(K\) is a closed subspace of \(\tilde K\). Since a
+closed subspace of a compact
+space must also be compact, without any loss in generality we may consider the case that \(m_i \geq 1\)
+for all \(i\).
+
 The key is to again interpret \(K\) as a numeral expansions as we did for \(g\) and \(\mathcal N\); however
-this time, instead of having an "infinite base", we have a varying finite base given by the \(m_i\). We will
+this time, instead of having an "infinite base", we have a varying finite base given by the \(m_i\) (the base
+will actually be \(1 + m_i\)). We will
 use this to construct a function \(f: K \to [0, 1]\) that is continuous and onto. Note that the function
 \(f\) will not be one to one, but the inverse image of any point will be finite; also note that it is
 onto a closed interval. With \(f\) constucted, we can then imitate the proof
 that a closed and bounded interval in \(\mathbb R\) is compact by looking at the set 
 \(S \coloneqq \{x\in [0,1] \mid f^{-1}([0, x]) \text{ is compact }\}\). 
+
+Interpreting \(K\) as numeral expansions for numbers in \([0, 1]\) with a variable base \(m_i\), we are lead
+to the following construction for \(f(n)\) for \(n \in \mathcal N\). First, we divide \([0, 1]\)
+into \(m_0 + 1\) intervals and choose the \(n_0^{\text{th}}\) interval. Next we divide that interval into
+\(m_1  + 1\) intervals and choose the \(n_1^{\text{th}}\) sub-interval. We continue this for every \(n_i\).
+We are lead to the following formula:
+\begin{equation}
+f(n) \coloneqq \frac{n_0}{1 + m_0} + \frac{n_1}{(1+m_0)(1+m_1)} + ...
+\end{equation}
+Note that
+\begin{align}
+f(n) & \leq \frac{m_0}{1 + m_0} + \frac{m_1}{(1 + m_0)(1 + m_1)} + ... \\
+    & = 1 - \frac{1}{1+m_0} + \frac{m_1}{(1 + m_0)(1 + m_1)} + ... \\
+    & = 1 - \frac{1}{(1+m_0)(1+m_1)} + ...
+\end{align}
+and the pattern continues. So we see that the sum of the first \(j+1\) terms is equal to
+\(1 - \frac{1}{(1 + m_0)...(1+m_j)}\). Therefore, \(f(n)\) is well-defined by a convergent series and
+\(f(n) \leq 1\). Furthermore, in the case that \(n_i = m_i\) for all \(i\), we have equality; so
+\(f(m) = 1\). 
+
+From the interval construction of \(f\), it is clear that \(f: K \to [0, 1]\) is also onto. Next note that
+when \(d(x, y) < 2^{-j}\) for \(x,y \in K\), then \(x_i = y_i\) for \(i < j\). Hence
+\begin{equation}
+|f(x) - f(y)| \leq \frac{|x_j - y_j|}{(1 + m_0)...(1 + m_j)} + ...
+\end{equation} 
+Since \(|x_j - y_j| \leq m_j\), the analysis we used above will apply here as well. So we have that
+\(|f(x) - f(y)| \leq \frac{1}{(1 + m_0)...(1 + m_j)} \leq 2^{-j-1}\), since \(m_i \geq 1\). Therefore,
+\(f\) is continuous.
