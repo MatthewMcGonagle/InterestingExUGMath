@@ -136,4 +136,20 @@ With the above facts we have what we need to prove that \(K\) is compact. Consid
 \(S \coloneqq \{x \in [0, 1] \mid f^{-1}(x) \text{ is compact }\}\), and let \(\mu = \sup S\). Note that
 \(f^{-1}(0)\) consists of the single point \((0,0,...)\in K\); therefore \(0 \in S\). 
 
-Next, we show that \(\mu \in S\).
+Next, we show that \(\mu \in S\). Let \(\mathfrak F\) be a collection of open sets covering \(f^{-1}([0, \mu])\).
+First, consider the case that \(f^{-1}(\mu)\) consists of a single point \(n \in K\). So we know that
+\(n_i > 0\) for infinitely many \(i\). There exists a \(j\) such that the open ball \(B_{2^{-j-1}}(n)\) is
+contained in a single open set \(U_0 \in \mathcal F\) and \(n_j > 0\). So we know that the set 
+\(V \coloneqq \{x \in K | x_i = n_i \text{ for all } i\leq j\} \subset U_0\). Now, since \(n_j > 0\), we
+must have that over \(x \in f^{-1}([0, \mu]) \setminus V\), \(f(x)\) is maximized by 
+\(x_0 = (n_0, ..., n_j - 1, m_{j+1}, m_{j+2}, ...)\). Now, for some \(k > j\), we have also have that \(n_k > 0\).
+It is clear then clear that \(f(n) \geq f(x_0) + \frac{1}{(1+m_0)...(1+m_k)}\). Therefore, there is a
+\(\nu\) such that \(f(x) \leq \nu < \mu\) for all \(x \in f^{-1}([0, \mu]) \setminus V\).
+Since \([0, \nu]\) is compact, cover it with a
+finite collection of open sets \(\mathfrak G\) from \(\mathfrak F\). Then we have that
+\(\{U_0\} \cup \mathfrak G\) is a finite collection of open sets from \(\mathfrak F\) covering
+\(f^{-1}([0, \mu])\), and so \(\mu \in S\). 
+
+Next, consider the case that \(f^{-1}(\mu)\) consists of two points. They must be of the form
+\(n = (n_0, n_1, ..., n_j, m_{j+1}, m_{j+2}, ...)\) and \(p = (n_0, n_1, ..., n_j + 1, 0, 0, ...)\)
+for some \(j\). 
