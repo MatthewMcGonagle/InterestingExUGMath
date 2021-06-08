@@ -137,6 +137,7 @@ With the above facts we have what we need to prove that \(K\) is compact. Consid
 \(f^{-1}(0)\) consists of the single point \((0,0,...)\in K\); therefore \(0 \in S\). 
 
 Next, we show that \(\mu \in S\). Let \(\mathfrak F\) be a collection of open sets covering \(f^{-1}([0, \mu])\).
+
 First, consider the case that \(f^{-1}(\mu)\) consists of a single point \(n \in K\). So we know that
 \(n_i > 0\) for infinitely many \(i\). There exists a \(j\) such that the open ball \(B_{2^{-j-1}}(n)\) is
 contained in a single open set \(U_0 \in \mathcal F\) and \(n_j > 0\). So we know that the set 
@@ -152,4 +153,26 @@ finite collection of open sets \(\mathfrak G\) from \(\mathfrak F\). Then we hav
 
 Next, consider the case that \(f^{-1}(\mu)\) consists of two points. They must be of the form
 \(n = (n_0, n_1, ..., n_j, m_{j+1}, m_{j+2}, ...)\) and \(p = (n_0, n_1, ..., n_j + 1, 0, 0, ...)\)
-for some \(j\). 
+for some \(j\). We may cover both \(n\) and \(p\) with at most two open sets from \(\mathfrak F\). Then
+for any \(x\) satisfying \(f(x) < \mu\), we have that \(x < n\). Using a ball \(B_{2^{-j-1}}(n)\) and the
+fact that \(m_i > 0\), we may apply the same argument from the previous case. Therefore, we again have that
+\(\mu \in S\). We have shown that in all cases \(\mu \in S\). 
+
+Finally, we show that if \(\mu < 1\) then \(\mu + \delta \in S\) for some \(\delta > 0\). Let \(n\) be the
+largest element of \(f^{-1}(\mu)\). We know that there exists \(j\) such that the set
+\(W \coloneqq \{x \in K | x_i = n_i \text{ for all } i < j\}\) is covered by a single open set \(U_0\) from
+\(\mathcal F\). Furthermore, there is a \(k > j\) such that \(n_k < m_k\); let us show that this must be true.
+If not then \(n = (n_0, ..., n_j, m_{j+1}, m_{j+2}, ...)\). Since \(f(n) < 1\), we have that for some
+\(i \leq j\) that \(n_i < m_i\). Let \(i\) the largest \(i \leq j\) satisfying this. Then we have that
+\(p = (n_0, ..., n_i + 1, 0, 0, ...)\) is a larger element of \(f^{-1}(\mu)\), but this can not be the case. Thus,
+by contradiction we have show that there exists a \(k > j\) such that \(n_k < m_k\). 
+
+Now let \(q = (n_0, ..., n_{k-1}, m_k, m_{k+1}, ...)\). We have that \(q > n\), \(q \in U_0\), and 
+\(f(q) \geq f(n) + \frac{1}{(1+m_0)...(1+m_k)} > \mu + 2\delta\) for some \(\delta > 0\). So if
+\(f(x) \leq \mu + \delta\), then \(x < q\). If \(x < q\), then either the first \(j\) terms of \(x\) agree
+with \(n\) and \(x \in U_0\), or \(x_i < n_i\) for some \(i \leq j\). In the latter case, \(f(x) \leq \mu\). 
+Since \(f^{-1}([0, \mu]\) is compact, we then have that combining \(\{U_0\}\) with a finite sub-convering
+from \(f^{-1}([0, \mu])\) gives us that \(f^{-1}([0, \mu + \delta])\) is compact. Therefore, when \(\mu < 1\),
+we have that \(\mu + \delta \in S\) for some \(\delta > 0\).
+
+Combining the above, we must have that \(\sup S = 1\), and therefore \(K = f^{-1}([0, 1])\) is compact.
