@@ -43,7 +43,24 @@ For any index \(i \in \mathcal N\), let \(1_i \coloneq v \in V\) such that \(v_i
 Consider any finite subset \(S \subset \mathcal N\). We let \(\delta(S)\) be the infimum of all
 \(d(\omega, 0)\) such that \(\omega(1_i) \geq 1\) for some \(i \in S\).
 
-We claim that \(\delta(S) > 0\). Since \(S\) is finite, there exists \(i \in S\) and a sequence \(\omega_n\)
-such that \(d(\omega_n, 0) \to \delta(S)\) and \(\omega_n(1_i) \geq 1\). 
+We claim that \(\delta(S) > 0\). Since \(S\) is finite, there exists a fixed \(i \in S\) and a sequence \(\omega_n\)
+such that \(d(\omega_n, 0) \to \delta(S)\) and \(\omega_n(1_i) \geq 1\). Hence we have that \(\omega_n\) does
+not weakly converge to \(0\). Therefore by our assumption on \(d\), we must have that \(\omega_n\) also does
+not converge to \(0\) with respect to the metric \(d\). Hence, \(\delta(S) > 0\). 
 
+Now partition \((0, \infty)\) into a countably infinite set of disjoint intervals,
+each of which is bounded away from
+zero: \([1, \infty)\), \([1/2, 1)\), \([1/4, 1/2)\), and so on. Since the set of all finite subsets
+\(S \subset \mathcal N\) is uncountable infinite, we must have that one of the above intervals contains
+\(\delta(S)\) for an infinite collection of \(S\). Therefore, we may find an infinite collection \(\mathcal C\)
+of \(S\)
+such that \(\delta(S) \geq \delta > 0\) for some fixed \(\delta > 0\) independent of \(S\) in \(\mathcal C\).
 
+Since \(\mathcal C\) is infinite, we can find a strictly increasing sequence of integers \(n_i\) such that
+\(n_i \in S\) for some \(S \in \mathcal C\). Then consider the sequence of continuous linear
+functionals \(\omega_i(v) = v_{n_i}\). Note that \(\omega(1_{n_i}) = 1\). Therefore we have that
+\(d(\omega_i, 0) \geq \delta\); hence \(\omega_i\) does not converge to \(0\) with respect to the metric \(d\).
+
+However, for any fixed \(v \in V\), \(v_i\) is non-zero for only finitely many \(i\). Therefore, for
+large enough \(i\) we have that \(v_{n_i} = 0\). Hence \(\omega_i(v) \to 0\). So \(\omega_i\) converges
+weakly to \(0\) despite the fact that it does not converge to \(0\) with respect to \(d\). 
