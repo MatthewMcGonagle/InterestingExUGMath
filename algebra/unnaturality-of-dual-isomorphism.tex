@@ -1,0 +1,70 @@
+\subsection{The Unnaturality of the Isomorphism to the Dual Space and Category Theory}
+
+Given a finite dimensional vector space \(V\), the dual vector space \(V^*\) consists of all of the real valued linear functions \(\omega : V \to \mathbb R\). If \(\{b_i\}\) is basis
+for \(V\), then its dual basis is \(\{\beta_i\}\) where 
+\begin{align}
+\beta_i(b_j) & =  \delta_{ij}, \\
+    & \coloneqq \begin{cases} 1, & i = j, \\ 0, & i \neq j. \end{cases}
+\end{align}
+So for any \(v = \sum_i c_i v_i\), we have that \(\beta_j(v) = c_j\). For each \(b_i\) there is a corrresponding \(\beta_i\). It is not hard to see that the \(\beta_i\) are linearly
+independent; if \(\sum_i c_i \beta_i = 0\) then \(c_j = (\sum_i c_i \beta_i)(b_j) = 0\) for each \(j\). Therefore, when \(V\) is finite-dimensional, we have that
+\(V^*\) is of the same dimension as \(V\). Therefore, they are isomorphic; a particular example being the isomorphism determined by sending \(b_i \to \beta_i\).
+
+However, this isomorphism isn't ``natural". Notice that we used a particular choice of basis \(\{b_i\}\) to define our isomorphism; that is, we used the isomorphism \(\phi : V \to V^*\) 
+such that \(\phi(b_i) = \beta_i\). It turns out that if we choose a different basis, then we get a diffferent isomorphism. This is the classical notion that the isomorphism ``depends
+on the basis."
+
+For example, consider \(\mathbb R\) as a one-dimensional vector space, and let \(b_1 = 1\) be a basis for \(\mathbb R\) and \(\tilde b_1 = 2\) be another basis for \(\mathbb R\).
+Then \(\beta_1(\tilde b_1) = \beta_1(2) = 2\beta_1(1) = 2\beta_1(b_1) = 2 \neq \tilde\beta_1(\tilde b_1)\). Therefore, the isomorphism between \(\mathbb R\) and \(\mathbb R^*\)
+sending \(b_1 \to \beta_1\) is not the same as the isomorphism sending \(\tilde b_1 \to \tilde \beta_1\). So, when we construct an isomorphism \(\phi : V \to V^*\) using a basis
+\(\{b_i\}\) as above, it will depend on our choice of basis.
+
+Category theory reframes many ideas in terms of compositions of morphisms and how they are independent of being taken in a particular order. In fact, the classical paper of Eilenberg
+and MacLane "General Theory of Natural Equivalences" \cite{eilenbergMaclane} creates the foundations of category theory for this purpose; the introduction explicitly mentions the case of a finite
+dimensional
+vector space \(V\) and its dual \(V^*\). We wish to show that the property of a linear transformation \(\phi : V \to V^*\) being ``independent of basis" is equivalent to the following
+diagram commuting for any linear isomorphism \(f: V \to V\).
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\node at (0, 2) (lvstar) {\(V^*\)};
+\node at (2, 2) (rvstar) {\(V^*\)};
+\node at (0, 0) (lv) {V};
+\node at (2, 0) (rv) {V};
+\path[->] (rvstar) edge node[above] {\(f^*\)} (lvstar);
+\path[->] (lv) edge node[below] {\(f\)} (rv);
+\path[->] (lv) edge node[left] {\(\phi\)} (lvstar);
+\path[->] (rv) edge node[right] {\(\phi\)} (rvstar);
+\end{tikzpicture}
+\end{figure}
+Here \(f^*\) is the pullback of \(f\), i.e. \(f^*(\omega)(v) = \omega(f(v))\). This diagram commutes exactly when as transformations \(\phi = f^* \phi f\).
+
+Note, that we have taken a slight change of perspective. Before, we started with a basis \(\{b_i\}\) of \(V\), used that basis to construct an isomorphism \(V \to V^*\), and then asked whether
+this isomorphism is in fact independent of the basis. Now, we are starting with a given linear transformation and asking what it means for this transformation to be independent of any given
+basis; that is, we do not concern ourselves with how this transformation was constructed.
+
+\subsubsection*{The Problem}
+
+\begin{enumerate}
+\item Given a finite dimensional vector space \(V\) with dual space \(V^*\) and a linear transformation \(\phi: V \to V^*\), show that the property of \(\phi\) being ``independent of basis"
+is equivalent to the above diagram being commutative, i.e. \(\phi = f^* \phi f\).
+\item Show that the only linear transformation \(\phi: V \to V^*\) that is ``independent of basis" is the trivial transformation \(\phi(v) = 0\) for all \(v \in V\).
+\end{enumerate}
+
+\subsubsection*{The Solution}
+
+From linear algebra, it is clear that a change of basis \(b_i \to \tilde b_i\) is equivalent to a linear isomorphism \(f : V \to  V\) determined by \(f(b_i) = \tilde b_i\).
+Then \(\phi\) being ``independent of basis" means that \(\phi\) looks the same in each basis; this means that \(\phi(b_i)(b_j) = m_{ij} = \phi(\tilde b_i)(\tilde b_j)\), where \(m_{ij}\)
+is some fixed matrix. Note that we don't require that \(\phi(b_i)(b_j) = \delta_{ij}\).
+
+Using the linear isomorphism \(f\), we have \(\phi(\tilde b_i)(\tilde b_j) = \phi(f(b_i))(f(b_j)) = (\phi f)(b_i)(f(b_j)) = (f^* \phi f)(b_i)(b_j)\). So we have \(\phi(b_i)(b_j) = (f^*\phi f)(b_i)(b_j)\)
+for all \(i, j\). Since \(\{b_i\}\) is a basis for \(V\) we must then have that \(\phi\) is ``independent of basis" is equivalent to \(\phi = f^* \phi f\), i.e. the diagram commutes. This proves the
+first part of the problem.
+
+For the second part, fix a basis \(\{b_i\}\). So we must have that for any linear isomorphism \(f: V \to V\) that \(\phi = f^* \phi f\). Let \(m_{ij}\) be the coordinates for \(\{b_i\}\) and the dual
+basis \(\{\beta_i\}\), i.e. \(m_{ij} = \phi(b_i)(b_j)\). Then we have that \(m_{il} = \sum_{j, k} m_{jk}f_{ji}f_{kl}\). For fixed \(p \neq q\), we let \(f\) be the linear isomorphsim determined by
+the permutation of \(\{b_i\}\) that switches \(b_p\) and \(b_q\). Then we have that \(m_{pq} = m_{qp}\). Similarly, let \(f\) be a linear isomorphism such that \(f(b_p) = b_q\) and \(f(b_q) = -b_p\).
+Then we have that \(m_{pq} = -m_{qp}\). Therefore, the off diagonal elements \(m_{pq} = 0\). Finally, let \(f\) be an isomorphism such that \(f(b_p) = 2b_p\), then we have that
+\(m_{pp} = 4 m_{pp} \). Therefore we also have that the diagonal elements \(m_{pp} = 0\). Therefore, \(\phi\) must be the trivial transformation \(\phi(v) = 0\). 
+
